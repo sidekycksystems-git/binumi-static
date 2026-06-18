@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+const posts = await getCollection('insights');
+const featured = posts.find((p) => p.data.featured);
+const rest = posts
+  .filter((p) => !p.data.featured)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<BaseLayout
+  title="Binumi · Insights"
+  description="Strategy, proof and craft on the Static Content Crisis, Systemized Expertise, and the video scaling model behind Binumi."
+  current="insights"
+>
+  <main>
+    <!-- ===================== PAGE BANNER ===================== -->
+    <section class="page-banner">
+      <div class="container hero-inner">
+        <h1>The thinking behind <span class="hl">video first</span>.</h1>
+        <p class="lead">
+          Strategy, proof and craft on the static content crisis, and on the model that solves it.
+          Every piece is a video, because the argument is easier to watch than to read.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== FEATURED LEAD POST ===================== -->
+    <!-- The latest piece, given prominence: cinematic video + copy, the whole
+         card a single link. -->
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        {featured && <PostCard post={featured} featured />}
+      </div>
+    </section>
+
+    <!-- ===================== POST GRID ===================== -->
+    <!-- Uniform cards, each with the house video thumbnail system. -->
+    <section class="section" style="padding-top:0;">
+      <div class="container stack">
+        <div class="section-label">
+          <h2>More from the team</h2>
+          <p class="lead">The model, the proof and the craft behind it.</p>
+        </div>
+        <div class="posts-grid reveal">
+          {rest.map((p) => <PostCard post={p} />)}
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CLOSE ===================== -->
+    <section class="section" id="cta">
+      <div class="container">
+        <div class="cta-card">
+          <video class="cta-bg" src="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__e9fd886d8dacac140457e375d606c8a0_h169.mp4"
+            autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+          <div class="inner">
+            <h2>Stop reading about it. <span class="hl">Watch it happen</span>.</h2>
+            <p class="lead">Bring your brief. We will show you what becomes possible, with the named work to back it.</p>
+            <a class="btn btn-primary" href="/solutions/">See what becomes possible
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style is:global>
+  /* ===========================================================
+     PAGE BANNER  (centered, matches the industries hub)
+     =========================================================== */
+  .page-banner { padding-top: var(--nav-to-hero); padding-bottom: var(--section-y); }
+  /* insights variant: tighter gap and narrower headline than homepage hero */
+  .page-banner .hero-inner { gap: clamp(1.25rem, 1rem + 1.2vw, 1.9rem); }
+  .page-banner .hero-inner h1 { max-width: 22ch; }
+  .page-banner .hero-inner .lead { max-width: 56ch; }
+
+  /* ===========================================================
+     SECTION LABEL
+     =========================================================== */
+  .section-label { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .section-label h2 { font-size: var(--t-h4); }
+  .section-label .lead { font-size: 1rem; }
+</style>

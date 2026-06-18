@@ -1,0 +1,649 @@
+    /* ===========================================================
+       DESIGN TOKENS
+       Type scale, spacing rhythm and component anatomy carried over
+       from the Automark Astro theme (themefisher/automark-astro).
+       Palette repainted to the supplied Binumi navy + cyan values.
+       =========================================================== */
+    :root {
+      /* --- Binumi palette (supplied brand values, exact hex) --- */
+      --cyan:         #00aeef;  /* primary Binumi blue: links, dots, headers, labels */
+      --cyan-bright:  #0e93c6;  /* bright: stat numbers, emphasis, hover */
+      --cyan-dark:    #0e93c6;  /* dark: gradient base */
+
+      --bg:           #ffffff;  /* page background, white */
+      --navy:         #0b1428;  /* navy accent: video surfaces, dark card islands */
+      --panel:        #f4f6f9;  /* panel */
+      --panel-2:      #eef1f6;  /* lighter panel */
+
+      --ink:          #0b1428;  /* primary ink: headings, strong text */
+      --muted:        #5b6b86;  /* secondary text, labels */
+      --body-copy:    #2b3a52;  /* body copy */
+
+      --border:       rgba(11,20,40,0.14); /* standard border */
+      --border-soft:  rgba(11,20,40,0.08); /* soft border */
+      --cyan-fill:    rgba(0,174,239,0.10);  /* cyan-tinted fill: ribbons, pills */
+      --surface:      #e8eff2;  /* light island fill: cards, proof, panels, testimonial. Replaces the old navy island; navy is now reserved for the closing CTA + the home video block */
+
+      /* --- Type (Automark major-third scale, ratio 1.25, base 16px) --- */
+      --font-body: "Roboto", system-ui, sans-serif;
+      --font-head: "Inter", system-ui, sans-serif;
+      --t-h1: clamp(2.4rem, 1.6rem + 3.4vw, 3.815rem);
+      --t-h2: clamp(2.0rem, 1.5rem + 2.2vw, 3.052rem);
+      --t-h3: clamp(1.65rem, 1.4rem + 1.3vw, 2.441rem);
+      --t-h4: 1.953rem;
+      --t-h5: 1.5625rem;
+      --t-h6: 1.25rem;
+
+      /* --- Rhythm & shape (from Automark .section / radii) --- */
+      --container: 1280px;     /* unified layout system: one page container */
+      --container-sm: 64rem;
+      --pad-x: clamp(24px, 5vw, 40px); /* unified side padding, all pages */
+      --section-y: clamp(2.5rem, 1.5rem + 2vw, 3.5rem); /* unified vertical rhythm (tightened) */
+      --nav-to-hero: clamp(.875rem, .125rem + 2.5vw, 2.375rem); /* gap from the nav down to the page heading, site-wide */
+      --gap: clamp(1.75rem, 1.25rem + 1.5vw, 2.75rem);
+      --radius:       2px; /* large surfaces: cards, panels, the video frame. Sharp 2px corner to match buttons */
+      --radius-sm:    2px; /* compact controls and chips (buttons, nav, chat bar): same sharp 2px corner */
+      --r-card: var(--radius);  /* every card, panel and box now shares the one corner */
+      --r-panel: var(--radius); /* large section panels use the same corner too */
+
+      --chat-w: 400px; /* width of the side chat panel; page reserves this when open */
+      --gutter: clamp(24px, 3vw, 40px); /* gap between the hero split columns */
+      --container-legal: 720px; /* tighter reading measure: legal + privacy only */
+    }
+
+    /* ===========================================================
+       RESET + BASE
+       =========================================================== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--body-copy);
+      font-family: var(--font-body); font-weight: 400; font-size: 1rem; line-height: 1.65;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden;
+    }
+    /* Heading weight is controlled globally here: all headings are bold (700),
+       h1 included, so h1/h2/h3 carry the same weight. Per-tag rules below set
+       size only, never weight. */
+    h1, h2, h3, h4, h5, h6 { font-family: var(--font-head); font-weight: 700; line-height: 1.1; color: var(--ink); margin: 0; letter-spacing: -0.01em; }
+    h1 { font-size: var(--t-h1); }
+    h2 { font-size: var(--t-h2); }
+    h3 { font-size: var(--t-h3); }
+    p { margin: 0; }
+    a { color: inherit; text-decoration: none; }
+    img, svg, video { display: block; max-width: 100%; }
+    strong { color: var(--ink); font-weight: 600; }
+    .hl { color: var(--cyan); }  /* Automark hasHighlight -> cyan */
+
+    /* ===========================================================
+       LAYOUT
+       =========================================================== */
+    .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--pad-x); }
+    .container.sm { max-width: var(--container-sm); }
+    .section { padding-block: var(--section-y); position: relative; }
+    .stack { display: flex; flex-direction: column; gap: var(--gap); }
+    .intro { max-width: 58rem; margin-inline: auto; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+    .intro .subtitle { font-size: 1.125rem; color: var(--muted); max-width: 48rem; }
+    .lead { font-size: 1.125rem; color: var(--muted); }
+
+    .eyebrow { display: inline-flex; align-items: center; gap: .55rem; font-family: var(--font-head); font-weight: 600;
+      font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--cyan);
+      padding: .5rem 1rem; border-radius: var(--radius-sm); background: var(--cyan-fill); border: 1px solid var(--border); }
+    .eyebrow .dot { width: .5rem; height: .5rem; border-radius: 999px; background: var(--cyan); }
+
+    .rule { height: 1px; border: 0; margin: 0; background: linear-gradient(to right, transparent 8%, rgba(11,20,40,.14) 50%, transparent 92%); }
+
+    /* ===========================================================
+       BUTTONS  (Automark .btn / .btn-primary / .btn-outline)
+       =========================================================== */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; height: 44px; padding: 0 2rem;
+      border-radius: 2px; font-family: var(--font-head); font-weight: 500; font-size: 1rem; cursor: pointer;
+      transition: all .3s ease; border: 1.5px solid transparent; white-space: nowrap; }
+    .btn-primary { color: #04121b; background: var(--cyan); }
+    .btn-primary:hover { background: var(--cyan-bright); }
+    .btn-outline { color: var(--ink); border-color: var(--border); background: transparent; }
+    .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+    .btn-sm { padding: .55rem 1.1rem; font-size: .9rem; }
+    .btn svg { width: 18px; height: 18px; }
+    a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
+    /* ===========================================================
+       HEADER / NAV  (Automark navbar; mobile menu is a pure-CSS
+       checkbox toggle, no JavaScript)
+       =========================================================== */
+    .site-header { position: sticky; top: 0; z-index: 50; padding-block: .5rem;
+      background: #ffffff; border-bottom: 1px solid var(--border-soft); }
+    .navbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; } .navbar > .brand { justify-self: start; } .navbar > .nav-cta { justify-self: end; }
+    .brand { display: inline-flex; align-items: center; }
+    .brand img { display: block; height: 1.3rem; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: .25rem; padding: .35rem .75rem; border-radius: var(--radius-sm);
+      background: #ffffff; border: 1px solid #ffffff; backdrop-filter: blur(10px); }
+    .nav-links a { color: var(--ink); font-size: .95rem; padding: .5rem .85rem; border-radius: var(--radius-sm); transition: color .2s; }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-links a.current { color: var(--cyan); }
+    .nav-cta { display: flex; align-items: center; gap: .5rem; }
+    .nav-toggle, .nav-toggle-label { display: none; }
+    .nav-toggle-label .icon-close { display: none; }
+
+    /* ---- Primary-nav dropdowns + mega-menu (pure CSS, <details>/<summary>;
+       desktop reveals on hover/focus, mobile is the native accordion) ---- */
+    .nav-links summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: .3rem;
+      color: var(--ink); font-size: .95rem; padding: .5rem .85rem; border-radius: var(--radius-sm); transition: color .2s; }
+    .nav-links summary::-webkit-details-marker { display: none; }
+    .nav-links summary.current { color: var(--cyan); }
+    .nav-item.has-menu:hover > summary, .nav-item.has-menu:focus-within > summary,
+    .nav-links summary:hover { color: var(--cyan); }
+    .nav-caret { width: 13px; height: 13px; flex: 0 0 auto; transition: transform .2s ease; }
+    .nav-panel { background: var(--bg); border: 1px solid var(--border-soft); border-radius: var(--radius);
+      box-shadow: 0 18px 50px rgba(11,20,40,.12); padding: 1rem; }
+    .nav-list { list-style: none; display: flex; flex-direction: column; gap: .1rem; }
+    .nav-panel a { display: block; color: var(--ink); font-size: .95rem; padding: .5rem .65rem;
+      border-radius: var(--radius-sm); transition: color .15s, background .15s; }
+    .nav-panel a:hover { color: var(--cyan); background: rgba(11,20,40,.04); }
+    .nav-lead { font-family: var(--font-head); font-weight: 700; }
+    .mega-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.25rem 1rem; }
+    .mega-heading { font-family: var(--font-head); font-weight: 700; font-size: .72rem; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted); padding: 0 .65rem .4rem; }
+    .mega-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      margin-top: 1rem; padding: .9rem .65rem 0; border-top: 1px solid var(--border-soft); }
+    .mega-travels { color: var(--muted); font-size: .9rem; transition: color .15s; }
+    .mega-travels:hover { color: var(--cyan); }
+
+    /* Desktop: panels float under the header, revealed on hover/keyboard focus.
+       The narrow Solutions panel anchors to its item; the Industries mega-panel
+       anchors to the header and centres as a wide panel. */
+    @media (min-width: 981px) {
+      .nav-solutions { position: relative; }
+      /* A closed <details> hides its content two ways depending on the engine:
+         older engines set display:none on the children (beaten by display:block
+         below), modern engines set content-visibility:hidden on ::details-content
+         (beaten here). Both overrides let hover/focus reveal the panel without
+         toggling [open]; show/hide is then driven by opacity/visibility. */
+      .nav-item.has-menu::details-content { content-visibility: visible; }
+      .nav-item.has-menu > .nav-panel { display: block; position: absolute; top: calc(100% + .55rem); z-index: 60;
+        opacity: 0; visibility: hidden; pointer-events: none;
+        transition: opacity .18s ease, transform .18s ease, visibility .18s ease; }
+      .nav-panel--narrow { left: 0; min-width: 250px; transform: translateY(4px); }
+      /* The pill (.nav-links) is the containing block (it has backdrop-filter) and
+         sits centred in the header, so centring the panel on it ≈ centring it in the
+         visible area. Width is viewport-based and subtracts the chat panel when it is
+         open, so the wide panel never overflows the visible area. */
+      .nav-panel--mega { left: 50%; width: min(1080px, calc(100vw - 2rem)); transform: translateX(-50%) translateY(4px); }
+      body.bnm-chat-open .nav-panel--mega { width: min(1080px, calc(100vw - var(--chat-w) - 2rem)); }
+      .nav-solutions:hover > .nav-panel, .nav-solutions:focus-within > .nav-panel {
+        opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
+      .nav-industries:hover > .nav-panel, .nav-industries:focus-within > .nav-panel {
+        opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+      .nav-item.has-menu:hover > summary .nav-caret,
+      .nav-item.has-menu:focus-within > summary .nav-caret { transform: rotate(180deg); }
+      /* Bridge the gap between a trigger and its panel: a transparent strip under
+         the summary so the pointer can cross the empty space without the panel
+         closing. It is part of .nav-item, so hovering it keeps :hover alive. It
+         only exists while open, so it never blocks clicks when the menu is shut. */
+      .nav-item.has-menu > summary { position: relative; }
+      .nav-item.has-menu:hover > summary::after,
+      .nav-item.has-menu:focus-within > summary::after {
+        content: ""; position: absolute; top: 100%; left: 0; width: 100%; height: 1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .nav-caret, .nav-item.has-menu > .nav-panel { transition: none; }
+    }
+
+    /* ===========================================================
+       HERO + CAPABILITY
+       Hero is a left-aligned editorial stack: headline -> lead -> CTA -> video.
+       The CTA button is the single bold action and everything else recedes.
+       Capability stays a video-led split (video left / copy right).
+       Calm styling throughout: no glow, no grid overlay, no sweep.
+       =========================================================== */
+    .hero { padding-top: var(--nav-to-hero); padding-bottom: var(--section-y); }
+
+    /* left-aligned hero stack; generous spacing so it breathes */
+    .hero-inner { display: flex; flex-direction: column; align-items: flex-start; text-align: left;
+      gap: clamp(1.5rem, 1rem + 1.6vw, 2.6rem); }
+    /* wide enough to keep each line whole; balanced wrap avoids single-word widows */
+    .hero-inner h1 { max-width: 36ch; text-wrap: balance; }
+    .hero-inner .lead { max-width: 70ch; text-wrap: balance; } /* subhead: supporting text, wider so it doesn't crowd into a narrow column */
+    .hero-cta { display: flex; flex-direction: column; align-items: flex-start; gap: .7rem; width: 100%; } /* the primary CTA button and its single credit as one tight block */
+    .hero-inner .video-master { margin-top: clamp(1rem, .5rem + 1.5vw, 2rem); } /* extra air around the dominant visual */
+    /* Homepage hero, scoped so the promoted vertical-page .hero-inner overrides further
+       down this file (h1 24ch, video-master 980px) cannot clobber the home values. */
+    .hero-home .hero-inner h1 { max-width: 36ch; }
+    .hero-home .hero-inner .video-master { max-width: none; }
+    /* Background film + dark-navy legibility overlay (homepage hero only).
+       isolation keeps the z-index stack local; pointer-events:none keeps the
+       hero buttons clickable through the decorative layers. */
+    /* Deep navy sits under the film so the iframe never flashes its white default
+       background while it loads on first paint / refresh. The film runs full-bleed
+       to the very top of the page, under the translucent (now fixed) header, so there
+       is no hard line; extra top padding keeps the hero copy clear of the nav. */
+    .home .site-header { position: fixed; inset: 0 0 auto 0; }
+    .hero-home { position: relative; isolation: isolate; overflow: hidden; background: var(--bg);
+      padding-top: calc(5.5rem + var(--nav-to-hero)); }
+    .hero-home .hero-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: var(--bg); }
+    /* The iframe is locked to the film's own 16:9 ratio at full width, centered.
+       The player can then never letterbox internally (its gray bars), so any
+       space the film does not cover is this element's own deep-navy --bg.
+       Tall heroes (narrow screens) show navy above and below the film band;
+       short, wide heroes crop the film evenly top and bottom. */
+    .hero-home .hero-bg iframe { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; background: var(--bg);
+      -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+      mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+      opacity: 1; transition: opacity .9s ease; }
+    /* Fade the film in once it has loaded (no flash, no pop). .js scope keeps it
+       visible if scripts are off; .is-loaded is added on the iframe load event. */
+    .js .hero-home .hero-bg iframe { opacity: 0; }
+    .js .hero-home .hero-bg iframe.is-loaded { opacity: 1; }
+    .hero-home .hero-overlay { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(180deg, rgba(7,14,29,.67), rgba(7,14,29,.82)); }
+    .hero-home .hero-inner { position: relative; z-index: 2; }
+
+    /* capability split */
+    .split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      gap: clamp(2rem, 1rem + 3vw, 4rem); align-items: center; }
+    .split--flip { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+    .copy-col { display: flex; flex-direction: column; align-items: flex-start; gap: 1.4rem; }
+    .copy-col h1, .copy-col h2 { max-width: 18ch; }
+    .copy-col .lead { max-width: 48ch; }
+
+    /* video master (shared component, calm styling) */
+    .video-master { position: relative; width: 100%; }
+    .video-frame { position: relative; aspect-ratio: 16 / 9; width: 100%; border-radius: var(--radius);
+      background: linear-gradient(160deg, #12244a, #0b1428);
+      border: 1px solid rgba(120,165,225,0.16); box-shadow: 0 30px 80px -42px rgba(11,20,40,.30);
+      display: grid; place-items: center; overflow: hidden; transition: transform .5s ease; }
+    .video-master:hover .video-frame { transform: scale(1.005); }
+    .play { position: relative; z-index: 2; width: 84px; height: 84px; border-radius: 999px; display: grid; place-items: center;
+      color: #04121b; background: var(--cyan); }
+    .play svg { width: 30px; height: 30px; margin-left: 4px; }
+    .video-tag { position: absolute; left: 1rem; top: 1rem; z-index: 2; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+      color: #cfe0ff; padding: .35rem .7rem; border-radius: var(--radius-sm); background: rgba(7,14,29,.72); border: 1px solid rgba(120,165,225,0.14); }
+    .video-frame iframe,
+    .video-frame video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
+    .duration { position: absolute; right: .7rem; bottom: .7rem; z-index: 2; display: inline-flex; align-items: center; gap: .4rem;
+      font-size: .72rem; letter-spacing: .03em; color: var(--ink); padding: .3rem .6rem; border-radius: var(--radius-sm);
+      background: rgba(7,14,29,.72); border: 1px solid var(--border-soft); backdrop-filter: blur(4px); }
+    .duration svg { width: 12px; height: 12px; color: var(--cyan); }
+
+    .thumb { position: relative; aspect-ratio: 16 / 9; width: 100%; overflow: hidden;
+      background: linear-gradient(160deg, #12244a, #0b1428); border-bottom: 1px solid rgba(120,165,225,0.16);
+      display: grid; place-items: center; }
+    .thumb .play-sm { width: 54px; height: 54px; border-radius: 999px; display: grid; place-items: center;
+      color: #04121b; background: var(--cyan); transition: transform .3s ease; }
+    .thumb .play-sm svg { width: 21px; height: 21px; margin-left: 3px; }
+    .thumb .video-tag { left: .8rem; top: .8rem; }
+
+    /* Chat input bar. Used only by the site-wide chat widget (ChatWidget.astro)
+       in its panel footer, as `.chatbar.bnm-chat-bar`. Not a hero element. */
+    .chatbar { display: flex; align-items: center; gap: .5rem; width: 100%; max-width: 42rem;
+      background: var(--panel); border: 1px solid var(--cyan); border-radius: var(--radius-sm);
+      padding: .5rem .5rem .5rem 1.2rem; box-shadow: 0 18px 50px -30px rgba(11,20,40,.20); }
+    .chatbar .ai { color: var(--cyan); flex: 0 0 auto; display: grid; place-items: center; }
+    .chatbar .ai svg { width: 20px; height: 20px; }
+    .chatbar input { flex: 1 1 auto; min-width: 0; background: transparent; border: 0; outline: 0; color: var(--ink);
+      font-family: var(--font-body); font-size: 1rem; padding: .6rem .25rem; }
+    .chatbar input::placeholder { color: var(--muted); }
+    .chatbar .btn { flex: 0 0 auto; }
+
+
+    /* ===========================================================
+       CARD GRIDS  (Automark ValueCard: p-8 rounded-2xl bg-white/5)
+       =========================================================== */
+    .grid { display: grid; gap: 1rem; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+    /* ISLANDS, two kinds, on the white page.
+       DARK islands stay navy (#001437) and carry the on-dark token block. They are
+       reserved for the deliberate, visually-important dark moments only: the closing
+       CTA card, the named-client proof cards, and the homepage "drive revenue" video
+       block. Video frames keep their own navy via Law 1. This is the ONE place the
+       on-dark token set lives.
+       LIGHT islands are everything that used to be a navy card: a pale --surface fill
+       defined by a cyan (CTA-color) hairline. They keep the page's light text tokens,
+       so there is nothing to override here. Page and base rules set geometry only
+       (size, padding, border-width/style, radius, transform), never island colors.
+       The `:root body` prefix is defensive specificity (0,2,1): it keeps a stray
+       page-local background from ever overriding the island. */
+    :root body :is(.cta-card, .proof) {
+      background: #001437;
+      --ink: #eaf1fb;
+      --body-copy: #cfdcef;
+      --muted: #8ea4c6;
+      --border: rgba(120,165,225,0.16);
+      --border-soft: rgba(120,165,225,0.10);
+      --cyan-bright: #3fd0ff;
+      border-color: var(--border);
+      color: var(--body-copy);
+    }
+    :root body :is(.card, .bento-card, .bento-tile, .feature-block, .wiw-card, .faq-item, .featured, .post-card) {
+      background: var(--surface);
+      border-color: var(--cyan);
+      color: var(--body-copy);
+    }
+    :root body :is(.card, .bento-card, .bento-tile, .feature-block, .featured, .post-card):hover {
+      border-color: var(--cyan-bright);
+      box-shadow: 0 18px 44px -30px rgba(11,20,40,.30);
+    }
+
+    .card { padding: 2rem; border-radius: var(--r-card); border-width: 1px; border-style: solid;
+      transition: border-color .25s, transform .25s, background .25s; }
+    .card:hover { transform: translateY(-3px); }
+    .card .kicker { font-family: var(--font-head); font-weight: 700; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; color: var(--cyan); margin-bottom: .9rem; }
+    .card p { color: var(--muted); font-size: 1rem; }
+    .icon { width: 48px; height: 48px; border-radius: var(--radius-sm); display: grid; place-items: center; margin-bottom: 1.25rem;
+      background: var(--cyan-fill); border: 1px solid var(--border); color: var(--cyan); }
+    .icon svg { width: 24px; height: 24px; }
+
+    /* ===========================================================
+       STATEMENT  (the weighty claim line on the home hero)
+       =========================================================== */
+    .statement { max-width: 58ch; margin-inline: auto; font-size: clamp(1.2rem, 1rem + .9vw, 1.55rem);
+      line-height: 1.5; color: var(--body-copy); }               /* weightier than body text */
+
+    /* ===========================================================
+       PROOF  (featured outcomes -> credential band -> testimonial)
+       Named-client figures in bright cyan.
+       =========================================================== */
+    .proof { padding: 2rem; border-radius: var(--r-card); border-width: 1px; border-style: solid; }
+    .proof .client { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem; margin-bottom: 1.1rem; }
+    .proof .client .name { font-family: var(--font-head); font-weight: 700; font-size: 1.35rem; color: var(--ink); letter-spacing: .02em; }
+    .pending { font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; color: #9a5b00;
+      padding: .25rem .55rem; border-radius: var(--radius-sm); border: 1px dashed rgba(154,91,0,.5); background: rgba(255,180,84,.14); white-space: nowrap; }
+    .proof ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .7rem; }
+    .proof li { color: var(--body-copy); padding-left: 1.4rem; position: relative; }
+    .proof li::before { content: ""; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; border-radius: 999px; background: var(--cyan); }
+    .stat { color: var(--cyan-bright); font-weight: 600; }
+
+    .credential { text-align: center; padding: 1.4rem 1.5rem;
+      display: flex; align-items: center; justify-content: center; gap: .75rem; flex-wrap: wrap; }
+    .credential p { color: var(--muted); font-size: 1.02rem; }
+    .credential .names { color: var(--body-copy); font-weight: 500; }
+
+    .testimonial { position: relative; max-width: 62rem; margin-inline: auto; border-radius: var(--r-card); border: 1px solid var(--cyan);
+      background: var(--surface); padding: clamp(2rem, 1.5rem + 3vw, 3.5rem); }
+    .testimonial .qmark { color: var(--cyan); opacity: .9; margin-bottom: 1rem; }
+    .testimonial .qmark svg { width: 44px; height: 28px; }
+    .testimonial blockquote { margin: 0; color: var(--body-copy); font-size: var(--t-h6); line-height: 1.55; }
+    .testimonial .attribution { margin-top: 1.5rem; display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    .testimonial .avatar { width: 46px; height: 46px; border-radius: 999px; background: var(--cyan-fill); border: 1px solid var(--border); }
+    .testimonial .who b { color: var(--ink); font-weight: 600; display: block; font-family: var(--font-head); }
+    .testimonial .who span { color: var(--muted); font-size: .92rem; }
+
+    /* ===========================================================
+       CLOSING CTA  (Automark CallToAction; carries a ghosted master)
+       =========================================================== */
+    .cta-card { position: relative; border-radius: var(--r-panel);
+      border-width: 1px; border-style: solid; padding: clamp(2.5rem, 1.5rem + 5vw, 5.5rem) 1.5rem; text-align: center; overflow: hidden; }
+    .cta-card .inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.4rem; }
+    /* Optional brand film filling the card as a muted background, with a navy scrim
+       keeping the overlaid copy readable. Present on any .cta-card that ships a .cta-bg. */
+    .cta-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+    .cta-card:has(.cta-bg)::after { content: ""; position: absolute; inset: 0; z-index: 0; background: rgba(0, 20, 55, 0.58); }
+
+    /* ===========================================================
+       FOOTER  (Automark footer)
+       =========================================================== */
+    .site-footer { position: relative; padding-top: var(--section-y); overflow: hidden; }
+    .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2.5rem; padding-bottom: 3rem; }
+    .footer-brand { max-width: 24rem; }
+    .footer-brand .brand img { height: 2.1rem; }
+    .footer-brand p { color: var(--muted); margin-top: 1rem; }
+    .footer-col h4 { font-size: 1.1rem; color: var(--ink); margin-bottom: 1.25rem; font-family: var(--font-head); }
+    .footer-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .85rem; }
+    .footer-col a { color: var(--muted); transition: color .2s; }
+    .footer-col a:hover { color: var(--ink); }
+    .footer-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.6rem; }
+    .footer-bottom p { color: var(--muted); font-size: .9rem; }
+    .footer-bottom a { color: var(--muted); font-size: .9rem; transition: color .2s; }
+    .footer-bottom a:hover { color: var(--ink); }
+    .footer-legal { display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem; }
+    .socials { display: flex; gap: .6rem; }
+    .socials a { width: 40px; height: 40px; border-radius: 999px; display: grid; place-items: center; background: rgba(11,20,40,.05); color: var(--ink); transition: background .2s; }
+    .socials a:hover { background: var(--cyan-fill); }
+
+    /* ===========================================================
+       LEGAL PAGES  (/terms-of-use/ and /privacy-policy/ share these)
+       =========================================================== */
+    .legal-page .section { padding-top: var(--nav-to-hero); }
+    .legal-page .legal-head { max-width: var(--container-legal); margin-inline: auto; display: flex; flex-direction: column; align-items: flex-start; gap: 1.1rem; padding-bottom: 2.4rem; border-bottom: 1px solid var(--border); }
+    .legal-page .legal-head h1 { max-width: 16ch; text-wrap: balance; }
+    .legal-page .legal-updated { color: var(--muted); font-size: .95rem; }
+    .legal-page .legal-body { max-width: var(--container-legal); margin-inline: auto; padding-top: 2.4rem; }
+    .legal-page .legal-body > * + * { margin-top: 1.15rem; }
+    .legal-page .legal-body p,
+    .legal-page .legal-body dd,
+    .legal-page .legal-body li { color: var(--body-copy); font-size: 1.02rem; line-height: 1.75; }
+    .legal-page .legal-body h2 { font-size: var(--t-h5); margin-top: clamp(2.6rem, 2rem + 2vw, 3.6rem); }
+    .legal-page .legal-body h3 { font-size: var(--t-h6); margin-top: 2.4rem; }
+    .legal-page .legal-body ul { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: .55rem; }
+    .legal-page .legal-body li::marker { color: var(--cyan); }
+    .legal-page .legal-body a { color: var(--cyan); transition: color .2s; }
+    .legal-page .legal-body a:hover { color: var(--cyan-bright); }
+    .legal-page .legal-body .sub { padding-left: 1.6rem; }
+    .legal-page .legal-body .sub2 { padding-left: 3.2rem; }
+    .legal-page .legal-body dl { margin: 0; }
+    .legal-page .legal-body dt { color: var(--ink); font-family: var(--font-head); font-weight: 600; margin-top: 1.5rem; }
+    .legal-page .legal-body dd { margin: .4rem 0 0; }
+    .legal-page .legal-body dd + dd { margin-top: .6rem; }
+
+    /* ===========================================================
+       MOTION  (Automark used GSAP/Lenis; plain-CSS reveals here,
+       with a static fallback when scroll timelines are unsupported)
+       =========================================================== */
+    @media (prefers-reduced-motion: no-preference) {
+      /* Scroll reveals: elements tagged .reveal fade and rise as they enter the
+         viewport. A tiny IntersectionObserver in BaseLayout adds .in-view. The .js
+         scope means content stays visible if JavaScript is off, and the hero is
+         intentionally not tagged, so it renders statically on load. */
+      .js .reveal { opacity: 0; transform: translateY(28px);
+        transition: opacity .7s ease-out, transform .7s ease-out; }
+      .js .reveal.in-view { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    /* ===========================================================
+       RESPONSIVE
+       =========================================================== */
+    @media (max-width: 980px) {
+      .navbar { display: flex; justify-content: flex-start; gap: .75rem; }
+      .grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .split, .split--flip { grid-template-columns: 1fr; }
+      .copy-col { align-items: center; text-align: center; }
+      .copy-col h1, .copy-col h2, .copy-col .lead { max-width: 36ch; }
+      .nav-links { position: fixed; inset: 5.2rem 1rem auto 1rem; flex-direction: column; align-items: stretch;
+        padding: 1rem; border-radius: var(--radius); background: var(--bg); border-color: var(--border); display: none; }
+      .nav-toggle:checked ~ .nav-links { display: flex; }
+      .nav-toggle-label { order: -1; display: grid; place-items: center; width: 46px; height: 46px; border-radius: var(--radius-sm);
+        background: rgba(11,20,40,.06); border: 1px solid var(--border-soft); color: var(--ink); cursor: pointer; }
+      .nav-toggle:checked + .nav-toggle-label .icon-menu { display: none; }
+      .nav-toggle:checked + .nav-toggle-label .icon-close { display: block; }
+      .nav-cta .btn { display: none; }
+
+      /* Inside the mobile menu the dropdowns are native <details> accordions,
+         so the whole nav works with JavaScript disabled. */
+      .nav-item.has-menu { width: 100%; }
+      .nav-links summary { display: flex; justify-content: space-between; width: 100%; padding: .7rem .25rem; }
+      .nav-item[open] > summary .nav-caret { transform: rotate(180deg); }
+      .nav-panel { border: none; box-shadow: none; background: transparent; padding: .1rem .25rem .6rem; }
+      .nav-panel a { padding: .55rem .5rem; }
+      .mega-grid { grid-template-columns: 1fr; gap: .85rem; }
+      .mega-heading { padding-left: .5rem; }
+      .mega-foot { flex-direction: column; align-items: flex-start; gap: .5rem; margin-top: .6rem; padding: .7rem .5rem 0; }
+    }
+    @media (max-width: 620px) {
+      .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    /* ===== VERTICAL INDUSTRY PAGES (tech/fintech/events/industrials/insurance/consultancy) ===== */
+
+    /* INDUSTRY BREADCRUMB (slim bar directly under the header; replaces the
+       six-item switcher, which did not scale to the full industry set) */
+    .crumb { border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); background: var(--panel); }
+    .crumb-inner { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; padding-block: .7rem; }
+    .crumb a, .crumb-current { font-family: var(--font-head); font-weight: 600; font-size: .92rem; letter-spacing: .01em; }
+    .crumb a { color: var(--muted); transition: color .2s; }
+    .crumb a:hover { color: var(--cyan); }
+    .crumb .sep { color: var(--border); user-select: none; }
+    .crumb-current { color: var(--ink); }
+
+    /* SHARED VERTICAL COMPONENTS */
+    .card .kicker.muted { color: var(--muted); }   /* couplet color logic: platform = muted, service = cyan */
+    .chip { padding: .55rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-soft);
+      background: var(--panel); color: var(--muted); font-family: var(--font-head); font-weight: 600; font-size: .9rem; white-space: nowrap; }
+
+    /* BLOCK 1: HERO (vertical variant, centered feature video) */
+    .hero-inner h1 { max-width: 24ch; text-wrap: balance; }
+    .hero-inner .btn { margin-top: .2rem; }   /* the one action */
+    .hero-inner .video-master { margin-top: clamp(1rem, .5rem + 1.5vw, 2rem); max-width: 980px; }
+
+    /* BLOCK 2: WHAT BINUMI DOES (two-column couplet split) */
+    .couplet { display: flex; flex-direction: column; gap: clamp(1.5rem, 1rem + 1.5vw, 2.25rem); align-items: center; }
+    .lead-line { text-align: center; max-width: 40ch; margin-inline: auto; font-family: var(--font-head); font-weight: 800;
+      font-size: var(--t-h3); line-height: 1.1; color: var(--ink); text-wrap: balance; }
+    .couplet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; width: 100%; }
+    .couplet-grid .card p { color: var(--body-copy); }
+    .couplet .close-line { text-align: center; max-width: 60ch; font-size: clamp(1.1rem, 1rem + .6vw, 1.35rem);
+      line-height: 1.45; color: var(--body-copy); }
+    .couplet .close-line strong { color: var(--ink); }
+
+    /* BLOCK 3 + 4: PROBLEM + PROOF (left column) and a VIDEO (right) */
+    .problem-proof { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 1rem + 3vw, 4rem); align-items: center; }
+    .proof-col { display: flex; flex-direction: column; gap: clamp(1.5rem, 1rem + 1vw, 2rem); }
+    .problem { text-align: left; display: flex; flex-direction: column; gap: 1.4rem; }
+    .problem p { font-size: 1rem; line-height: 1.65; color: var(--body-copy); }
+    .proof-interim { text-align: left;
+      display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;
+      border: 1px dashed var(--border); border-radius: var(--radius); background: rgba(255,255,255,.02);
+      padding: clamp(1.75rem, 1.25rem + 2vw, 2.75rem); }
+    .proof-row { display: flex; flex-direction: column; align-items: center; gap: clamp(1.5rem, 1rem + 1.5vw, 2.25rem); }
+    .proof-row .problem-proof { width: 100%; }
+    .proof-interim p { color: var(--muted); max-width: 56ch; font-size: 1.05rem; }
+    .proof-interim p .names { color: var(--body-copy); font-weight: 500; }
+
+    /* BLOCK 5: USE CASES (breadth layer, chip row) */
+    .usecases { display: flex; flex-direction: column; align-items: center; gap: clamp(1.5rem, 1rem + 1.5vw, 2.25rem); }
+    .usecases .lead-line { text-align: center; max-width: 30ch; font-family: var(--font-head); font-weight: 800;
+      font-size: var(--t-h3); line-height: 1.1; color: var(--ink); text-wrap: balance; }
+    .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; max-width: 64rem; }
+
+    /* BLOCK 6: TRUST (governance / Control half of the brand) */
+    .trust { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(2rem, 1rem + 3vw, 4rem); align-items: center; }
+    .trust-copy { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 1.5rem; min-width: 0; }
+    .trust .kicker { font-family: var(--font-head); font-weight: 700; font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; color: var(--cyan); }
+    .trust h2 { max-width: 26ch; text-wrap: balance; }
+    .trust .creds { width: 100%; border-radius: var(--radius); border: 1px solid var(--border);
+      background: var(--cyan-fill); padding: clamp(1.25rem, 1rem + 1vw, 1.75rem) clamp(1.5rem, 1rem + 1.5vw, 2rem);
+      color: var(--body-copy); font-size: 1.08rem; line-height: 1.55; }
+    .trust .creds strong { color: var(--ink); }
+    .trust .close { max-width: 60ch; font-size: clamp(1.15rem, 1rem + .7vw, 1.45rem); line-height: 1.4; color: var(--ink); font-weight: 500; }
+
+    /* RESPONSIVE: vertical pages */
+    @media (max-width: 980px) {
+      .couplet-grid { grid-template-columns: 1fr; }
+      .problem-proof { grid-template-columns: 1fr; }
+      .trust { grid-template-columns: 1fr; }
+    }
+
+    /* ===========================================================
+       SITE-WIDE CHAT WIDGET (.bnm-chat)
+       Launcher pill bottom-right on every page; right-hand drawer
+       panel. Visual shell only: the send handler in ChatWidget.astro
+       is the seam where a real engine lands later.
+       Header z-index is 50, so launcher (80) and panel (90) sit above.
+       =========================================================== */
+    .bnm-chat-launcher { position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 80;
+      display: inline-flex; align-items: center; gap: .55rem; height: 48px; padding: 0 1.3rem;
+      border: 1.5px solid transparent; border-radius: var(--radius-sm); cursor: pointer;
+      font-family: var(--font-head); font-weight: 600; font-size: .95rem;
+      color: #04121b; background: var(--cyan); box-shadow: 0 14px 40px -12px rgba(0,0,0,.7);
+      transition: background .3s ease; }
+    .bnm-chat-launcher:hover { background: var(--cyan-bright); }
+    .bnm-chat-launcher svg { width: 20px; height: 20px; }
+    body.bnm-chat-open .bnm-chat-launcher { visibility: hidden; }
+
+    .bnm-chat-panel { position: fixed; top: 0; right: 0; bottom: 0; z-index: 90;
+      width: min(var(--chat-w), 100%); display: flex; flex-direction: column;
+      background: #ffffff; border-left: 1px solid var(--border);
+      transform: translateX(102%); transition: transform .28s ease; }
+    .bnm-chat-panel.open { transform: translateX(0); }
+    .bnm-chat-panel[hidden] { display: none; }
+
+    /* On wider screens the panel sits inline beside the page, not over it:
+       the body reserves its width so content reflows, and the home page's
+       fixed header pulls its right edge in to match. Phones keep the
+       full-width panel (handled in the narrow media query below). */
+    @media (min-width: 641px) {
+      body { transition: padding-right .28s ease; }
+      body.bnm-chat-open { padding-right: var(--chat-w); }
+      body.bnm-chat-open .site-header { right: var(--chat-w); }
+      /* Pre-open: set on <html> in BaseLayout's head before first paint, so the
+         gutter is reserved up front and content never reflow-slides on refresh.
+         ChatWidget hands control to .bnm-chat-open and drops this once JS runs. */
+      html.chat-preopen body { padding-right: var(--chat-w); }
+      html.chat-preopen .site-header { right: var(--chat-w); }
+    }
+    /* Suppress drawer + reflow motion for the initial auto-open on load, so a
+       refresh shows the panel already in place. The class is removed after the
+       first paint, so user-driven open/close still animates. */
+    body.bnm-chat-no-anim,
+    body.bnm-chat-no-anim .bnm-chat-panel { transition: none !important; }
+
+    .bnm-chat-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 1rem 1.25rem; border-bottom: 1px solid var(--border-soft); flex: 0 0 auto; }
+    .bnm-chat-title { display: flex; align-items: center; }
+    .bnm-chat-title img { display: block; height: 1.3rem; width: auto; }
+    .bnm-chat-title .tag { margin-left: .55rem; font-weight: 600; font-size: .7rem;
+      letter-spacing: .12em; text-transform: uppercase; color: var(--cyan); }
+    .bnm-chat-close { display: grid; place-items: center; width: 36px; height: 36px;
+      border-radius: var(--radius-sm); background: transparent; border: 1px solid var(--border-soft);
+      color: var(--muted); cursor: pointer; transition: color .2s, border-color .2s; }
+    .bnm-chat-close:hover { color: var(--ink); border-color: var(--cyan); }
+    .bnm-chat-close svg { width: 16px; height: 16px; }
+
+    .bnm-chat-body { flex: 1 1 auto; overflow-y: auto; padding: 1.25rem;
+      display: flex; flex-direction: column; gap: 1.1rem; }
+
+    .bnm-chat-thread { display: flex; flex-direction: column; gap: .6rem; }
+    .bnm-msg { max-width: 88%; padding: .75rem 1rem; border-radius: var(--radius);
+      font-size: .95rem; line-height: 1.55; }
+    .bnm-msg-bot { align-self: flex-start; background: var(--panel-2);
+      border: 1px solid var(--border-soft); color: var(--body-copy); }
+    .bnm-msg-user { align-self: flex-end; background: var(--cyan-fill);
+      border: 1px solid var(--border); color: var(--ink); }
+
+    .bnm-chat-suggest { display: flex; flex-direction: column; align-items: stretch; gap: .5rem; margin-top: auto; }
+    .bnm-suggest-label { font-family: var(--font-head); font-weight: 700; font-size: 1rem;
+      color: var(--ink); margin-bottom: .15rem; }
+    .bnm-chip { display: flex; align-items: center; gap: .7rem;
+      padding: .65rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-soft);
+      background: #ffffff; color: var(--body-copy); font-family: var(--font-head);
+      font-weight: 600; font-size: .9rem; cursor: pointer; text-align: left;
+      transition: border-color .2s, color .2s; }
+    .bnm-chip svg { width: 18px; height: 18px; flex: 0 0 auto; color: var(--cyan); }
+    .bnm-chip:hover { border-color: var(--cyan); color: var(--cyan); }
+
+
+    .bnm-chat-foot { padding: 1rem 1.25rem 1.1rem; border-top: 1px solid var(--border-soft);
+      display: flex; flex-direction: column; gap: .55rem; flex: 0 0 auto; }
+    .bnm-chat-bar { max-width: none; }
+    .bnm-chat-note { color: var(--muted); font-size: .78rem; }
+
+    @media (max-width: 640px) {
+      .bnm-chat-launcher { width: 52px; height: 52px; padding: 0; justify-content: center; }
+      .bnm-chat-launcher .label { display: none; }
+      body.bnm-chat-open { overflow: hidden; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bnm-chat-panel { transition: none; }
+      body { transition: none; }
+    }

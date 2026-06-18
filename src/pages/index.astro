@@ -1,0 +1,390 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import VideoFrame from '../components/VideoFrame.astro';
+import HowAccordion from '../components/HowAccordion.astro';
+
+// Five-stage "How Binumi works" accordion content for the homepage.
+const homeSteps = [
+  {
+    label: 'Identify',
+    glyph: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
+    body: 'We work with you to identify where precision video communications can create measurable impact across sales, workforce education, customer engagement, and knowledge transfer.',
+  },
+  {
+    label: 'Configure',
+    glyph: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.3.9a7 7 0 0 0-1.7-1L16.5 2h-4l-.4 2.5a7 7 0 0 0-1.7 1l-2.3-.9-2 3.4 2 1.5a7 7 0 0 0 0 2l-2 1.5 2 3.4 2.3-.9a7 7 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7 7 0 0 0 1.7-1l2.3.9 2-3.4-2-1.5c.06-.33.1-.66.1-1z"/></svg>',
+    body: 'We configure Binumi around your brand, content, governance, and objectives, creating the foundations for scalable communications from day one.',
+  },
+  {
+    label: 'Deliver',
+    glyph: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2l8 3v6c0 5-3.4 8.5-8 11-4.6-2.5-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg>',
+    body: 'Our team helps deliver immediate results, supporting priority initiatives and demonstrating value within weeks rather than months.',
+  },
+  {
+    label: 'Enable',
+    glyph: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3.3 3-6 7-6s7 2.7 7 6"/><path d="M17 11l2 2 4-4"/></svg>',
+    body: 'Your experts and teams learn how to create, adapt, and scale communications themselves, reducing dependency on agencies and specialist resources.',
+  },
+  {
+    label: 'Scale',
+    glyph: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 18V9M10 18V5M16 18v-6M22 18v-9"/></svg>',
+    body: 'Video becomes an organizational capability, supporting every opportunity, every workforce, and every stage of growth without increasing headcount.',
+  },
+];
+---
+<BaseLayout
+  title="Binumi · Scale expertise, grow revenue"
+  description="Binumi helps organizations transform complex knowledge into precision video communications that support every sales opportunity, educate every workforce, and let experts influence thousands rather than dozens."
+  ctaHref="#close"
+>
+  <main>
+    <!-- ===================== HERO (Variant B: white editorial + transformation row) ===================== -->
+    <section class="hero hero-home hero-editorial">
+      <div class="container hero-inner">
+        <h1 class="hero-head">Scale Expertise. <span class="hl">Grow Revenue</span>.</h1>
+
+        <div class="hero-copy">
+            <p class="lead">
+              Revenue is limited by how many people your experts can reach. Binumi helps organizations
+              transform complex knowledge into precision video communications that support every sales
+              opportunity, educate every workforce, and enable their most valuable people to influence
+              thousands rather than dozens.
+            </p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="/contact/">Start your proof of value
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+            <ul class="hero-trust">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/></svg>
+                ISO 27001 certified
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                Brand-locked output
+              </li>
+            </ul>
+            <dl class="hero-proof">
+              <div class="hp-cell"><dt>Fujitsu</dt><dd>£20M+ in opportunities supported</dd></div>
+              <div class="hp-cell"><dt>Informa</dt><dd>200+ videos in 3 months</dd></div>
+              <div class="hp-cell"><dt>Generali</dt><dd>Localized in 12 languages</dd></div>
+              <div class="hp-cell"><dt>Knight Frank</dt><dd>Two weeks to two hours</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== WE DRIVE REVENUE WITH VIDEO (text left, brand film right) ===================== -->
+    <section class="section" id="drive">
+      <div class="container split">
+        <div class="copy-col">
+          <h2>We <span class="hl">drive revenue</span> with video.</h2>
+          <p class="lead">Binumi turns your already created company knowledge into an on brand, on message finished video.</p>
+        </div>
+        <div class="drive-media">
+          <VideoFrame
+            label="Binumi brand film"
+            videoSrc="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__eff639274fe438f8e6950573373faf76_h169.mp4"
+            autoplay
+            muted
+            loop
+          />
+          <svg class="drive-merge" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M500 0 V68 M166 68 H834 M166 68 V100 M500 68 V100 M834 68 V100" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+          </svg>
+          <div class="drive-inputs">
+            <span class="node">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>
+              Decks
+            </span>
+            <span class="node">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
+              Reports
+            </span>
+            <span class="node">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9z"/></svg>
+              Knowledge
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== WHERE BINUMI CREATES VALUE (Home_03) ===================== -->
+    <section class="section" id="value">
+      <div class="container stack">
+        <div class="intro">
+          <h2>Where Binumi <span class="hl">creates value</span></h2>
+        </div>
+        <!-- Spotlight tabs: a horizontal row of value areas (top) drives one focal panel below.
+             Toggle logic in the inline script below; one panel open at a time. -->
+        <div class="value-wrap reveal">
+          <div class="value-rail" role="tablist" aria-label="Value areas">
+            <button class="value-tab active" type="button" role="tab" data-i="0" aria-selected="true">Revenue Growth</button>
+            <button class="value-tab" type="button" role="tab" data-i="1" aria-selected="false">Workforce Capability</button>
+            <button class="value-tab" type="button" role="tab" data-i="2" aria-selected="false">Customer Engagement</button>
+            <button class="value-tab" type="button" role="tab" data-i="3" aria-selected="false">Operational Efficiency</button>
+          </div>
+          <div class="value-stage">
+            <article class="value-panel active" data-i="0">
+              <span class="value-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></span>
+              <h3>Revenue Growth</h3>
+              <p>Support every pitch, proposal, and sales opportunity with precision video communications that help buyers understand, engage, and act.</p>
+            </article>
+            <article class="value-panel" data-i="1">
+              <span class="value-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M5 10v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/></svg></span>
+              <h3>Workforce Capability</h3>
+              <p>Transform complex knowledge into scalable learning experiences that improve onboarding, training, compliance, internal communications, and professional development.</p>
+            </article>
+            <article class="value-panel" data-i="2">
+              <span class="value-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.3A8.4 8.4 0 1 1 21 11.5z"/></svg></span>
+              <h3>Customer Engagement</h3>
+              <p>Help customers understand products, services, processes, and decisions through clear, consistent communications.</p>
+            </article>
+            <article class="value-panel" data-i="3">
+              <span class="value-glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 12l5-3"/><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg></span>
+              <h3>Operational Efficiency</h3>
+              <p>Reduce dependency on agencies, repetitive meetings, and additional headcount by scaling expert communication across the business.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BE VIDEO FIRST (Home_02) ===================== -->
+    <section class="section" id="be-video-first">
+      <div class="container split">
+        <div class="copy-col">
+          <h2>Video is the output. <span class="hl">Growth is the goal</span>.</h2>
+          <p class="lead">Your experts already create value. Binumi helps that value scale.</p>
+          <p class="lead">
+            Binumi identifies where precision video can support sales, learning, customer engagement,
+            and knowledge transfer, then configures the AI, workflows, brand controls, and specialist
+            support to deliver measurable impact.
+          </p>
+        </div>
+        <VideoFrame label="Video is the output, growth is the goal" />
+      </div>
+    </section>
+
+    <!-- ===================== CAPABILITY (split: video left, copy right) ===================== -->
+    <section class="section" id="reframe">
+      <div class="container split split--flip">
+        <VideoFrame label="Capability overview video" />
+        <div class="copy-col">
+          <h2>Video isn&rsquo;t a project. It&rsquo;s <span class="hl">a capability</span>.</h2>
+          <p class="lead">Most organizations treat video as a one-off request.</p>
+          <p class="lead">
+            Binumi makes it a repeatable business capability, built to scale expertise, accelerate
+            understanding, and support growth across the organization.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== HOW BINUMI WORKS (two-column: copy left, accordion right) ===================== -->
+    <!-- Numbered accordion: one stage open at a time. Structure/styles live in the
+         HowAccordion component; toggle logic in its inline script. -->
+    <section class="section" id="how">
+      <div class="container split">
+        <div class="copy-col">
+          <h2>How <span class="hl">Binumi</span> works</h2>
+          <p class="lead">
+            Not a platform you are left to figure out. Not an agency you become dependent on.
+            Binumi combines specialist services, AI, and purpose-built technology to help organizations
+            scale expertise, drive revenue, and build long-term communication capability.
+          </p>
+        </div>
+        <HowAccordion idPrefix="how-step" steps={homeSteps} />
+      </div>
+    </section>
+
+    <!-- ===================== PROOF (outcomes + credentials + testimonial) ===================== -->
+    <section class="section" id="proof">
+      <div class="container stack" style="position:relative;">
+        <div class="intro">
+          <h2>Real clients, <span class="hl">in detail</span>.</h2>
+          <p class="subtitle">A closer look at the organizations we support, in their own numbers, not borrowed industry statistics.</p>
+        </div>
+
+        <!-- Featured outcomes -->
+        <div class="grid grid-3 reveal">
+          <div class="proof">
+            <div class="client"><h3 class="name">Fujitsu</h3><span class="descr">$37B global technology and services provider</span></div>
+            <ul>
+              <li><span class="stat">Every</span> sales meeting, video-supported.</li>
+              <li><span class="stat">5&times;</span> post-meeting engagement.</li>
+              <li><span class="stat">&pound;20M+</span> in opportunities supported.</li>
+            </ul>
+          </div>
+          <div class="proof">
+            <div class="client"><h3 class="name">Informa</h3><span class="descr">FTSE 100 leader in intelligence and B2B events</span></div>
+            <ul>
+              <li><span class="stat">200+</span> videos in the first 3 months.</li>
+              <li><span class="stat">New</span> video revenue stream created.</li>
+              <li><span class="stat">Sponsor value</span> extended beyond the event.</li>
+            </ul>
+          </div>
+          <div class="proof">
+            <div class="client"><h3 class="name">Generali</h3><span class="descr">One of the world&rsquo;s largest insurance and asset management groups</span></div>
+            <ul>
+              <li><span class="stat">Video</span> communications scaled across Europe.</li>
+              <li><span class="stat">Instantly</span> localized in 12 languages.</li>
+              <li><span class="stat">One message.</span> Every market.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Quieter credential band -->
+        <div class="credential reveal">
+          <p>Plus <span class="names">Netcetera, Imagine Learning</span> and many more.</p>
+        </div>
+
+        <!-- Testimonial, given its own space -->
+        <div class="testimonial reveal">
+          <div class="qmark"><svg viewBox="0 0 45 28" fill="currentColor"><path d="M15.4 0v11H24.9L16.6 28H0L13 0h2.4ZM36.7 0v11H45L36.7 28H21.3L34.3 0h2.4Z"/></svg></div>
+          <blockquote>
+            Binumi has changed how we sell. It helps our experts support every opportunity with
+            precise, high-impact video communications that make complex ideas easier to understand
+            and faster to act on. It is not another tool. It is a capability for scaling expertise
+            and driving revenue.
+          </blockquote>
+          <div class="attribution">
+            <span class="avatar"></span>
+            <span class="who"><b>CTO</b><span>Fujitsu</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CLOSE ===================== -->
+    <section class="section" id="close">
+      <div class="container">
+        <div class="cta-card">
+          <video class="cta-bg" src="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__e9fd886d8dacac140457e375d606c8a0_h169.mp4"
+            autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+          <div class="inner">
+            <h2>See where Binumi <span class="hl">creates impact</span>.</h2>
+            <p class="subtitle">Explore how precision video communications can support sales, workforce education, customer engagement, internal communications, and knowledge transfer across your organization.</p>
+            <a class="btn btn-primary" href="/solutions/">See the opportunities
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style is:global>
+  /* Stack the new client descriptor under the client name in the proof cards. */
+  #proof .proof .client { flex-direction: column; align-items: flex-start; gap: .3rem; }
+  #proof .proof .descr { color: var(--muted); font-size: .9rem; font-weight: 400; }
+
+  /* Hero (Variant B): white editorial copy block + transformation row */
+  /* Match the solutions hero spacing: the same clamp it uses, plus the fixed
+     header's height (5.5rem) since this page's header overlaps instead of pushing. */
+  .hero-editorial { background: var(--bg); padding-top: calc(5.5rem + var(--nav-to-hero)); padding-bottom: var(--section-y); }
+  /* hero-inner stacks the full-width headline, then the split row. The headline sits
+     tight to the subhead (its own gap), not the full --gap block rhythm. */
+  .hero-editorial .hero-inner { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: clamp(1rem, .5rem + 1.5vw, 2rem); }
+  .hero-editorial .hero-head { letter-spacing: -0.02em; line-height: 1.08; }
+
+  /* Single-column editorial: copy, CTA, trust, and the proof row stacked. */
+  .hero-editorial .hero-copy { width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .hero-editorial .lead { max-width: none; line-height: 1.7; color: var(--body-copy); }
+
+  /* Hero proof: all four named-client outcomes on one line, each in a light island
+     box styled like the testimonial (surface fill, cyan hairline, card radius). */
+  .hero-proof { margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; width: 100%; }
+  .hero-proof .hp-cell { background: var(--surface); border: 1px solid var(--cyan); border-radius: var(--r-card); padding: 1.25rem; }
+  .hero-proof dt { color: var(--ink); font-family: var(--font-head); font-weight: 700; font-size: 1rem; }
+  .hero-proof dd { margin: .15rem 0 0; color: var(--muted); font-size: .9rem; }
+  .hero-trust { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap;
+    gap: .55rem 1.75rem; color: var(--muted); font-size: .9rem; }
+  .hero-trust li { display: flex; align-items: center; gap: .5rem; }
+  .hero-trust li svg { width: 16px; height: 16px; flex: 0 0 auto; color: var(--muted); }
+
+  @media (max-width: 860px) { .hero-proof { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .hero-proof { grid-template-columns: 1fr; } }
+
+  /* "We drive revenue with video": text left, the brand film right with its inverted
+     merge bracket gathering the Decks / Reports / Knowledge inputs up into the film. */
+  #drive .drive-media { display: flex; flex-direction: column; align-items: stretch; }
+  #drive .drive-media .video-master { width: 100%; }
+  #drive .drive-merge { width: 100%; height: 46px; display: block; }
+  #drive .drive-inputs { display: grid; grid-template-columns: repeat(3, 1fr); justify-items: center; }
+  #drive .drive-inputs .node { display: inline-flex; align-items: center; gap: .5rem; padding: .5rem .8rem;
+    border-radius: var(--radius-sm); border: 1px solid var(--border-soft); background: var(--panel); color: var(--muted);
+    font-family: var(--font-head); font-weight: 600; font-size: .85rem; }
+  #drive .drive-inputs .node svg { width: 16px; height: 16px; color: var(--cyan); flex: 0 0 auto; }
+  /* .split collapses to one column at 860; drop the bracket and let chips wrap. */
+  @media (max-width: 860px) {
+    #drive .drive-merge { display: none; }
+    #drive .drive-inputs { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1rem; }
+  }
+
+  /* "Where Binumi creates value" spotlight tabs: a horizontal row of labels (top) drives one focal panel below. */
+  #value .value-wrap { display: flex; flex-direction: column; gap: 1.5rem; max-width: 64rem; margin: 1rem auto 0; width: 100%; }
+  #value .value-rail { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: .25rem; border-bottom: 1px solid var(--border); }
+  #value .value-tab { all: unset; box-sizing: border-box; display: flex; align-items: center; cursor: pointer;
+    font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; color: var(--muted);
+    padding: .9rem 1.1rem; margin-bottom: -1px; border-bottom: 2px solid transparent;
+    transition: background .2s, border-color .2s, color .2s; }
+  #value .value-tab:hover { background: rgba(11,20,40,.04); color: var(--ink); }
+  #value .value-tab:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
+  #value .value-tab.active { border-bottom-color: var(--cyan); background: var(--cyan-fill); color: var(--ink); }
+  /* All panels share one grid cell, so the stage always sizes to the tallest panel:
+     the section height is constant and the page never jumps between hovers. Inactive
+     panels stay in flow (height held) but fade out via opacity for a smooth crossfade. */
+  #value .value-stage { display: grid; }
+  #value .value-panel { grid-area: 1 / 1; display: grid; grid-template-columns: auto 1fr; column-gap: 1.5rem; align-items: start;
+    padding: 2.5rem; border: 1px solid var(--cyan); border-radius: var(--r-card);
+    background: var(--surface); color: var(--body-copy); min-height: 15rem;
+    opacity: 0; visibility: hidden; transform: translateY(6px); pointer-events: none;
+    transition: opacity .3s ease, transform .3s ease, visibility .3s; }
+  #value .value-panel.active { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
+  @media (prefers-reduced-motion: reduce) { #value .value-panel { transition: opacity .15s linear; transform: none; } }
+  #value .value-glyph { grid-row: 1 / span 2; display: grid; place-items: center; width: 54px; height: 54px; border-radius: var(--radius-sm);
+    background: var(--cyan-fill); border: 1px solid var(--border); color: var(--cyan); margin-bottom: 0; }
+  #value .value-glyph svg { width: 26px; height: 26px; }
+  #value .value-panel h3 { font-size: var(--t-h4); margin-bottom: .8rem; }
+  #value .value-panel p { color: var(--body-copy); font-size: 1.1rem; max-width: 46ch; }
+  @media (max-width: 860px) {
+    #value .value-tab { padding: .7rem 1rem; font-size: .98rem; }
+    #value .value-panel { padding: 1.8rem; }
+  }
+
+  /* "How Binumi works": two-column split, copy left / accordion right. Top-align
+     so the heading sits level with the first accordion row, not centered against
+     the tall accordion. The accordion shows bare on the white page (no box). */
+  #how .split { align-items: start; }
+  #how .how-acc { margin: 0; }
+
+</style>
+
+<script is:inline>
+  /* "Where Binumi creates value" spotlight tabs: hover, focus, or click swaps the panel. */
+  (function () {
+    var tabs = document.querySelectorAll('#value .value-tab');
+    var panels = document.querySelectorAll('#value .value-panel');
+    function select(i) {
+      Array.prototype.forEach.call(tabs, function (t) {
+        var on = t.getAttribute('data-i') === i;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      Array.prototype.forEach.call(panels, function (p) {
+        p.classList.toggle('active', p.getAttribute('data-i') === i);
+      });
+    }
+    Array.prototype.forEach.call(tabs, function (tab) {
+      var i = tab.getAttribute('data-i');
+      tab.addEventListener('mouseenter', function () { select(i); });
+      tab.addEventListener('focus', function () { select(i); });
+      tab.addEventListener('click', function () { select(i); });
+    });
+  })();
+</script>

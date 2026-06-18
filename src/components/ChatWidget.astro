@@ -1,0 +1,152 @@
+---
+/* Site-wide chat shell: a right-hand overlay panel that is open by default
+   on every page (the launcher pill is the reopen affordance after a visitor
+   closes it). Visual shell, no backend. The submit handler below is the
+   single seam where a real engine (guided flow or AI) lands later.
+   Styles: .bnm-chat in global.css. */
+---
+<div data-bnm-chat>
+  <button class="bnm-chat-launcher" type="button" aria-haspopup="dialog"
+    aria-expanded="false" aria-controls="bnm-chat-panel">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/><path d="M18 14l.8 2.2L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8z"/></svg>
+    <span class="label">Ask Binumi</span>
+  </button>
+
+  <section class="bnm-chat-panel" id="bnm-chat-panel" role="dialog"
+    aria-label="Binumi video assistant" hidden>
+    <header class="bnm-chat-head">
+      <p class="bnm-chat-title"><img src="/binumi-logo.png" alt="Binumi" width="1920" height="599" /><span class="tag">assistant</span></p>
+      <button class="bnm-chat-close" type="button" aria-label="Close chat">
+        <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M4.2 2.8 10 8.6l5.8-5.8 1.4 1.4-5.8 5.8 5.8 5.8-1.4 1.4-5.8-5.8-5.8 5.8-1.4-1.4L8.6 10 2.8 4.2z"/></svg>
+      </button>
+    </header>
+
+   <div class="bnm-chat-body">
+      <div class="bnm-chat-thread" aria-live="polite">
+        <p class="bnm-msg bnm-msg-bot">Hello. Your best path to revenue is already inside your business, buried in the expertise your people carry. Tell me what you want to achieve, and I will show you what becomes possible.</p>
+      </div>
+
+      <div class="bnm-chat-suggest">
+        <p class="bnm-suggest-label">What can I help you with today?</p>
+        <button class="bnm-chip" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 17l5-5 4 3 6-7"/><path d="M16 8h3v3"/></svg>
+          <span>Win more of the pitches that matter</span>
+        </button>
+        <button class="bnm-chip" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6c4-2 6-2 8 0 2-2 4-2 8 0v12c-4-2-6-2-8 0-2-2-4-2-8 0z"/><path d="M12 6v12"/></svg>
+          <span>Get our people to full performance faster</span>
+        </button>
+        <button class="bnm-chip" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 11l16-6-3 14-5-5z"/><path d="M11 14l-3 4v-5"/></svg>
+          <span>Keep every team on-brand and on-message</span>
+        </button>
+      </div>
+
+      
+    </div>
+
+    <footer class="bnm-chat-foot">
+      <form class="chatbar bnm-chat-bar">
+        <span class="ai" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/><path d="M18 14l.8 2.2L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8z"/></svg></span>
+        <input type="text" aria-label="Ask Binumi a question" placeholder="Ask Binumi a question..." />
+        <button class="btn btn-primary btn-sm" type="submit">Send</button>
+      </form>
+      <p class="bnm-chat-note">Early preview. Replies are limited for now.</p>
+    </footer>
+  </section>
+</div>
+
+<script is:inline>
+  (function () {
+    var root = document.querySelector('[data-bnm-chat]');
+    if (!root) return;
+    var launcher = root.querySelector('.bnm-chat-launcher');
+    var panel = root.querySelector('.bnm-chat-panel');
+    var closeBtn = root.querySelector('.bnm-chat-close');
+    var thread = root.querySelector('.bnm-chat-thread');
+    var body = root.querySelector('.bnm-chat-body');
+    var form = root.querySelector('.bnm-chat-bar');
+    var input = form.querySelector('input');
+    var replied = false;
+    var motion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    /* The panel is open on every page by default, so it reads as an
+       always-present assistant rather than a button to click. We only
+       keep it shut once a visitor has closed it (stored for the session),
+       and we leave it shut on first load on small screens, where the panel
+       is full-width and would otherwise trap the page. */
+    var DISMISS_KEY = 'bnm-chat-dismissed';
+    function dismissed() {
+      try { return sessionStorage.getItem(DISMISS_KEY) === '1'; } catch (e) { return false; }
+    }
+    function remember(state) {
+      try { state ? sessionStorage.setItem(DISMISS_KEY, '1') : sessionStorage.removeItem(DISMISS_KEY); } catch (e) {}
+    }
+
+    function open(focusPanel, instant) {
+      /* instant: the auto-open on load lands with no slide, so a refresh shows
+         the panel already in place rather than flying it in. */
+      if (instant) document.body.classList.add('bnm-chat-no-anim');
+      panel.hidden = false;
+      void panel.offsetWidth; /* style flush so the slide-in transition runs */
+      panel.classList.add('open');
+      launcher.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('bnm-chat-open');
+      remember(false);
+      if (focusPanel) closeBtn.focus();
+      if (instant) {
+        void panel.offsetWidth; /* commit the open state with motion still off */
+        requestAnimationFrame(function () {
+          document.body.classList.remove('bnm-chat-no-anim');
+        });
+      }
+    }
+    function close() {
+      panel.classList.remove('open');
+      launcher.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('bnm-chat-open');
+      remember(true);
+      window.setTimeout(function () { panel.hidden = true; launcher.focus(); }, motion ? 300 : 0);
+    }
+    launcher.addEventListener('click', function () { open(true); });
+    closeBtn.addEventListener('click', close);
+
+    /* Auto-open on load unless the visitor closed it this session, and not
+       on phones where the full-width panel would cover the whole page. */
+    if (!dismissed() && window.matchMedia('(min-width: 641px)').matches) {
+      open(false, true);
+    }
+    /* The head reserved the gutter for first paint; now that the JS-driven open
+       state owns it, drop the bootstrap class so close() can collapse it again. */
+    document.documentElement.classList.remove('chat-preopen');
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !panel.hidden) close();
+    });
+
+    root.querySelectorAll('.bnm-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        input.value = chip.textContent.trim();
+        input.focus();
+      });
+    });
+
+    function say(text, who) {
+      var el = document.createElement('p');
+      el.className = 'bnm-msg bnm-msg-' + who;
+      el.textContent = text;
+      thread.appendChild(el);
+      body.scrollTop = body.scrollHeight;
+    }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var text = input.value.trim();
+      if (!text) return;
+      say(text, 'user');
+      input.value = '';
+      var reply = replied
+        ? 'Our team can take it from there. The proof of value is the fastest route.'
+        : 'Thanks. Our assistant is still in preview, so it cannot answer in full here yet. The fastest way to see what Binumi could make for you is a proof of value: our team shows you, using what your business already has. Shall we start one?';
+      replied = true;
+      window.setTimeout(function () { say(reply, 'bot'); }, 500);
+    });
+  })();
+</script>

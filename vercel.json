@@ -1,0 +1,23 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/why-it-works", "destination": "/solutions/", "permanent": true },
+    { "source": "/why-it-works/", "destination": "/solutions/", "permanent": true },
+    { "source": "/how-it-works", "destination": "/solutions/", "permanent": true },
+    { "source": "/how-it-works/", "destination": "/solutions/", "permanent": true },
+    { "source": "/why-it-works/fintech", "destination": "/industries/financial-services/", "permanent": true },
+    { "source": "/why-it-works/fintech/", "destination": "/industries/financial-services/", "permanent": true },
+    { "source": "/why-it-works/insurance", "destination": "/industries/financial-services/", "permanent": true },
+    { "source": "/why-it-works/insurance/", "destination": "/industries/financial-services/", "permanent": true },
+    { "source": "/why-it-works/events", "destination": "/industries/events/", "permanent": true },
+    { "source": "/why-it-works/events/", "destination": "/industries/events/", "permanent": true },
+    { "source": "/why-it-works/tech", "destination": "/industries/technology/", "permanent": true },
+    { "source": "/why-it-works/tech/", "destination": "/industries/technology/", "permanent": true },
+    { "source": "/why-it-works/consultancy", "destination": "/industries/professional-services/", "permanent": true },
+    { "source": "/why-it-works/consultancy/", "destination": "/industries/professional-services/", "permanent": true },
+    { "source": "/why-it-works/industrials", "destination": "/industries/industrials/", "permanent": true },
+    { "source": "/why-it-works/industrials/", "destination": "/industries/industrials/", "permanent": true },
+    { "source": "/why-it-works/real-estate", "destination": "/industries/real-estate/", "permanent": true },
+    { "source": "/why-it-works/real-estate/", "destination": "/industries/real-estate/", "permanent": true }
+  ]
+}

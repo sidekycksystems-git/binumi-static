@@ -1,0 +1,71 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ChatWidget from '../components/ChatWidget.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  current?: 'solution' | 'industries' | 'insights';
+  ctaHref?: string;
+}
+const { title, description, current, ctaHref } = Astro.props;
+const isHome = Astro.url.pathname === '/';
+---
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <!-- Mark JS as available before paint so .reveal elements only start hidden when
+       we can animate them in (no-JS keeps all content visible). The same pre-paint
+       moment reserves the side-chat gutter when the panel will auto-open, so the
+       page renders at its final width instead of sliding left on every refresh.
+       The condition mirrors the auto-open test in ChatWidget. -->
+  <script is:inline>
+    document.documentElement.classList.add('js');
+    try {
+      if (window.matchMedia('(min-width: 641px)').matches &&
+          sessionStorage.getItem('bnm-chat-dismissed') !== '1') {
+        document.documentElement.classList.add('chat-preopen');
+      }
+    } catch (e) {}
+  </script>
+  <title>{title}</title>
+  <meta name="description" content={description} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body class={isHome ? 'home' : undefined}>
+  <Header current={current} ctaHref={ctaHref} />
+  <slot />
+  <Footer />
+  <ChatWidget />
+
+  <!-- Scroll reveals: add .in-view as each .reveal element enters the viewport.
+       Falls back to showing everything if IntersectionObserver is unavailable or
+       the visitor prefers reduced motion. -->
+  <script is:inline>
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) ||
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        for (var i = 0; i < els.length; i++) els[i].classList.add('in-view');
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+</body>
+</html>

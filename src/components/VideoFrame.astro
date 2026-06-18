@@ -1,0 +1,82 @@
+---
+interface Props {
+  class?: string;
+  duration?: string;
+  embedSrc?: string;
+  videoSrc?: string;
+  label?: string;
+  small?: boolean;
+  tag?: string;
+  title?: string;
+  autoplay?: boolean;
+  muted?: boolean;
+  loop?: boolean;
+}
+
+const {
+  class: className = '',
+  duration,
+  embedSrc,
+  videoSrc,
+  label,
+  small = false,
+  tag,
+  title = 'Binumi video',
+  autoplay = false,
+  muted = false,
+  loop = false
+} = Astro.props;
+
+const frameRole = label && !embedSrc && !videoSrc ? 'img' : undefined;
+---
+
+{small ? (
+  <div class={`thumb ${className}`.trim()} role={frameRole} aria-label={label}>
+    {tag && <span class="video-tag">{tag}</span>}
+    <span class="play-sm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg></span>
+    {duration && <span class="duration" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>{duration}</span>}
+  </div>
+) : (
+  <div class={`video-master ${className}`.trim()} role={frameRole} aria-label={label}>
+    <div class="video-frame">
+      {tag && <span class="video-tag">{tag}</span>}
+      {embedSrc ? (
+        <iframe
+          src={embedSrc}
+          title={title}
+          frameborder="0"
+          scrolling="no"
+          allow="fullscreen"
+          allowfullscreen>
+        </iframe>
+      ) : videoSrc ? (
+        <video
+          src={videoSrc}
+          title={title}
+          controls
+          playsinline
+          autoplay={autoplay}
+          muted={muted}
+          loop={loop}
+          preload={autoplay ? 'auto' : 'metadata'}>
+        </video>
+      ) : (
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg></span>
+      )}
+      {duration && <span class="duration" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>{duration}</span>}
+    </div>
+  </div>
+)}
+
+{!small && videoSrc && autoplay && (
+  <script is:inline>
+    (function () {
+      var vids = document.querySelectorAll('video[autoplay]');
+      for (var i = 0; i < vids.length; i++) {
+        vids[i].muted = true;
+        var p = vids[i].play();
+        if (p && typeof p.catch === 'function') p.catch(function () {});
+      }
+    })();
+  </script>
+)}

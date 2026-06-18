@@ -1,0 +1,99 @@
+---
+interface Props {
+  /** Which nav section is active: 'solution' | 'industries' | 'insights' | undefined (home) */
+  current?: 'solution' | 'industries' | 'insights';
+  /** Header CTA target. Homepage passes '#close'; all other pages use the default '#cta'. */
+  ctaHref?: string;
+}
+const { current, ctaHref = '#cta' } = Astro.props;
+
+// Nav: Solution (flat link) / Industries (mega-menu) / Insights (flat link).
+// The Industries <summary> is a trigger only, not a link: Industries has no
+// landing page of its own (the old hub became /solutions/), but every cluster
+// item links to its /industries/{slug}/ page. Five clusters; Events is the 15th
+// industry, last in the Property, Travel, Public & Education cluster.
+const industryClusters = [
+  {
+    heading: 'Financial & Professional',
+    items: [
+      { label: 'Financial Services', href: '/industries/financial-services/' },
+      { label: 'Professional Services', href: '/industries/professional-services/' },
+    ],
+  },
+  {
+    heading: 'Technology & Communications',
+    items: [
+      { label: 'Technology & Software', href: '/industries/technology/' },
+      { label: 'Telecommunications', href: '/industries/telecommunications/' },
+    ],
+  },
+  {
+    heading: 'Industry & Infrastructure',
+    items: [
+      { label: 'Industrials & Manufacturing', href: '/industries/industrials/' },
+      { label: 'Construction', href: '/industries/construction/' },
+      { label: 'Energy & Utilities', href: '/industries/energy-utilities/' },
+      { label: 'Automotive', href: '/industries/automotive/' },
+    ],
+  },
+  {
+    heading: 'Life Sciences & Healthcare',
+    items: [
+      { label: 'Life Sciences & Pharma', href: '/industries/life-sciences/' },
+      { label: 'Healthcare', href: '/industries/healthcare/' },
+    ],
+  },
+  {
+    heading: 'Property, Travel, Public & Education',
+    items: [
+      { label: 'Real Estate', href: '/industries/real-estate/' },
+      { label: 'Travel, Transport & Hospitality', href: '/industries/travel-transport/' },
+      { label: 'Public Sector', href: '/industries/public-sector/' },
+      { label: 'Education', href: '/industries/education/' },
+      { label: 'Events', href: '/industries/events/' },
+    ],
+  },
+];
+---
+<header class="site-header">
+  <div class="container navbar">
+    <a class="brand" href="/" aria-label="Binumi home"><img src="/binumi-logo.png" alt="Binumi" width="1920" height="599" /></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+    <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle menu">
+      <svg class="icon-menu" width="22" height="22" viewBox="0 0 20 20" fill="currentColor"><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+      <svg class="icon-close" width="22" height="22" viewBox="0 0 20 20" fill="currentColor"><path d="M4.2 2.8 10 8.6l5.8-5.8 1.4 1.4-5.8 5.8 5.8 5.8-1.4 1.4-5.8-5.8-5.8 5.8-1.4-1.4L8.6 10 2.8 4.2z"/></svg>
+    </label>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/solutions/" class={current === 'solution' ? 'current' : undefined} aria-current={current === 'solution' ? 'page' : undefined}>Solution</a>
+
+      <details class="nav-item has-menu nav-industries">
+        <summary class={current === 'industries' ? 'current' : undefined} aria-current={current === 'industries' ? 'page' : undefined}>
+          Industries
+          <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="nav-panel nav-panel--mega">
+          <div class="mega-grid">
+            {industryClusters.map((cluster) => (
+              <div class="mega-col">
+                <p class="mega-heading">{cluster.heading}</p>
+                <ul class="nav-list">
+                  {cluster.items.map((it) => (
+                    <li><a href={it.href}>{it.label}</a></li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div class="mega-foot">
+            <a class="mega-travels" href="/solutions/">Not listed? The model travels.</a>
+          </div>
+        </div>
+      </details>
+
+      <a href="/insights/" class={current === 'insights' ? 'current' : undefined} aria-current={current === 'insights' ? 'page' : undefined}>Insights</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary btn-sm" href={ctaHref}>See what becomes possible</a>
+    </div>
+  </div>
+</header>

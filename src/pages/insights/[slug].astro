@@ -1,0 +1,188 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VideoFrame from '../../components/VideoFrame.astro';
+import PostCard from '../../components/PostCard.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('insights', (e) => e.data.status === 'published');
+  return posts.map((e) => ({ params: { slug: e.id }, props: { entry: e } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const data = entry.data;
+
+const fmtDate = (date: Date) =>
+  new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(date);
+
+const related = (await getCollection('insights', (e) => e.data.status === 'published' && e.id !== entry.id))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  current="insights"
+>
+
+  <main>
+    <!-- ===================== ARTICLE HEAD ===================== -->
+    <article>
+      <section class="article">
+        <div class="container">
+          <div class="article-head">
+            <a class="back-link" href="/insights/">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+              All insights
+            </a>
+            <span class="post-cat">{data.category}</span>
+            <h1>{data.heading}</h1>
+            <p class="deck">{data.deck}</p>
+            <div class="byline">
+              <span class="avatar" aria-hidden="true"></span>
+              <span class="who">
+                <b>{data.author}</b>
+                <span>{fmtDate(data.date)} &middot; {data.watch}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- HERO VIDEO: a video stands in for the usual static hero image -->
+        <div class="container">
+          <div class="article-hero">
+            <VideoFrame
+              class="reveal"
+              tag={data.heroVideoTag}
+              duration={data.heroVideoDuration}
+              label={`${data.heading} video`}
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== ARTICLE BODY ===================== -->
+      <section class="section" style="padding-top: var(--nav-to-hero);">
+        <div class="container">
+          <div class="prose">
+            <Content />
+
+            <!-- SHARE -->
+            <div class="share-row">
+              <span>Share this insight</span>
+              <div class="socials">
+                <a href={`https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.binumi.com%2Finsights%2F${entry.id}%2F`} aria-label="Share on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.84-2.05 3.78-2.05 4.04 0 4.79 2.66 4.79 6.12V21H17v-5.4c0-1.29-.02-2.95-1.8-2.95s-2.07 1.4-2.07 2.85V21H9z"/></svg></a>
+                <a href={`https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.binumi.com%2Finsights%2F${entry.id}%2F&text=${encodeURIComponent(data.heading)}`} aria-label="Share on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.8l-5.3-6.9L4.8 22H1.7l7.8-8.9L1 2h7l4.8 6.3zM17.7 20h1.7L7.4 4H5.6z"/></svg></a>
+                <a href={`/insights/${entry.id}/`} aria-label="Open article link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <!-- ===================== RELATED INSIGHTS ===================== -->
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <h2 class="related-head">Related insights</h2>
+        <div class="posts-grid reveal">
+          {related.map((p) => <PostCard post={p} />)}
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CLOSE ===================== -->
+    <section class="section" id="cta" style="padding-top:0;">
+      <div class="container">
+        <div class="cta-card">
+          <video class="cta-bg" src="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__e9fd886d8dacac140457e375d606c8a0_h169.mp4"
+            autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+          <div class="inner">
+            <h2>Find the video <span class="hl">hiding in your business</span>.</h2>
+            <p class="lead">Bring one thing you already have, a deck, a report, a recording. We will show you what it becomes.</p>
+            <a class="btn btn-primary" href="/solutions/">See what becomes possible
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</BaseLayout>
+
+<style is:global>
+  /* ===========================================================
+     ARTICLE HEAD  (centered: back link, category, title, deck, byline)
+     =========================================================== */
+  .article { padding-top: clamp(2rem, 1rem + 4vw, 3.5rem); }
+  .back-link { display: inline-flex; align-items: center; gap: .45rem; color: var(--muted); font-size: .9rem; transition: color .2s; }
+  .back-link:hover { color: var(--cyan); }
+  .back-link svg { width: 16px; height: 16px; }
+  .article-head { max-width: var(--container-sm); margin-inline: 0; text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 1.15rem; }
+  .article-head .post-cat { margin-top: 1.5rem; }
+  .article-head h1 { max-width: 18ch; text-wrap: balance; }
+  .article-head .deck { font-size: 1.2rem; color: var(--muted); max-width: 52ch; line-height: 1.55; }
+  .byline { display: flex; align-items: center; gap: .7rem; margin-top: .4rem; }
+  .byline .avatar { width: 42px; height: 42px; border-radius: 999px; background: var(--cyan-fill); border: 1px solid var(--border); }
+  .byline .who { text-align: left; }
+  .byline .who b { display: block; color: var(--ink); font-weight: 600; font-family: var(--font-head); font-size: .98rem; }
+  .byline .who span { color: var(--muted); font-size: .85rem; }
+
+  /* hero video: a video stands in for the usual static hero image */
+  .article-hero { max-width: var(--container-sm); margin: clamp(2rem, 1rem + 3vw, 3.25rem) auto 0; }
+
+  /* ===========================================================
+     PROSE  (the readable column; ~44rem measure)
+     =========================================================== */
+  .prose { max-width: var(--container-sm); margin-inline: auto; }
+  .prose > * + * { margin-top: 1.4rem; }
+  .prose p { color: var(--body-copy); font-size: 1.12rem; line-height: 1.78; }
+  .prose h2 { font-size: var(--t-h3); margin-top: clamp(2.5rem, 1.5rem + 2vw, 3.5rem); max-width: 24ch; }
+  .prose h3 { font-size: var(--t-h5); margin-top: 2.2rem; }
+  .prose ul { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: .65rem; color: var(--body-copy); font-size: 1.08rem; }
+  .prose li { line-height: 1.6; }
+  .prose li::marker { color: var(--cyan); }
+  .prose a.inline { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+
+  .pullquote { border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(1.5rem, 1rem + 1.5vw, 2.1rem); margin-block: clamp(2.25rem, 1.5rem + 1.5vw, 3.25rem);
+    background: var(--cyan-fill); font-family: var(--font-head); font-weight: 700; font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.95rem); line-height: 1.25; color: var(--ink); }
+
+  /* in-body video: replaces the inline image you would normally drop here */
+  figure.video-figure { margin: clamp(2.25rem, 1.5rem + 2vw, 3.25rem) 0; }
+  figure.video-figure figcaption { margin-top: .85rem; color: var(--muted); font-size: .9rem; text-align: center; max-width: 52ch; margin-inline: auto; }
+
+  /* stat callout inside the prose flow */
+  .stat-callout { border: 1px solid var(--border); border-radius: var(--radius); background: var(--cyan-fill);
+    padding: clamp(1.5rem, 1rem + 1.5vw, 2.25rem); display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; text-align: center; }
+  .stat-callout .figure { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.6rem); color: var(--cyan-bright); line-height: 1; }
+  .stat-callout .label { color: var(--muted); font-size: .9rem; margin-top: .5rem; }
+
+  /* share row */
+  .share-row { display: flex; align-items: center; gap: 1rem; margin-top: clamp(2.5rem, 1.5rem + 2vw, 3.5rem);
+    padding-top: 1.6rem; border-top: 1px solid var(--border-soft); }
+  .share-row span { color: var(--muted); font-size: .9rem; }
+  .share-row .socials { display: flex; gap: .6rem; }
+  .share-row .socials a { width: 38px; height: 38px; border-radius: 999px; display: grid; place-items: center;
+    background: rgba(11,20,40,.05); color: var(--ink); transition: background .2s; }
+  .share-row .socials a:hover { background: var(--cyan-fill); }
+  .share-row .socials svg { width: 16px; height: 16px; }
+
+  .related-head { font-size: var(--t-h4); margin-bottom: 1.75rem; }
+
+  /* ===========================================================
+     MOTION  (article-specific reveal)
+     =========================================================== */
+  @media (prefers-reduced-motion: no-preference) {
+    .article-head > * { animation: reveal-up .7s ease both; }
+  }
+
+  /* ===========================================================
+     RESPONSIVE
+     =========================================================== */
+  @media (max-width: 620px) {
+    .stat-callout { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+
+</style>
