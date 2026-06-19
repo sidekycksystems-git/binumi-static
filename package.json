@@ -9,7 +9,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "sync": "bash sync.sh",
+    "deploy": "npm run build && npm run sync"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",
