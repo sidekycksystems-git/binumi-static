@@ -7,6 +7,9 @@ to write content in it. Read `brand.md` and `product.md` before writing any copy
 1. **No em-dashes anywhere.** Use commas, colons, or full stops. This is a brand rule, not a preference.
 2. **American spelling throughout** (organization, systemize, program, optimize). The site is `lang="en-US"`.
 
+## Responses
+- Be concise in your responses and sacrifice grammar for conciseness.
+
 ## Code style
 - Solve only what was asked. Don't add features, options, or config I didn't request.
 - Prefer the simplest approach that works. No premature abstraction — don't add layers, wrappers, or helpers until there are at least two real callers.

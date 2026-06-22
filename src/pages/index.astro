@@ -35,7 +35,6 @@ const homeSteps = [
 <BaseLayout
   title="Binumi · Scale expertise, grow revenue"
   description="Binumi helps organizations transform complex knowledge into precision video communications that support every sales opportunity, educate every workforce, and let experts influence thousands rather than dozens."
-  ctaHref="#close"
 >
   <main>
     <!-- ===================== HERO (Variant B: white editorial + transformation row) ===================== -->
@@ -81,7 +80,7 @@ const homeSteps = [
       <div class="container split">
         <div class="copy-col">
           <h2>We <span class="hl">drive revenue</span> with video.</h2>
-          <p class="lead">Binumi turns your already created company knowledge into an on brand, on message finished video.</p>
+          <p class="lead">Binumi uses AI to turn your company's existing knowledge, content, and expertise into polished, on-brand videos in minutes.</p>
         </div>
         <div class="drive-media">
           <VideoFrame
@@ -129,24 +128,24 @@ const homeSteps = [
           </div>
           <div class="value-stage">
             <article class="value-panel active" data-i="0">
-              <span class="value-glyph"><span class="material-symbols-outlined" aria-hidden="true">trending_up</span></span>
               <h3>Revenue Growth</h3>
               <p>Support every pitch, proposal, and sales opportunity with precision video communications that help buyers understand, engage, and act.</p>
+              <span class="value-graphic" aria-hidden="true"><span class="material-symbols-outlined">trending_up</span></span>
             </article>
             <article class="value-panel" data-i="1">
-              <span class="value-glyph"><span class="material-symbols-outlined" aria-hidden="true">school</span></span>
               <h3>Workforce Capability</h3>
               <p>Transform complex knowledge into scalable learning experiences that improve onboarding, training, compliance, internal communications, and professional development.</p>
+              <span class="value-graphic" aria-hidden="true"><span class="material-symbols-outlined">psychology</span></span>
             </article>
             <article class="value-panel" data-i="2">
-              <span class="value-glyph"><span class="material-symbols-outlined" aria-hidden="true">chat</span></span>
               <h3>Customer Engagement</h3>
               <p>Help customers understand products, services, processes, and decisions through clear, consistent communications.</p>
+              <span class="value-graphic" aria-hidden="true"><span class="material-symbols-outlined">smart_display</span></span>
             </article>
             <article class="value-panel" data-i="3">
-              <span class="value-glyph"><span class="material-symbols-outlined" aria-hidden="true">schedule</span></span>
               <h3>Operational Efficiency</h3>
               <p>Reduce dependency on agencies, repetitive meetings, and additional headcount by scaling expert communication across the business.</p>
+              <span class="value-graphic" aria-hidden="true"><span class="material-symbols-outlined">settings</span></span>
             </article>
           </div>
         </div>
@@ -242,18 +241,34 @@ const homeSteps = [
           <p>Plus <span class="names">Netcetera, Imagine Learning</span> and many more.</p>
         </div>
 
-        <!-- Testimonial, given its own space -->
-        <div class="testimonial reveal">
-          <div class="qmark"><svg viewBox="0 0 45 28" fill="currentColor"><path d="M15.4 0v11H24.9L16.6 28H0L13 0h2.4ZM36.7 0v11H45L36.7 28H21.3L34.3 0h2.4Z"/></svg></div>
-          <blockquote>
-            Binumi has changed how we sell. It helps our experts support every opportunity with
-            precise, high-impact video communications that make complex ideas easier to understand
-            and faster to act on. It is not another tool. It is a capability for scaling expertise
-            and driving revenue.
-          </blockquote>
-          <div class="attribution">
-            <span class="avatar"></span>
-            <span class="who"><b>CTO</b><span>Fujitsu</span></span>
+        <!-- Testimonials, two-up -->
+        <div class="testimonials reveal">
+          <div class="testimonial">
+            <div class="qmark"><svg viewBox="0 0 45 28" fill="currentColor"><path d="M15.4 0v11H24.9L16.6 28H0L13 0h2.4ZM36.7 0v11H45L36.7 28H21.3L34.3 0h2.4Z"/></svg></div>
+            <blockquote>
+              Binumi has changed how we sell. It helps our experts support every opportunity with
+              precise, high-impact video communications that make complex ideas easier to understand
+              and faster to act on. It is not another tool. It is a capability for scaling expertise
+              and driving revenue.
+            </blockquote>
+            <div class="attribution">
+              <span class="avatar"></span>
+              <span class="who"><b>CTO</b><span>Fujitsu</span></span>
+            </div>
+          </div>
+
+          <div class="testimonial">
+            <div class="qmark"><svg viewBox="0 0 45 28" fill="currentColor"><path d="M15.4 0v11H24.9L16.6 28H0L13 0h2.4ZM36.7 0v11H45L36.7 28H21.3L34.3 0h2.4Z"/></svg></div>
+            <blockquote>
+              Binumi enables us to create accurate, targeted video at a scale our business demands,
+              unlocking new opportunities for engagement and revenue growth. They don&rsquo;t just
+              provide technology; they bring the expertise, support and strategic thinking that make
+              video deliver real commercial value.
+            </blockquote>
+            <div class="attribution">
+              <span class="avatar"></span>
+              <span class="who"><b>Jean Pierre Bird</b><span>Global Commercial Director, Informa</span></span>
+            </div>
           </div>
         </div>
       </div>
@@ -340,21 +355,21 @@ const homeSteps = [
      the section height is constant and the page never jumps between hovers. Inactive
      panels stay in flow (height held) but fade out via opacity for a smooth crossfade. */
   #value .value-stage { display: grid; }
-  #value .value-panel { grid-area: 1 / 1; display: grid; grid-template-columns: auto 1fr; column-gap: 1.5rem; align-items: start;
+  #value .value-panel { grid-area: 1 / 1; display: grid; grid-template-columns: 1fr auto; column-gap: 1.5rem; align-items: start;
     padding: 2.5rem; border: 1px solid var(--cyan); border-radius: var(--r-card);
     background: var(--surface); color: var(--body-copy); min-height: 15rem;
     opacity: 0; visibility: hidden; transform: translateY(6px); pointer-events: none;
     transition: opacity .3s ease, transform .3s ease, visibility .3s; }
   #value .value-panel.active { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
   @media (prefers-reduced-motion: reduce) { #value .value-panel { transition: opacity .15s linear; transform: none; } }
-  #value .value-glyph { grid-row: 1 / span 2; display: grid; place-items: center; width: 54px; height: 54px; border-radius: var(--radius-sm);
-    background: var(--cyan-fill); border: 1px solid var(--border); color: var(--cyan); margin-bottom: 0; }
-  #value .value-glyph .material-symbols-outlined { font-size: 28px; }
-  #value .value-panel h3 { font-size: var(--t-h4); margin-bottom: .8rem; }
-  #value .value-panel p { color: var(--body-copy); font-size: 1.1rem; max-width: 46ch; }
+  #value .value-panel h3 { grid-column: 1; font-size: var(--t-h4); margin-bottom: .8rem; }
+  #value .value-panel p { grid-column: 1; color: var(--body-copy); font-size: 1.1rem; max-width: 46ch; }
+  #value .value-graphic { grid-column: 2; grid-row: 1 / span 2; align-self: center; justify-self: end; display: grid; place-items: center; color: var(--cyan); opacity: .12; pointer-events: none; }
+  #value .value-graphic .material-symbols-outlined { font-size: 150px; line-height: 1; }
   @media (max-width: 860px) {
     #value .value-tab { padding: .7rem 1rem; font-size: .98rem; }
-    #value .value-panel { padding: 1.8rem; }
+    #value .value-panel { padding: 1.8rem; grid-template-columns: 1fr; }
+    #value .value-graphic { display: none; }
   }
 
   /* "How Binumi works": two-column split, copy left / accordion right. Top-align

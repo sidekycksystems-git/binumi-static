@@ -130,7 +130,7 @@
       background: #ffffff; border-bottom: 1px solid var(--border-soft); }
     .navbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; } .navbar > .brand { justify-self: start; } .navbar > .nav-cta { justify-self: end; }
     .brand { display: inline-flex; align-items: center; }
-    .brand img { display: block; height: 1.3rem; width: auto; }
+    .brand img { display: block; height: 2rem; width: auto; }
     .nav-links { display: flex; align-items: center; gap: .25rem; padding: .35rem .75rem; border-radius: var(--radius-sm);
       background: #ffffff; border: 1px solid #ffffff; backdrop-filter: blur(10px); }
     .nav-links a { color: var(--ink); font-size: .95rem; padding: .5rem .85rem; border-radius: var(--radius-sm); transition: color .2s; }
@@ -158,7 +158,7 @@
     .nav-lead { font-family: var(--font-head); font-weight: 700; }
     .mega-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.25rem 1rem; }
     .mega-heading { font-family: var(--font-head); font-weight: 700; font-size: .72rem; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--muted); padding: 0 .65rem .4rem; }
+      text-transform: uppercase; color: var(--muted); padding: 0 .65rem .4rem; min-height: 2.4rem; }
     .mega-foot { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
       margin-top: 1rem; padding: .9rem .65rem 0; border-top: 1px solid var(--border-soft); }
     .mega-travels { color: var(--muted); font-size: .9rem; transition: color .15s; }
@@ -375,12 +375,14 @@
     .credential p { color: var(--muted); font-size: 1.02rem; }
     .credential .names { color: var(--body-copy); font-weight: 500; }
 
-    .testimonial { position: relative; max-width: 62rem; margin-inline: auto; border-radius: var(--r-card); border: 1px solid var(--cyan);
+    .testimonials { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); align-items: stretch; }
+    @media (max-width: 760px) { .testimonials { grid-template-columns: 1fr; } }
+    .testimonial { position: relative; display: flex; flex-direction: column; max-width: 62rem; margin-inline: auto; border-radius: var(--r-card); border: 1px solid var(--cyan);
       background: var(--surface); padding: clamp(2rem, 1.5rem + 3vw, 3.5rem); }
     .testimonial .qmark { color: var(--cyan); opacity: .9; margin-bottom: 1rem; }
     .testimonial .qmark svg { width: 44px; height: 28px; }
     .testimonial blockquote { margin: 0; color: var(--body-copy); font-size: var(--t-h6); line-height: 1.55; }
-    .testimonial .attribution { margin-top: 1.5rem; display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
+    .testimonial .attribution { margin-top: auto; padding-top: 1.5rem; display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
     .testimonial .avatar { width: 46px; height: 46px; border-radius: 999px; background: var(--cyan-fill); border: 1px solid var(--border); }
     .testimonial .who b { color: var(--ink); font-weight: 600; display: block; font-family: var(--font-head); }
     .testimonial .who span { color: var(--muted); font-size: .92rem; }
@@ -481,6 +483,8 @@
       .nav-toggle:checked + .nav-toggle-label .icon-menu { display: none; }
       .nav-toggle:checked + .nav-toggle-label .icon-close { display: block; }
       .nav-cta .btn { display: none; }
+      .nav-cta { margin-left: auto; }
+      .nav-cta .nav-login { display: inline-flex; }
 
       /* Inside the mobile menu the dropdowns are native <details> accordions,
          so the whole nav works with JavaScript disabled. */
@@ -490,7 +494,7 @@
       .nav-panel { border: none; box-shadow: none; background: transparent; padding: .1rem .25rem .6rem; }
       .nav-panel a { padding: .55rem .5rem; }
       .mega-grid { grid-template-columns: 1fr; gap: .85rem; }
-      .mega-heading { padding-left: .5rem; }
+      .mega-heading { padding-left: .5rem; min-height: 0; }
       .mega-foot { flex-direction: column; align-items: flex-start; gap: .5rem; margin-top: .6rem; padding: .7rem .5rem 0; }
     }
     @media (max-width: 620px) {
