@@ -60,8 +60,8 @@ const industryClusters = [
     <a class="brand" href="/" aria-label="Binumi home"><img src="/binumi-logo.png" alt="Binumi" width="1920" height="599" /></a>
     <input type="checkbox" id="nav-toggle" class="nav-toggle" />
     <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle menu">
-      <svg class="icon-menu" width="22" height="22" viewBox="0 0 20 20" fill="currentColor"><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-      <svg class="icon-close" width="22" height="22" viewBox="0 0 20 20" fill="currentColor"><path d="M4.2 2.8 10 8.6l5.8-5.8 1.4 1.4-5.8 5.8 5.8 5.8-1.4 1.4-5.8-5.8-5.8 5.8-1.4-1.4L8.6 10 2.8 4.2z"/></svg>
+      <span class="icon-menu material-symbols-outlined" aria-hidden="true">menu</span>
+      <span class="icon-close material-symbols-outlined" aria-hidden="true">close</span>
     </label>
     <nav class="nav-links" aria-label="Primary">
       <a href="/solutions/" class={current === 'solution' ? 'current' : undefined} aria-current={current === 'solution' ? 'page' : undefined}>Solution</a>
@@ -69,7 +69,7 @@ const industryClusters = [
       <details class="nav-item has-menu nav-industries">
         <summary class={current === 'industries' ? 'current' : undefined} aria-current={current === 'industries' ? 'page' : undefined}>
           Industries
-          <svg class="nav-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          <span class="nav-caret material-symbols-outlined" aria-hidden="true">expand_more</span>
         </summary>
         <div class="nav-panel nav-panel--mega">
           <div class="mega-grid">

@@ -14,7 +14,7 @@ const { idPrefix, steps } = Astro.props as { idPrefix: string; steps: Step[] };
       <button class="acc-head" type="button" aria-expanded={i===0 ? 'true' : 'false'} aria-controls={id}>
         <span class="acc-glyph" set:html={s.glyph}></span>
         <span class="acc-label">{s.label}</span>
-        <span class="acc-chev" aria-hidden="true"></span>
+        <span class="acc-chev material-symbols-outlined" aria-hidden="true">expand_more</span>
       </button>
       <div class="acc-panel" id={id}><div class="acc-panel-in"><p>{s.body}</p></div></div>
     </div>
@@ -52,14 +52,12 @@ const { idPrefix, steps } = Astro.props as { idPrefix: string; steps: Step[] };
   .how-acc .acc-glyph { flex: none; width: 38px; height: 38px; border-radius: var(--radius-sm); display: grid; place-items: center;
     background: var(--cyan-fill); border: 1px solid var(--border); color: var(--cyan);
     transition: background .25s, border-color .25s, color .25s; }
-  .how-acc .acc-glyph svg { width: 18px; height: 18px; }
+  .how-acc .acc-glyph .material-symbols-outlined { font-size: 22px; }
   .how-acc .acc-label { flex: none; text-align: left; font-family: var(--font-head); font-weight: 700; font-size: var(--t-h6);
     text-transform: uppercase; letter-spacing: .06em; color: var(--ink); }
-  .how-acc .acc-chev { position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; }
-  .how-acc .acc-chev::before, .how-acc .acc-chev::after { content: ""; position: absolute; top: 6px; left: 0;
-    width: 14px; height: 2px; background: var(--cyan); transition: transform .25s; }
-  .how-acc .acc-chev::after { transform: rotate(90deg); }
-  .how-acc .acc-item.open .acc-chev::after { transform: rotate(0); }
+  .how-acc .acc-chev { position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%);
+    font-size: 22px; color: var(--cyan); transition: transform .25s ease; }
+  .how-acc .acc-item.open .acc-chev { transform: translateY(-50%) rotate(180deg); }
   .how-acc .acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
   .how-acc .acc-item.open .acc-panel { grid-template-rows: 1fr; }
   .how-acc .acc-panel-in { overflow: hidden; }

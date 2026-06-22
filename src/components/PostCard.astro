@@ -24,7 +24,7 @@ const fmtDate = (date: Date) =>
         <span>{fmtDate(data.date)}</span><span class="sep" aria-hidden="true"></span><span>{data.watch}</span>
       </div>
       <span class="read-link">Watch the insight
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
       </span>
     </div>
   </a>
@@ -59,7 +59,7 @@ const fmtDate = (date: Date) =>
   .post-meta { display: flex; align-items: center; gap: .55rem; color: var(--muted); font-size: .85rem; }
   .post-meta .sep { width: 3px; height: 3px; border-radius: 999px; background: var(--muted); opacity: .55; }
   .read-link { display: inline-flex; align-items: center; gap: .45rem; color: var(--cyan); font-weight: 500; }
-  .read-link svg { width: 18px; height: 18px; transition: transform .2s; }
+  .read-link .material-symbols-outlined { font-size: 18px; transition: transform .2s; }
 
   /* ===========================================================
      FEATURED LEAD POST  (split: cinematic video + copy)
@@ -68,7 +68,7 @@ const fmtDate = (date: Date) =>
     gap: clamp(1.75rem, 1rem + 3vw, 3.25rem); align-items: center;
     border-width: 1px; border-style: solid; border-radius: var(--r-card);
     padding: clamp(1.1rem, .9rem + 1vw, 1.6rem); transition: border-color .25s, background .25s; }
-  .featured:hover .read-link svg { transform: translateX(3px); }
+  .featured:hover .read-link .material-symbols-outlined { transform: translateX(3px); }
   .featured-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; padding-block: .5rem; }
   .featured-copy h2 { font-size: var(--t-h3); max-width: 18ch; text-wrap: balance; }
   .featured-copy p { color: var(--muted); }
