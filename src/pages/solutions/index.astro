@@ -38,10 +38,23 @@ import VideoFrame from '../../components/VideoFrame.astro';
           <div class="bento-card b-wide">
             <h3>Any input becomes video</h3>
             <p>Decks, reports, footage, transcripts, the knowledge your people carry. The platform turns what you already have into finished, on-brand video.</p>
-            <div class="b-media" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5l5 2.5-5 2.5z" fill="currentColor" stroke="none"/></svg>
+            <div class="input-flow">
+              <div class="input-stack">
+                <span class="input-node">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>
+                  Decks
+                </span>
+                <span class="input-node">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
+                  Reports
+                </span>
+                <span class="input-node">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9z"/></svg>
+                  Knowledge
+                </span>
+              </div>
+              <svg class="flow-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              <VideoFrame class="input-video" label="Any input becomes finished, on-brand video" />
             </div>
           </div>
           <div class="bento-card b-cell">
@@ -259,9 +272,22 @@ import VideoFrame from '../../components/VideoFrame.astro';
   .bento-card p { color: var(--muted); font-size: .98rem; }
   .b-wide { grid-column: span 4; }
   .b-cell { grid-column: span 2; }
-  .b-media { margin-top: auto; aspect-ratio: 24 / 7; border-radius: var(--radius); border: 1px solid var(--border-soft);
-    background: linear-gradient(160deg, var(--panel-2), var(--navy)); display: flex; align-items: center; justify-content: center; gap: 1.25rem; color: var(--cyan); }
-  .b-media svg { width: 34px; height: 34px; }
+  /* "Any input becomes video": three stacked input chips flow into the video,
+     the homepage Decks/Reports/Knowledge merge concept laid out horizontally. */
+  .input-flow { margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 1.25rem; }
+  .input-stack { display: flex; flex-direction: column; gap: .6rem; flex: 0 0 auto; }
+  .input-node { display: inline-flex; align-items: center; gap: .5rem; padding: .55rem .85rem;
+    border-radius: var(--radius-sm); border: 1px solid var(--border-soft); background: var(--panel); color: var(--muted);
+    font-family: var(--font-head); font-weight: 600; font-size: .85rem; }
+  .input-node svg { width: 16px; height: 16px; color: var(--cyan); flex: 0 0 auto; }
+  .flow-arrow { width: 26px; height: 26px; color: var(--cyan); flex: 0 0 auto; }
+  .input-video { flex: 0 1 auto; width: 360px; max-width: 100%; }
+  @media (max-width: 560px) {
+    .input-flow { flex-direction: column; align-items: stretch; gap: .85rem; }
+    .input-stack { width: 100%; }
+    .flow-arrow { transform: rotate(90deg); align-self: center; }
+    .input-video { max-width: none; }
+  }
 
   /* ===========================================================
      SERVICE FEATURE BLOCK  (Automark alternating feature)
