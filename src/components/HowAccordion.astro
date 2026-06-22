@@ -12,7 +12,7 @@ const { idPrefix, steps } = Astro.props as { idPrefix: string; steps: Step[] };
   {steps.map((s, i) => { const n = String(i+1).padStart(2,'0'); const id = `${idPrefix}-${n}`; return (
     <div class={i===0 ? 'acc-item open' : 'acc-item'}>
       <button class="acc-head" type="button" aria-expanded={i===0 ? 'true' : 'false'} aria-controls={id}>
-        <span class="acc-glyph" set:html={s.glyph}></span>
+        <span class="acc-glyph icon-chip" set:html={s.glyph}></span>
         <span class="acc-label">{s.label}</span>
         <span class="acc-chev material-symbols-outlined" aria-hidden="true">expand_more</span>
       </button>
@@ -49,10 +49,9 @@ const { idPrefix, steps } = Astro.props as { idPrefix: string; steps: Step[] };
   .how-acc .acc-head { all: unset; box-sizing: border-box; position: relative; display: flex; align-items: center;
     justify-content: flex-start; gap: .85rem; width: 100%; padding: 1.4rem 3.5rem 1.4rem 1.25rem; cursor: pointer; }
   .how-acc .acc-head:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
-  .how-acc .acc-glyph { flex: none; width: 38px; height: 38px; border-radius: var(--radius-sm); display: grid; place-items: center;
-    background: var(--cyan-fill); border: 1px solid var(--border); color: var(--cyan);
+  /* Recipe inherited from global .icon-chip; this only sets size and keeps the transition. */
+  .how-acc .acc-glyph { flex: none; --chip-size: 38px; --chip-icon: 22px;
     transition: background .25s, border-color .25s, color .25s; }
-  .how-acc .acc-glyph .material-symbols-outlined { font-size: 22px; }
   .how-acc .acc-label { flex: none; text-align: left; font-family: var(--font-head); font-weight: 700; font-size: var(--t-h6);
     text-transform: uppercase; letter-spacing: .06em; color: var(--ink); }
   .how-acc .acc-chev { position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%);

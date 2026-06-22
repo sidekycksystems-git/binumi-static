@@ -1,0 +1,155 @@
+---
+// PROTOTYPE — throwaway. Question: how should the icons in the solutions
+// "A platform, with a team behind it" bento section look? Three treatments on
+// one route, switch via ?variant=A|B|C or the floating bar / arrow keys.
+// Only the four small (b-cell) card icons change; the Decks/Reports/Knowledge
+// input pills are left alone. Delete this file once a treatment is chosen.
+import '../styles/global.css';
+import VideoFrame from '../components/VideoFrame.astro';
+
+const cells = [
+  { icon: 'verified_user', title: 'On-brand by default',        body: 'Your brand rules are built in, so every video is compliant, whoever makes it.' },
+  { icon: 'movie',         title: '15 million rights-cleared clips', body: 'Footage, music and motion, with the rights already sorted.' },
+  { icon: 'groups',        title: 'An expert service team',      body: 'Set-up, direction and quality control from people who do this for a living.' },
+  { icon: 'bar_chart',     title: 'Scales with your organization', body: 'Every team, every purpose, every channel, without adding headcount.' },
+];
+---
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PROTOTYPE · solutions bento icons</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <main id="proto" data-variant="A">
+    <section class="section">
+      <div class="container stack">
+        <p class="proto-flag">PROTOTYPE · solutions bento icons · not linked from the site · delete after decision</p>
+        <div class="intro">
+          <h2>A platform, with <span class="hl">a team behind it</span>.</h2>
+          <p class="subtitle">The platform does the production. The team makes sure it performs. Flip variants with the bar below or the &larr; &rarr; keys.</p>
+        </div>
+        <div class="bento">
+          <div class="bento-card b-wide">
+            <h3>Any input becomes video</h3>
+            <p>Decks, reports, footage, transcripts, the knowledge your people carry. The platform turns what you already have into finished, on-brand video.</p>
+            <div class="input-flow">
+              <div class="input-stack">
+                <span class="input-node"><span class="material-symbols-outlined" aria-hidden="true">slideshow</span>Decks</span>
+                <span class="input-node"><span class="material-symbols-outlined" aria-hidden="true">description</span>Reports</span>
+                <span class="input-node"><span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>Knowledge</span>
+              </div>
+              <span class="flow-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              <VideoFrame class="input-video" label="Any input becomes finished, on-brand video" />
+            </div>
+          </div>
+          {cells.map((c) => (
+            <div class="bento-card b-cell">
+              <div class="icon"><span class="material-symbols-outlined" aria-hidden="true">{c.icon}</span></div>
+              <h3>{c.title}</h3>
+              <p>{c.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- floating variant switcher (throwaway) -->
+    <div class="pv-bar" role="group" aria-label="Prototype variant switcher">
+      <button type="button" id="pv-prev" aria-label="Previous variant">&#8249;</button>
+      <span id="pv-label">A</span>
+      <button type="button" id="pv-next" aria-label="Next variant">&#8250;</button>
+    </div>
+  </main>
+
+  <style is:global>
+    #proto { background: var(--bg); min-height: 100vh; }
+    .proto-flag { font-family: var(--font-head); font-weight: 700; font-size: .72rem; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--cyan); margin-bottom: 1rem; }
+
+    /* --- bento layout copied verbatim from solutions/index.astro for fidelity --- */
+    .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; }
+    .bento-card { display: flex; flex-direction: column; gap: 1rem; padding: 1.9rem; border-radius: var(--r-card);
+      background: var(--surface); border: 1px solid var(--cyan); }
+    .bento-card h3 { font-size: var(--t-h5); position: relative; z-index: 1; }
+    .bento-card p { color: var(--muted); font-size: .98rem; position: relative; z-index: 1; }
+    .b-wide { grid-column: span 4; }
+    .b-cell { grid-column: span 2; position: relative; overflow: hidden; }
+    .input-flow { margin-top: auto; display: flex; align-items: center; justify-content: center; gap: 1.25rem; }
+    .input-stack { display: flex; flex-direction: column; gap: .6rem; flex: 0 0 auto; }
+    .input-node { display: inline-flex; align-items: center; gap: .5rem; padding: .55rem .85rem;
+      border-radius: var(--radius-sm); border: 1px solid var(--border-soft); background: var(--panel); color: var(--muted);
+      font-family: var(--font-head); font-weight: 600; font-size: .85rem; }
+    .input-node .material-symbols-outlined { font-size: 18px; color: var(--cyan); flex: 0 0 auto; }
+    .flow-arrow { font-size: 26px; color: var(--cyan); flex: 0 0 auto; }
+    .input-video { flex: 0 1 auto; width: 360px; max-width: 100%; }
+    @media (max-width: 860px) { .bento { grid-template-columns: 1fr; } .b-wide, .b-cell { grid-column: auto; } }
+    @media (max-width: 560px) {
+      .input-flow { flex-direction: column; align-items: stretch; gap: .85rem; }
+      .input-stack { width: 100%; }
+      .flow-arrow { transform: rotate(90deg); align-self: center; }
+      .input-video { max-width: none; }
+    }
+
+    /* ---- icon treatments (only the b-cell card icons) ---- */
+    /* Variant A: small boxed chip (current). Inherits global .icon recipe; nothing to add. */
+
+    /* Variant B: large faint watermark, bottom-right bleed (the value-section style). */
+    #proto[data-variant="B"] .b-cell .icon { position: absolute; right: -8px; bottom: -24px;
+      width: auto; height: auto; margin: 0; background: none; border: none; opacity: .14; pointer-events: none; }
+    #proto[data-variant="B"] .b-cell .icon .material-symbols-outlined { font-size: 120px; line-height: 1; }
+
+    /* Variant C: huge background wash, centered, very faint. */
+    #proto[data-variant="C"] .b-cell .icon { position: absolute; inset: 0; display: grid; place-items: center;
+      width: auto; height: auto; margin: 0; background: none; border: none; opacity: .06; pointer-events: none; }
+    #proto[data-variant="C"] .b-cell .icon .material-symbols-outlined { font-size: 200px; line-height: 1; }
+
+    /* floating switcher: high-contrast navy pill, obviously not part of the design */
+    .pv-bar { position: fixed; left: 50%; bottom: 1.25rem; transform: translateX(-50%); z-index: 999;
+      display: flex; align-items: center; gap: .5rem; background: #001437; color: #eaf1fb;
+      border-radius: 999px; padding: .4rem .5rem; box-shadow: 0 10px 30px rgba(0,0,0,.35); }
+    .pv-bar button { all: unset; cursor: pointer; width: 32px; height: 32px; display: grid; place-items: center;
+      border-radius: 999px; font-size: 20px; color: #eaf1fb; }
+    .pv-bar button:hover { background: rgba(255,255,255,.12); }
+    .pv-bar #pv-label { font-family: var(--font-head); font-weight: 600; font-size: .85rem; padding: 0 .5rem; white-space: nowrap; }
+  </style>
+
+  <script is:inline>
+    (function () {
+      var VARIANTS = [
+        { k: 'A', n: 'Boxed chips (current)' },
+        { k: 'B', n: 'Corner watermark — large, faint' },
+        { k: 'C', n: 'Background wash — huge, faint' },
+      ];
+      var root = document.getElementById('proto');
+      var label = document.getElementById('pv-label');
+      function valid(k) { return VARIANTS.some(function (v) { return v.k === k; }); }
+      function get() { var p = new URLSearchParams(location.search).get('variant'); return valid(p) ? p : 'A'; }
+      function set(k) {
+        root.setAttribute('data-variant', k);
+        var u = new URL(location); u.searchParams.set('variant', k); history.replaceState(null, '', u);
+        var v = VARIANTS.find(function (x) { return x.k === k; });
+        label.textContent = k + ' — ' + v.n;
+      }
+      function step(d) {
+        var cur = root.getAttribute('data-variant');
+        var i = VARIANTS.findIndex(function (v) { return v.k === cur; });
+        set(VARIANTS[(i + d + VARIANTS.length) % VARIANTS.length].k);
+      }
+      document.getElementById('pv-prev').addEventListener('click', function () { step(-1); });
+      document.getElementById('pv-next').addEventListener('click', function () { step(1); });
+      document.addEventListener('keydown', function (e) {
+        var t = e.target;
+        if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+        if (e.key === 'ArrowLeft') step(-1);
+        if (e.key === 'ArrowRight') step(1);
+      });
+      set(get());
+    })();
+  </script>
+</body>
+</html>

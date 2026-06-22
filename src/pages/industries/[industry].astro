@@ -33,7 +33,7 @@ const { industry } = Astro.props;
         <p class="lead">
           {industry.hero.lead}
         </p>
-        <a class="btn btn-primary" href="#cta">See what becomes possible
+        <a class="btn btn-primary" href="/contact/">See what becomes possible
           <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
         </a>
         <VideoFrame tag={`${industry.name} brand film`} label={`${industry.name} brand film`} />
@@ -119,7 +119,7 @@ const { industry } = Astro.props;
             autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
           <div class="inner">
             <h2 set:html={industry.cta.h2}></h2>
-            <a class="btn btn-primary" href="/solutions/">Start your proof of value
+            <a class="btn btn-primary" href="/contact/">Start your proof of value
               <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
             </a>
           </div>

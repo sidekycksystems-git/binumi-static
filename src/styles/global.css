@@ -346,9 +346,12 @@
     .card:hover { transform: translateY(-3px); }
     .card .kicker { font-family: var(--font-head); font-weight: 700; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; color: var(--cyan); margin-bottom: .9rem; }
     .card p { color: var(--muted); font-size: 1rem; }
-    .icon { width: 48px; height: 48px; border-radius: var(--radius-sm); display: grid; place-items: center; margin-bottom: 1.25rem;
-      background: var(--cyan-fill); border: 1px solid var(--border); color: var(--cyan); }
-    .icon .material-symbols-outlined { font-size: 24px; }
+    /* Canonical icon chip: square, cyan-fill, hairline border, cyan glyph. Size via
+       --chip-size / --chip-icon. Used by .icon (cards) and .acc-glyph (accordion). */
+    .icon-chip, .icon { width: var(--chip-size, 48px); height: var(--chip-size, 48px); border-radius: var(--radius-sm);
+      display: grid; place-items: center; background: var(--cyan-fill); border: 1px solid var(--border); color: var(--cyan); }
+    .icon-chip .material-symbols-outlined, .icon .material-symbols-outlined { font-size: var(--chip-icon, 24px); }
+    .icon { margin-bottom: 1.25rem; }
 
     /* ===========================================================
        STATEMENT  (the weighty claim line on the home hero)
