@@ -5,85 +5,218 @@
    .bnm-chat-body below is the mount point where the real engine (chatkit)
    lands later. Styles: .bnm-chat in global.css. */
 ---
+
 <div data-bnm-chat>
-  <button class="bnm-chat-launcher" type="button" aria-haspopup="dialog"
-    aria-expanded="false" aria-controls="bnm-chat-panel">
-    <span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>
+  <button
+    class="bnm-chat-launcher"
+    type="button"
+    aria-haspopup="dialog"
+    aria-expanded="false"
+    aria-controls="bnm-chat-panel"
+  >
+    <span class="material-symbols-outlined" aria-hidden="true"
+      >auto_awesome</span
+    >
     <span class="label">Ask Binumi</span>
   </button>
 
-  <section class="bnm-chat-panel" id="bnm-chat-panel" role="dialog"
-    aria-label="Binumi video assistant" hidden>
+  <section
+    class="bnm-chat-panel"
+    id="bnm-chat-panel"
+    role="dialog"
+    aria-label="Binumi video assistant"
+    hidden
+  >
     <header class="bnm-chat-head">
-      <p class="bnm-chat-title"><img src="/binumi-logo.png" alt="Binumi" width="1920" height="599" /><span class="tag">assistant</span></p>
+      <p class="bnm-chat-title">
+        <img
+          src="/binumi-logo.png"
+          alt="Binumi"
+          width="1920"
+          height="599"
+        /><span class="tag">assistant</span>
+      </p>
       <button class="bnm-chat-close" type="button" aria-label="Close chat">
         <span class="material-symbols-outlined" aria-hidden="true">close</span>
       </button>
     </header>
 
-    <div class="bnm-chat-body"></div>
+    <div class="bnm-chat-body">
+      <openai-chatkit id="my-chat"></openai-chatkit>
+    </div>
   </section>
 </div>
 
 <script is:inline>
   (function () {
-    var root = document.querySelector('[data-bnm-chat]');
+    var root = document.querySelector("[data-bnm-chat]");
     if (!root) return;
-    var launcher = root.querySelector('.bnm-chat-launcher');
-    var panel = root.querySelector('.bnm-chat-panel');
-    var closeBtn = root.querySelector('.bnm-chat-close');
-    var motion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var launcher = root.querySelector(".bnm-chat-launcher");
+    var panel = root.querySelector(".bnm-chat-panel");
+    var closeBtn = root.querySelector(".bnm-chat-close");
+    var motion = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     /* The panel is open on every page by default, so it reads as an
        always-present assistant rather than a button to click. We only
        keep it shut once a visitor has closed it (stored for the session),
        and we leave it shut on first load on small screens, where the panel
        is full-width and would otherwise trap the page. */
-    var DISMISS_KEY = 'bnm-chat-dismissed';
+    var DISMISS_KEY = "bnm-chat-dismissed";
+
+    let isLoaded = false;
     function dismissed() {
-      try { return sessionStorage.getItem(DISMISS_KEY) === '1'; } catch (e) { return false; }
+      try {
+        return sessionStorage.getItem(DISMISS_KEY) === "1";
+      } catch (e) {
+        return false;
+      }
     }
     function remember(state) {
-      try { state ? sessionStorage.setItem(DISMISS_KEY, '1') : sessionStorage.removeItem(DISMISS_KEY); } catch (e) {}
+      try {
+        state
+          ? sessionStorage.setItem(DISMISS_KEY, "1")
+          : sessionStorage.removeItem(DISMISS_KEY);
+      } catch (e) {}
+    }
+    async function getJsConfig() {
+      try {
+        const response = await fetch("/resource/index/get-js-config", {
+          method: "GET",
+        });
+
+        const data = await response.json();
+
+        if (!data.config) {
+          throw new Error("No config returned in response.");
+        }
+
+        window.binumiConfig = data.config;
+      } catch (e) {
+        console.error("Error fetching JS config:", e);
+      }
+    }
+    async function loadDependencies() {
+      try {
+        const scripts = [
+          "/media/lib/jquery/1.11.2/jquery-1.11.2.min.js",
+          "/media/lib/jquery-ui/1.11.1/jquery-ui.min.js",
+          "/media/lib/i18next/1.6.3/i18next-1.6.3.min.js",
+          "https://cdn.jsdelivr.net/npm/regenerator-runtime@0.14.1/runtime.min.js",
+          "https://cdn.platform.openai.com/deployments/chatkit/chatkit.js?v=2",
+        ];
+
+        for (const script of scripts) {
+          await new Promise((resolve, reject) => {
+            const scr = document.createElement("script");
+            scr.src = script;
+            scr.onload = resolve;
+            scr.onerror = reject;
+            document.head.appendChild(scr);
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching or loading script:", error);
+      }
     }
 
-    function open(focusPanel, instant) {
+    async function loadScript(fileName) {
+      try {
+        // 1. Fetch the script URL
+        const response = await fetch("/resource/index/get-public-file", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({ file: fileName }),
+        });
+
+        const data = await response.json();
+
+        if (!data.file) {
+          throw new Error("No file URL returned in response.");
+        }
+
+        const fileUrl = data.file;
+
+        return new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = fileUrl;
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+      } catch (e) {
+        console.error("Error loading script:", e);
+      }
+    }
+    async function initChatKit() {
+      try {
+        await getJsConfig();
+        await loadDependencies();
+
+        loadScript("binumi.js")
+          .then(() => {
+            console.log("Script loaded and ready to use!");
+            // Call your loaded function here
+            Binumi.agent.initHomepage("");
+          })
+          .catch((error) => {
+            console.error("Failed to load the fetched script:", error);
+          });
+      } catch (error) {
+        console.error("Error fetching or loading script:", error);
+      }
+    }
+
+    async function open(focusPanel, instant) {
       /* instant: the auto-open on load lands with no slide, so a refresh shows
          the panel already in place rather than flying it in. */
-      if (instant) document.body.classList.add('bnm-chat-no-anim');
+      if (instant) document.body.classList.add("bnm-chat-no-anim");
       panel.hidden = false;
       void panel.offsetWidth; /* style flush so the slide-in transition runs */
-      panel.classList.add('open');
-      launcher.setAttribute('aria-expanded', 'true');
-      document.body.classList.add('bnm-chat-open');
+      panel.classList.add("open");
+      launcher.setAttribute("aria-expanded", "true");
+      document.body.classList.add("bnm-chat-open");
       remember(false);
       if (focusPanel) closeBtn.focus();
       if (instant) {
         void panel.offsetWidth; /* commit the open state with motion still off */
         requestAnimationFrame(function () {
-          document.body.classList.remove('bnm-chat-no-anim');
+          document.body.classList.remove("bnm-chat-no-anim");
         });
+      }
+      if (!isLoaded) {
+        isLoaded = true;
+        initChatKit();
       }
     }
     function close() {
-      panel.classList.remove('open');
-      launcher.setAttribute('aria-expanded', 'false');
-      document.body.classList.remove('bnm-chat-open');
+      panel.classList.remove("open");
+      launcher.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("bnm-chat-open");
       remember(true);
-      window.setTimeout(function () { panel.hidden = true; launcher.focus(); }, motion ? 300 : 0);
+      window.setTimeout(
+        function () {
+          panel.hidden = true;
+          launcher.focus();
+        },
+        motion ? 300 : 0,
+      );
     }
-    launcher.addEventListener('click', function () { open(true); });
-    closeBtn.addEventListener('click', close);
+    launcher.addEventListener("click", function () {
+      open(true);
+    });
+    closeBtn.addEventListener("click", close);
 
     /* Auto-open on load unless the visitor closed it this session, and not
        on phones where the full-width panel would cover the whole page. */
-    if (!dismissed() && window.matchMedia('(min-width: 641px)').matches) {
+    if (!dismissed() && window.matchMedia("(min-width: 641px)").matches) {
       open(false, true);
     }
     /* The head reserved the gutter for first paint; now that the JS-driven open
        state owns it, drop the bootstrap class so close() can collapse it again. */
-    document.documentElement.classList.remove('chat-preopen');
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && !panel.hidden) close();
+    document.documentElement.classList.remove("chat-preopen");
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !panel.hidden) close();
     });
   })();
 </script>
