@@ -100,6 +100,7 @@
           "/media/lib/jquery/1.11.2/jquery-1.11.2.min.js",
           "/media/lib/jquery-ui/1.11.1/jquery-ui.min.js",
           "/media/lib/i18next/1.6.3/i18next-1.6.3.min.js",
+          "/media/lib/sweetalert2/6.4.4/dist/sweetalert2.min.js",
           "https://cdn.jsdelivr.net/npm/regenerator-runtime@0.14.1/runtime.min.js",
           "https://cdn.platform.openai.com/deployments/chatkit/chatkit.js?v=2",
         ];
@@ -113,8 +114,55 @@
             document.head.appendChild(scr);
           });
         }
+
+        const stylesheets = [
+          "/media/lib/sweetalert2/6.4.4/dist/sweetalert2.min.css",
+        ];
+
+        for (const stylesheet of stylesheets) {
+          await new Promise((resolve, reject) => {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = stylesheet;
+            link.onload = resolve;
+            link.onerror = reject;
+            document.head.appendChild(link);
+          });
+        }
       } catch (error) {
-        console.error("Error fetching or loading script:", error);
+        console.error("Error fetching or loading stylesheet:", error);
+      }
+    }
+
+    async function loadStyles(fileName) {
+      try {
+        // 1. Fetch the script URL
+        const response = await fetch("/resource/index/get-public-file", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({ file: fileName }),
+        });
+
+        const data = await response.json();
+
+        if (!data.file) {
+          throw new Error("No file URL returned in response.");
+        }
+
+        const fileUrl = data.file;
+
+        return new Promise((resolve, reject) => {
+          const link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = fileUrl;
+          link.onload = resolve;
+          link.onerror = reject;
+          document.head.appendChild(link);
+        });
+      } catch (e) {
+        console.error("Error loading stylesheet:", e);
       }
     }
 
@@ -152,6 +200,7 @@
       try {
         await getJsConfig();
         await loadDependencies();
+        //await loadStyles("binumi.css");
 
         loadScript("binumi.js")
           .then(() => {
