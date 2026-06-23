@@ -127,9 +127,11 @@
        HEADER / NAV  (Automark navbar; mobile menu is a pure-CSS
        checkbox toggle, no JavaScript)
        =========================================================== */
-    .site-header { position: sticky; top: 0; z-index: 50; padding-block: .5rem; min-height: var(--header-h);
+    .site-header { position: sticky; top: 0; z-index: 50; height: var(--header-h); display: flex; align-items: center;
       background: #ffffff; border-bottom: 1px solid var(--border-soft); }
-    .navbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; } .navbar > .brand { justify-self: start; } .navbar > .nav-cta { justify-self: end; }
+    .site-header > .container { width: 100%; }
+    .navbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem;
+      container-type: inline-size; container-name: nav; } .navbar > .brand { justify-self: start; } .navbar > .nav-cta { justify-self: end; }
     .brand { display: inline-flex; align-items: center; }
     .brand img { display: block; height: 2rem; width: auto; }
     .nav-links { display: flex; align-items: center; gap: .25rem; padding: .35rem .75rem; border-radius: var(--radius-sm);
@@ -138,6 +140,7 @@
     .nav-links a:hover { color: var(--cyan); }
     .nav-links a.current { color: var(--cyan); }
     .nav-cta { display: flex; align-items: center; gap: .5rem; }
+    .nav-links-cta { display: none; } /* CTAs duplicated into the open hamburger menu; only shown when collapsed */
     .nav-toggle, .nav-toggle-label { display: none; }
     .nav-toggle-label .icon-close { display: none; }
 
@@ -167,8 +170,10 @@
 
     /* Desktop: panels float under the header, revealed on hover/keyboard focus.
        The narrow Solutions panel anchors to its item; the Industries mega-panel
-       anchors to the header and centres as a wide panel. */
-    @media (min-width: 981px) {
+       anchors to the header and centres as a wide panel. The query is on the
+       navbar's own width (container), so the chat panel shrinking the header
+       collapses the nav at the right moment, not at a fixed viewport width. */
+    @container nav (min-width: 1001px) {
       .nav-solutions { position: relative; }
       /* A closed <details> hides its content two ways depending on the engine:
          older engines set display:none on the children (beaten by display:block
@@ -474,21 +479,29 @@
        RESPONSIVE
        =========================================================== */
     @media (max-width: 980px) {
-      .navbar { display: flex; justify-content: flex-start; gap: .75rem; }
       .grid-3 { grid-template-columns: repeat(2, 1fr); }
       .split, .split--flip { grid-template-columns: 1fr; }
       .copy-col { align-items: center; text-align: center; }
       .copy-col h1, .copy-col h2, .copy-col .lead { max-width: 36ch; }
+    }
+
+    /* Nav collapse keys off the navbar's own width, so the logo never gets
+       crushed when the chat panel (or a narrow window) leaves the full nav too
+       little room: at that point the links and CTAs fold into the hamburger. */
+    @container nav (max-width: 1000px) {
+      /* navbar is the container itself, so it can't be restyled here; it stays the
+         1fr auto 1fr grid. Logo sits in col 1 (left), hamburger forced to col 3 (right). */
       .nav-links { position: fixed; inset: 5.2rem 1rem auto 1rem; flex-direction: column; align-items: stretch;
         padding: 1rem; border-radius: var(--radius); background: var(--bg); border-color: var(--border); display: none; }
       .nav-toggle:checked ~ .nav-links { display: flex; }
-      .nav-toggle-label { order: -1; display: grid; place-items: center; width: 46px; height: 46px; border-radius: var(--radius-sm);
+      .nav-toggle-label { grid-column: 3; justify-self: end; display: grid; place-items: center; width: 46px; height: 46px; border-radius: var(--radius-sm);
         background: rgba(11,20,40,.06); border: 1px solid var(--border-soft); color: var(--ink); cursor: pointer; }
       .nav-toggle:checked + .nav-toggle-label .icon-menu { display: none; }
       .nav-toggle:checked + .nav-toggle-label .icon-close { display: block; }
-      .nav-cta .btn { display: none; }
-      .nav-cta { margin-left: auto; }
-      .nav-cta .nav-login { display: inline-flex; }
+      .nav-cta { display: none; }
+      .nav-links-cta { display: flex; flex-direction: column; gap: .5rem;
+        margin-top: .5rem; padding-top: .7rem; border-top: 1px solid var(--border-soft); }
+      .nav-links-cta .btn { width: 100%; justify-content: center; }
 
       /* Inside the mobile menu the dropdowns are native <details> accordions,
          so the whole nav works with JavaScript disabled. */
