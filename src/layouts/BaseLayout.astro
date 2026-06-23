@@ -9,9 +9,26 @@ interface Props {
   description: string;
   current?: 'solution' | 'industries' | 'insights';
   ctaHref?: string;
+  ogImage?: string;
 }
-const { title, description, current, ctaHref } = Astro.props;
+const { title, description, current, ctaHref, ogImage = '/binumi-logo.png' } = Astro.props;
 const isHome = Astro.url.pathname === '/';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImageUrl = new URL(ogImage, Astro.site).href;
+const siteUrl = Astro.site!.href.replace(/\/$/, '');
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Binumi',
+  url: siteUrl,
+};
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Binumi',
+  url: siteUrl,
+  logo: new URL('/binumi-logo.png', Astro.site).href,
+};
 ---
 <!doctype html>
 <html lang="en-US">
@@ -34,6 +51,29 @@ const isHome = Astro.url.pathname === '/';
   </script>
   <title>{title}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Binumi" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageUrl} />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/binumi-logo.png" />
+  <meta name="theme-color" content="#00aeef" />
+
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  {isHome && (
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  )}
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
