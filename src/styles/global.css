@@ -40,6 +40,7 @@
       --pad-x: clamp(24px, 5vw, 40px); /* unified side padding, all pages */
       --section-y: clamp(2.5rem, 1.5rem + 2vw, 3.5rem); /* unified vertical rhythm (tightened) */
       --nav-to-hero: clamp(.875rem, .125rem + 2.5vw, 2.375rem); /* gap from the nav down to the page heading, site-wide */
+      --header-h: 63px; /* nav chrome height; the chat panel head aligns its bottom border to this */
       --gap: clamp(1.75rem, 1.25rem + 1.5vw, 2.75rem);
       --radius:       2px; /* large surfaces: cards, panels, the video frame. Sharp 2px corner to match buttons */
       --radius-sm:    2px; /* compact controls and chips (buttons, nav, chat bar): same sharp 2px corner */
@@ -126,7 +127,7 @@
        HEADER / NAV  (Automark navbar; mobile menu is a pure-CSS
        checkbox toggle, no JavaScript)
        =========================================================== */
-    .site-header { position: sticky; top: 0; z-index: 50; padding-block: .5rem;
+    .site-header { position: sticky; top: 0; z-index: 50; padding-block: .5rem; min-height: var(--header-h);
       background: #ffffff; border-bottom: 1px solid var(--border-soft); }
     .navbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; } .navbar > .brand { justify-self: start; } .navbar > .nav-cta { justify-self: end; }
     .brand { display: inline-flex; align-items: center; }
@@ -218,12 +219,12 @@
       gap: clamp(1.5rem, 1rem + 1.6vw, 2.6rem); }
     /* wide enough to keep each line whole; balanced wrap avoids single-word widows */
     .hero-inner h1 { max-width: 36ch; text-wrap: balance; }
-    .hero-inner .lead { max-width: 70ch; text-wrap: balance; } /* subhead: supporting text, wider so it doesn't crowd into a narrow column */
+    .hero-inner .lead { max-width: none; text-wrap: balance; } /* subhead spans the full hero width, matching the homepage hero */
     .hero-cta { display: flex; flex-direction: column; align-items: flex-start; gap: .7rem; width: 100%; } /* the primary CTA button and its single credit as one tight block */
     .hero-inner .video-master { margin-top: clamp(1rem, .5rem + 1.5vw, 2rem); } /* extra air around the dominant visual */
-    /* Homepage hero, scoped so the promoted vertical-page .hero-inner overrides further
-       down this file (h1 24ch, video-master 980px) cannot clobber the home values. */
-    .hero-home .hero-inner h1 { max-width: 36ch; }
+    /* Homepage hero: the vertical hero further down this file narrows .hero-inner
+       .video-master to 980px; keep the home film full-bleed. (h1 and subhead widths
+       are now shared with the subpages via the .hero-inner rules above.) */
     .hero-home .hero-inner .video-master { max-width: none; }
     /* Background film + dark-navy legibility overlay (homepage hero only).
        isolation keeps the z-index stack local; pointer-events:none keeps the
@@ -522,7 +523,6 @@
       background: var(--panel); color: var(--muted); font-family: var(--font-head); font-weight: 600; font-size: .9rem; white-space: nowrap; }
 
     /* BLOCK 1: HERO (vertical variant, centered feature video) */
-    .hero-inner h1 { max-width: 24ch; text-wrap: balance; }
     .hero-inner .btn { margin-top: .2rem; }   /* the one action */
     .hero-inner .video-master { margin-top: clamp(1rem, .5rem + 1.5vw, 2rem); max-width: 980px; }
 
@@ -619,7 +619,7 @@
     body.bnm-chat-no-anim .bnm-chat-panel { transition: none !important; }
 
     .bnm-chat-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-      padding: 1rem 1.25rem; border-bottom: 1px solid var(--border-soft); flex: 0 0 auto; }
+      height: var(--header-h); padding: 0 1.25rem; border-bottom: 1px solid var(--border-soft); flex: 0 0 auto; }
     .bnm-chat-title { display: flex; align-items: center; }
     .bnm-chat-title img { display: block; height: 1.3rem; width: auto; }
     .bnm-chat-title .tag { margin-left: .55rem; font-weight: 600; font-size: .7rem;
