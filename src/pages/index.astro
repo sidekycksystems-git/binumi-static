@@ -65,10 +65,10 @@ const homeSteps = [
               </li>
             </ul>
             <dl class="hero-proof">
-              <div class="hp-cell"><dt>Fujitsu</dt><dd>£20M+ in opportunities supported</dd></div>
-              <div class="hp-cell"><dt>Informa</dt><dd>200+ videos in 3 months</dd></div>
-              <div class="hp-cell"><dt>Generali</dt><dd>Localized in 12 languages</dd></div>
-              <div class="hp-cell"><dt>Knight Frank</dt><dd>Two weeks to two hours</dd></div>
+              <div class="hp-cell"><dt><img src="/logo-fujitsu.png" alt="Fujitsu" /></dt><dd>£20M+ in opportunities supported</dd></div>
+              <div class="hp-cell"><dt><img src="/logo-informa.png" alt="Informa" /></dt><dd>200+ videos in 3 months</dd></div>
+              <div class="hp-cell"><dt><img src="/logo-generali.png" alt="Generali" /></dt><dd>Localized in 12 languages</dd></div>
+              <div class="hp-cell"><dt><img src="/logo-knight-frank.png" alt="Knight Frank" /></dt><dd>Two weeks to two hours</dd></div>
             </dl>
           </div>
         </div>
@@ -164,14 +164,14 @@ const homeSteps = [
             support to deliver measurable impact.
           </p>
         </div>
-        <VideoFrame label="Video is the output, growth is the goal" />
+        <VideoFrame label="Video is the output, growth is the goal" videoSrc="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__b4979381d628b6f7372b4d11b18bd9be_h169.mp4" />
       </div>
     </section>
 
     <!-- ===================== CAPABILITY (split: video left, copy right) ===================== -->
     <section class="section" id="reframe">
       <div class="container split split--flip">
-        <VideoFrame label="Capability overview video" />
+        <VideoFrame label="Capability overview video" videoSrc="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__540d1186595af35d922ea8b71e37123e_h169.mp4" />
         <div class="copy-col">
           <h2>Video isn&rsquo;t a project. It&rsquo;s <span class="hl">a capability</span>.</h2>
           <p class="lead">Most organizations treat video as a one-off request.</p>
@@ -315,8 +315,9 @@ const homeSteps = [
      box styled like the testimonial (surface fill, cyan hairline, card radius). */
   .hero-proof { margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; width: 100%; }
   .hero-proof .hp-cell { background: var(--surface); border: 1px solid var(--cyan); border-radius: var(--r-card); padding: 1.25rem; }
-  .hero-proof dt { color: var(--ink); font-family: var(--font-head); font-weight: 700; font-size: 1rem; }
-  .hero-proof dd { margin: .15rem 0 0; color: var(--muted); font-size: .9rem; }
+  .hero-proof dt { line-height: 0; }
+  .hero-proof dt img { height: 26px; width: auto; max-width: 100%; vertical-align: middle; }
+  .hero-proof dd { margin: .6rem 0 0; color: var(--muted); font-size: .9rem; }
   .hero-trust { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap;
     gap: .55rem 1.75rem; color: var(--muted); font-size: .9rem; }
   .hero-trust li { display: flex; align-items: center; gap: .5rem; }
