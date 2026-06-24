@@ -15,7 +15,7 @@ const fmtDate = (date: Date) =>
 
 {featured ? (
   <a class="featured reveal" href={`/insights/${post.id}/`} aria-label={`Read: ${data.heading}`}>
-    <VideoFrame tag="Featured" duration={data.heroVideoDuration ?? data.cardDuration} label="Featured insight video" />
+    <VideoFrame tag="Featured" duration={data.heroVideoDuration ?? data.cardDuration} videoSrc={data.heroVideoSrc} controls={false} autoplay muted loop label="Featured insight video" />
     <div class="featured-copy">
       <span class="post-cat">{data.category}</span>
       <h2>{data.heading}</h2>
