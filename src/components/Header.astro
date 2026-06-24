@@ -11,7 +11,7 @@ const { current, ctaHref = '/contact/' } = Astro.props;
 // The Industries <summary> is a trigger only, not a link: Industries has no
 // landing page of its own (the old hub became /solutions/), but every cluster
 // item links to its /industries/{slug}/ page. Five clusters; Events is the 15th
-// industry, last in the Property, Travel, Public & Education cluster.
+// industry, first in the Events, Travel, Public & Education cluster.
 const industryClusters = [
   {
     heading: 'Financial & Professional',
@@ -44,13 +44,13 @@ const industryClusters = [
     ],
   },
   {
-    heading: 'Property, Travel, Public & Education',
+    heading: 'Events, Travel, Public & Education',
     items: [
+      { label: 'Events', href: '/industries/events/' },
       { label: 'Real Estate', href: '/industries/real-estate/' },
       { label: 'Travel, Transport & Hospitality', href: '/industries/travel-transport/' },
       { label: 'Public Sector', href: '/industries/public-sector/' },
       { label: 'Education', href: '/industries/education/' },
-      { label: 'Events', href: '/industries/events/' },
     ],
   },
 ];
@@ -93,12 +93,12 @@ const industryClusters = [
       <a href="/insights/" class={current === 'insights' ? 'current' : undefined} aria-current={current === 'insights' ? 'page' : undefined}>Insights</a>
 
       <div class="nav-links-cta">
-        <a class="btn btn-primary btn-sm" href={ctaHref}>See what becomes possible</a>
+        <a class="btn btn-primary btn-sm" href={ctaHref}>Start your proof of value</a>
         <a class="btn btn-outline btn-sm" href="/user/signin">Log in</a>
       </div>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-primary btn-sm" href={ctaHref}>See what becomes possible</a>
+      <a class="btn btn-primary btn-sm" href={ctaHref}>Start your proof of value</a>
       <a class="btn btn-outline btn-sm nav-login" href="/user/signin">Log in</a>
     </div>
   </div>

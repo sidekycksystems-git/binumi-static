@@ -4,6 +4,7 @@ interface Props {
   duration?: string;
   embedSrc?: string;
   videoSrc?: string;
+  poster?: string;
   label?: string;
   small?: boolean;
   tag?: string;
@@ -11,6 +12,7 @@ interface Props {
   autoplay?: boolean;
   muted?: boolean;
   loop?: boolean;
+  controls?: boolean;
 }
 
 const {
@@ -18,13 +20,15 @@ const {
   duration,
   embedSrc,
   videoSrc,
+  poster,
   label,
   small = false,
   tag,
   title = 'Binumi video',
   autoplay = false,
   muted = false,
-  loop = false
+  loop = false,
+  controls = true
 } = Astro.props;
 
 const frameRole = label && !embedSrc && !videoSrc ? 'img' : undefined;
@@ -53,7 +57,8 @@ const frameRole = label && !embedSrc && !videoSrc ? 'img' : undefined;
         <video
           src={videoSrc}
           title={title}
-          controls
+          poster={poster}
+          controls={controls}
           playsinline
           autoplay={autoplay}
           muted={muted}

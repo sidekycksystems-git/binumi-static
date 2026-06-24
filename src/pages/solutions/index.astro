@@ -18,12 +18,16 @@ import VideoFrame from '../../components/VideoFrame.astro';
           starts earning, and the proof is in the work we have already done.
         </p>
         <div class="banner-actions">
-          <a class="btn btn-primary" href="/contact/">See what becomes possible
+          <a class="btn btn-primary" href="/contact/">Start your proof of value
             <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
           </a>
-          <a class="btn btn-outline" href="#industries-proof">See the proof</a>
         </div>
-        <VideoFrame tag="Brand film master" label="Binumi proof overview video" />
+        <VideoFrame
+          videoSrc="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__79e216f079172a5949cf8e11095f67a5_h169.mp4"
+          poster="/solutions-hero-poster.jpg"
+          label="Binumi proof overview video"
+          autoplay muted loop
+        />
       </div>
     </section>
 
@@ -54,7 +58,7 @@ import VideoFrame from '../../components/VideoFrame.astro';
                 </span>
               </div>
               <span class="flow-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
-              <VideoFrame class="input-video" label="Any input becomes finished, on-brand video" />
+              <VideoFrame class="input-video" videoSrc="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__8ca546be7a5ca88b8a905b8b401d96b2_h169.mp4" />
             </div>
           </div>
           <div class="bento-card b-cell">
@@ -110,7 +114,7 @@ import VideoFrame from '../../components/VideoFrame.astro';
             </ul>
           </div>
           <div class="svc-media">
-            <VideoFrame label="Expert service team video" />
+            <VideoFrame videoSrc="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__16619ea0236568fa0d1bcca76dc7780b_h169.mp4" />
           </div>
         </div>
       </div>
@@ -200,7 +204,6 @@ import VideoFrame from '../../components/VideoFrame.astro';
           <div class="faq-intro">
             <h2>Questions, answered.</h2>
             <p class="lead">The practical detail behind the platform and the service.</p>
-              <VideoFrame label="Question and answer video" />
           </div>
           <div class="faq-list">
             <details class="faq-item" open>
@@ -323,9 +326,8 @@ import VideoFrame from '../../components/VideoFrame.astro';
   /* ===========================================================
      FAQ ACCORDION  (Automark Faq; pure-CSS <details>, no JS)
      =========================================================== */
-  .faq-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: clamp(2rem, 1rem + 3vw, 4rem); align-items: start; }
+  .faq-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: clamp(2rem, 1rem + 3vw, 4rem); align-items: center; }
   .faq-intro { display: flex; flex-direction: column; align-items: flex-start; gap: 1.1rem; }
-  .faq-intro .video-master { width: 100%; margin-top: .75rem; }
   .faq-list { display: flex; flex-direction: column; gap: 1rem; }
   .faq-item { border-width: 1px; border-style: solid; border-radius: var(--r-card); overflow: hidden; }
   .faq-item summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1rem;

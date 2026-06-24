@@ -40,7 +40,7 @@ const homeSteps = [
     <!-- ===================== HERO (Variant B: white editorial + transformation row) ===================== -->
     <section class="hero hero-home hero-editorial">
       <div class="container hero-inner">
-        <h1 class="hero-head">Scale Expertise. <span class="hl">Grow Revenue</span>.</h1>
+        <h1 class="hero-head">Scale Expertise. <span class="hl">Grow </span><span class="hero-rotate"><span class="hl" id="hero-word">Revenue</span>.</span></h1>
 
         <div class="hero-copy">
             <p class="lead">
@@ -66,9 +66,9 @@ const homeSteps = [
             </ul>
             <dl class="hero-proof">
               <div class="hp-cell"><dt><img src="/logo-fujitsu.png" alt="Fujitsu" /></dt><dd>£20M+ in opportunities supported</dd></div>
-              <div class="hp-cell"><dt><img src="/logo-informa.png" alt="Informa" /></dt><dd>200+ videos in 3 months</dd></div>
+              <div class="hp-cell"><dt><img src="/logo-informa.png" alt="Informa" /></dt><dd>New revenue line</dd></div>
               <div class="hp-cell"><dt><img src="/logo-generali.png" alt="Generali" /></dt><dd>Localized in 12 languages</dd></div>
-              <div class="hp-cell"><dt><img src="/logo-knight-frank.png" alt="Knight Frank" /></dt><dd>Two weeks to two hours</dd></div>
+              <div class="hp-cell"><dt><img src="/logo-knight-frank.png" alt="Knight Frank" /></dt><dd>800+ generated in 1 year</dd></div>
             </dl>
           </div>
         </div>
@@ -157,11 +157,11 @@ const homeSteps = [
       <div class="container split">
         <div class="copy-col">
           <h2>Video is the output. <span class="hl">Growth is the goal</span>.</h2>
-          <p class="lead">Your experts already create value. Binumi helps that value scale.</p>
           <p class="lead">
-            Binumi identifies where precision video can support sales, learning, customer engagement,
-            and knowledge transfer, then configures the AI, workflows, brand controls, and specialist
-            support to deliver measurable impact.
+            Your experts already create value. Binumi helps that value scale, identifying where
+            precision video can support sales, learning, customer engagement, and knowledge transfer,
+            then configuring the AI, workflows, brand controls, and specialist support to deliver
+            measurable impact.
           </p>
         </div>
         <VideoFrame label="Video is the output, growth is the goal" videoSrc="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__b4979381d628b6f7372b4d11b18bd9be_h169.mp4" />
@@ -174,10 +174,10 @@ const homeSteps = [
         <VideoFrame label="Capability overview video" videoSrc="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__540d1186595af35d922ea8b71e37123e_h169.mp4" />
         <div class="copy-col">
           <h2>Video isn&rsquo;t a project. It&rsquo;s <span class="hl">a capability</span>.</h2>
-          <p class="lead">Most organizations treat video as a one-off request.</p>
           <p class="lead">
-            Binumi makes it a repeatable business capability, built to scale expertise, accelerate
-            understanding, and support growth across the organization.
+            Most organizations treat video as a one-off request. Binumi makes it a repeatable business
+            capability, built to scale expertise, accelerate understanding, and support growth across
+            the organization.
           </p>
         </div>
       </div>
@@ -283,7 +283,7 @@ const homeSteps = [
           <div class="inner">
             <h2>See where Binumi <span class="hl">creates impact</span>.</h2>
             <p class="subtitle">Explore how precision video communications can support sales, workforce education, customer engagement, internal communications, and knowledge transfer across your organization.</p>
-            <a class="btn btn-primary" href="/contact/">See the opportunities
+            <a class="btn btn-primary" href="/contact/">Start your proof of value
               <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
             </a>
           </div>
@@ -306,6 +306,8 @@ const homeSteps = [
      tight to the subhead (its own gap), not the full --gap block rhythm. */
   .hero-editorial .hero-inner { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: clamp(1rem, .5rem + 1.5vw, 2rem); }
   .hero-editorial .hero-head { letter-spacing: -0.02em; line-height: 1.08; }
+  /* Rotating word after "Grow": word + trailing period cross-fade together. */
+  .hero-rotate { transition: opacity .3s ease; }
 
   /* Single-column editorial: copy, CTA, trust, and the proof row stacked. */
   .hero-editorial .hero-copy { width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
@@ -316,7 +318,7 @@ const homeSteps = [
   .hero-proof { margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; width: 100%; }
   .hero-proof .hp-cell { background: var(--surface); border: 1px solid var(--cyan); border-radius: var(--r-card); padding: 1.25rem; }
   .hero-proof dt { line-height: 0; }
-  .hero-proof dt img { height: 26px; width: auto; max-width: 100%; vertical-align: middle; }
+  .hero-proof dt img { height: 38px; width: auto; max-width: 100%; vertical-align: middle; filter: brightness(0) invert(0.3); }
   .hero-proof dd { margin: .6rem 0 0; color: var(--muted); font-size: .9rem; }
   .hero-trust { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap;
     gap: .55rem 1.75rem; color: var(--muted); font-size: .9rem; }
@@ -407,5 +409,32 @@ const homeSteps = [
       tab.addEventListener('focus', function () { select(i); });
       tab.addEventListener('click', function () { select(i); });
     });
+  })();
+
+  /* Hero: cross-fade the word after "Grow" (and its period). Revenue holds longest. */
+  (function () {
+    var word = document.getElementById('hero-word');
+    var fade = document.querySelector('.hero-rotate');
+    if (!word || !fade) return;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var WORDS = [
+      { text: 'Revenue', ms: 3500 },
+      { text: 'Success', ms: 2200 },
+      { text: 'Leadership', ms: 2200 },
+      { text: 'Influence', ms: 2200 }
+    ];
+    var i = 0;
+    function tick() {
+      setTimeout(function () {
+        fade.style.opacity = '0';
+        setTimeout(function () {
+          i = (i + 1) % WORDS.length;
+          word.textContent = WORDS[i].text;
+          fade.style.opacity = '1';
+          tick();
+        }, 300);
+      }, WORDS[i].ms);
+    }
+    tick();
   })();
 </script>

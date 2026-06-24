@@ -84,7 +84,8 @@ const breadcrumbs = {
             <VideoFrame
               class="reveal"
               tag={data.heroVideoTag}
-              duration={data.heroVideoDuration}
+              duration={data.heroVideoSrc ? undefined : data.heroVideoDuration}
+              videoSrc={data.heroVideoSrc}
               label={`${data.heading} video`}
             />
           </div>
@@ -130,7 +131,7 @@ const breadcrumbs = {
           <div class="inner">
             <h2>Find the video <span class="hl">hiding in your business</span>.</h2>
             <p class="lead">Bring one thing you already have, a deck, a report, a recording. We will show you what it becomes.</p>
-            <a class="btn btn-primary" href="/contact/">See what becomes possible
+            <a class="btn btn-primary" href="/contact/">Start your proof of value
               <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
             </a>
           </div>
