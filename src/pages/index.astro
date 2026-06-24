@@ -379,6 +379,11 @@ const homeSteps = [
   #how .split { align-items: start; }
   #how .how-acc { margin: 0; }
 
+  /* Capability section is video-first in the DOM (video-left on desktop). Stacked on
+     mobile that puts it right under the previous section's video, two videos back to
+     back. Put the copy first when stacked so the sections keep alternating. */
+  @media (max-width: 980px) { #reframe .video-master { order: 1; } }
+
 </style>
 
 <script is:inline>
