@@ -67,7 +67,7 @@ except where noted. Each also has a live industry page in this repo at
 | **Events** | None yet | **PROOF GAP.** Replaced Real Estate in the lineup. Uses the bracketed interim proof treatment (same approach as FinTech) until a named events client lands. Capturing one is the second content priority alongside the FinTech gap. |
 | **Tech** | Fujitsu (incl. Fujitsu x AstraZeneca) | Strong. £20M+ revenue, 100+ decks replaced. |
 | **Consultancy** | S2 Partnership | Strong. about 80% fewer onboarding support calls. |
-| **Industrials** | Fujitsu, Heathrow, Brabazon | Moderate, proof exists but less packaged. |
+| **Industrials** | Fujitsu, Heathrow | Moderate, proof exists but less packaged. |
 
 **Knight Frank** (ex-Real Estate: 800+ videos year one, 75% cost saving, 5x LinkedIn lift, the only attributed testimonial) remains a headline proof point. Real Estate was retired as a dedicated vertical and replaced by Events, so Knight Frank now lives on the homepage proof block, the About page, and as a cross-referenced example inside other industry pages, not on a page of its own.
 
@@ -100,7 +100,6 @@ high-value content task to flag.
 
 ### Named work (concrete projects)
 - **Heathrow.** A 7 page proposal distilled into a clear video summary for a key meeting.
-- **Brabazon Smart Neighbourhood.** Visual proposal for a smart-city initiative.
 - **Fujitsu x AstraZeneca.** A 56 page presentation turned into a streamlined video pitch.
 
 ---

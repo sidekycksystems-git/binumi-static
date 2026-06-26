@@ -25,7 +25,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               portalId: "26490650",
               formId: "d44fd1f3-4bd5-49b6-b133-c163bd9bee71",
               region: "eu1",
-              target: "#hubspot-form"
+              target: "#hubspot-form",
+              // HubSpot renders the form in a same-origin iframe, so page CSS can't reach it.
+              // Inject our brand styles into the iframe's own document instead. Retry briefly
+              // because onFormReady can fire before the iframe's inner DOM is painted.
+              onFormReady: function () {
+                var iframe = document.querySelector("#hubspot-form iframe");
+                var css =
+                  ".hs-button.primary{background-color:#00aeef !important;border:1.5px solid #00aeef !important;color:#04121b !important;border-radius:2px !important;font-weight:500 !important;}" +
+                  ".hs-button.primary:hover{background-color:#0e93c6 !important;border-color:#0e93c6 !important;}" +
+                  ".hs-form-field > label{color:#0b1428 !important;font-weight:600 !important;}" +
+                  ".hs-form-required{color:#00aeef !important;}" +
+                  ".hs-input{border:1px solid rgba(11,20,40,0.14) !important;border-radius:2px !important;color:#0b1428 !important;}" +
+                  ".hs-input:focus{border-color:#00aeef !important;}";
+                function inject() {
+                  var doc = iframe && iframe.contentDocument;
+                  if (!doc || !doc.querySelector(".hs-button")) return false;
+                  if (doc.getElementById("binumi-hs-style")) return true;
+                  var s = doc.createElement("style");
+                  s.id = "binumi-hs-style";
+                  s.textContent = css;
+                  doc.head.appendChild(s);
+                  return true;
+                }
+                if (!inject()) {
+                  var n = 0, t = setInterval(function () { if (inject() || ++n > 20) clearInterval(t); }, 100);
+                }
+              }
             });
           </script>
         </div>
@@ -64,4 +90,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-radius: var(--r-card);
     padding: 2.5rem;
   }
+  /* The HubSpot form lives in a same-origin iframe; its styling is injected into that
+     iframe's document by the script above, not from here (page CSS can't reach into it). */
 </style>

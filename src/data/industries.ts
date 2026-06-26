@@ -10,7 +10,7 @@
 //   fold into Financial Services, a merge decision still parked.
 //
 //   Proof is scaled as capability: each line uses a real named client (Generali,
-//   Fujitsu, Knight Frank, S2 Partnership, Heathrow, Brabazon, AstraZeneca) framed as
+//   Fujitsu, Knight Frank, S2 Partnership, Heathrow, AstraZeneca) framed as
 //   what Binumi does, transferred to the field. Every figure is reconfirmed against
 //   product.md. American spelling throughout, per the house rules.
 //
@@ -253,7 +253,7 @@ const industrials: Industry = {
     close: 'Together, industrial firms communicate at <strong>the standard their projects demand</strong>, across <strong>every site and market</strong>.',
   },
   proof: {
-    leadLine: 'Proven across Fujitsu, Heathrow and Brabazon.',
+    leadLine: 'Proven across Fujitsu and Heathrow.',
     problem: [
       'Industrials sell complex products and services across multiple sites and markets. Safety training has to be consistent everywhere. Bids and proposals run to hundreds of pages.',
       'Boards, regulators and communities need to understand what the work involves. Static formats slow every one of those loops, and a slow bid loop is a lost contract.',
@@ -300,7 +300,7 @@ const construction: Industry = {
     close: 'Together, contractors <strong>win more tenders</strong> and <strong>move schemes through consent faster</strong>, with every site on the same standard.',
   },
   proof: {
-    leadLine: 'Proven across Brabazon and Fujitsu.',
+    leadLine: 'Proven across Fujitsu.',
     problem: [
       'A bid runs to hundreds of pages, and the people deciding it skim. Planning and community consent depend on stakeholders understanding a scheme they will never read in full.',
       'Every week a tender or a consultation stalls is a week of cost and a competitor moving first. Static formats slow the decisions that revenue depends on.',
@@ -637,7 +637,7 @@ const publicSector: Industry = {
     close: 'Together, public bodies <strong>engage citizens</strong> and <strong>deliver faster</strong>, on a fraction of the cost of scattered agency spend.',
   },
   proof: {
-    leadLine: 'Proven across Heathrow and Brabazon.',
+    leadLine: 'Proven across Heathrow and Fujitsu.',
     problem: [
       'Consultations and services depend on citizens and stakeholders understanding information they will never read in full. Workforce training has to be consistent across every department.',
       'Static formats lower engagement and slow delivery, and agency production absorbs budget that should reach the front line. Clear video does the opposite.',
