@@ -1,0 +1,52 @@
+---
+/* First-visit cookie notice: a centered modal over a dark overlay, shown on
+   every page until the visitor accepts. Acceptance is stored in localStorage
+   so it never shows again. Hidden by default; the inline script reveals it
+   when no consent is recorded, so returning visitors get no flash. */
+---
+
+<div class="bnm-cookie" data-bnm-cookie hidden>
+  <div class="bnm-cookie-overlay"></div>
+  <div class="bnm-cookie-modal" role="dialog" aria-modal="true" aria-labelledby="bnm-cookie-title">
+    <button class="bnm-cookie-x" type="button" aria-label="Close">&times;</button>
+    <h2 class="bnm-cookie-title" id="bnm-cookie-title">Binumi uses cookies</h2>
+    <p class="bnm-cookie-copy">
+      We use cookies to provide you with a better browsing experience. By
+      continuing to use this website, you agree to the use of cookies.
+    </p>
+    <button class="bnm-cookie-ok btn btn-primary" type="button">Ok</button>
+  </div>
+</div>
+
+<style>
+  .bnm-cookie[hidden] { display: none; }
+  .bnm-cookie { position: fixed; inset: 0; z-index: 1000; display: flex;
+    align-items: center; justify-content: center; padding: 1.5rem; }
+  .bnm-cookie-overlay { position: absolute; inset: 0; background: rgba(11, 20, 40, 0.5); }
+  .bnm-cookie-modal { position: relative; background: var(--surface);
+    border: 1px solid var(--cyan); border-radius: var(--radius);
+    max-width: 480px; width: 100%; padding: 2.25rem 2rem; text-align: center;
+    box-shadow: 0 24px 60px rgba(11, 20, 40, 0.28); }
+  .bnm-cookie-x { position: absolute; top: .9rem; right: 1.1rem; border: 0;
+    background: none; color: var(--muted); font-size: 1.6rem; line-height: 1;
+    cursor: pointer; padding: 0; }
+  .bnm-cookie-title { margin: 0 0 1rem; font-size: var(--t-h6); color: var(--ink); }
+  .bnm-cookie-copy { margin: 0 0 1.75rem; color: var(--body-copy); line-height: 1.6; }
+</style>
+
+<script is:inline>
+  (function () {
+    var root = document.querySelector("[data-bnm-cookie]");
+    if (!root) return;
+    var KEY = "bnm-cookies-accepted";
+    try { if (localStorage.getItem(KEY) === "1") return; } catch (e) {}
+    function accept() {
+      try { localStorage.setItem(KEY, "1"); } catch (e) {}
+      root.hidden = true;
+    }
+    root.querySelector(".bnm-cookie-ok").addEventListener("click", accept);
+    root.querySelector(".bnm-cookie-x").addEventListener("click", accept);
+    root.hidden = false;
+    root.querySelector(".bnm-cookie-ok").focus();
+  })();
+</script>

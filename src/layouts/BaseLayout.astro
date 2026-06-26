@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ChatWidget from '../components/ChatWidget.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -84,6 +85,7 @@ const organizationSchema = {
   <slot />
   <Footer />
   <ChatWidget />
+  <CookieConsent />
 
   <!-- Scroll reveals: add .in-view as each .reveal element enters the viewport.
        Falls back to showing everything if IntersectionObserver is unavailable or

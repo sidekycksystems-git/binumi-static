@@ -20,6 +20,7 @@ const insights = defineCollection({
     heroVideoTag: z.string().optional(),      // article hero VideoFrame tag
     heroVideoDuration: z.string().optional(), // article hero duration, "Watch · 4:12"
     heroVideoSrc: z.string().optional(),      // real hero/featured video (mp4); falls back to play-button placeholder when absent
+    heroVideoPoster: z.string().optional(),   // poster/thumbnail still for the hero + featured-card video
   }),
 });
 

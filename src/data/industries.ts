@@ -34,6 +34,7 @@ export interface Industry {
   usecases: { leadLine: string; chips: string[] };
   trust:    { kicker: string; h2: string; creds: string; close: string }; // creds has <strong> -> set:html
   cta:      { h2: string };                                        // has <span class="hl"> -> set:html
+  video?:   string;        // optional src for the proof + trust placeholders; empty placeholder if unset
 }
 
 // ---------------------------------------------------------------------------
@@ -84,6 +85,7 @@ const financialServices: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">markets</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__2e5d44ca4c2b602a1edc2a856f746d23_h169.mp4',
 };
 
 const professionalServices: Industry = {
@@ -130,6 +132,7 @@ const professionalServices: Industry = {
   cta: {
     h2: 'See what becomes possible for your <span class="hl">practice</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__49c3e48862c3023c2591ddb136f55408_h169.mp4',
 };
 
 // ---------------------------------------------------------------------------
@@ -157,7 +160,7 @@ const technology: Industry = {
       'Demos are bottlenecks that depend on senior engineers. Documentation goes unread. Buyers stall in the cycle because the value never lands in a format they will actually watch.',
       'Launches need to scale faster than the sales team can absorb, and partner ecosystems need enabling at the same pace. Too much revenue depends on too few people.',
     ],
-    interim: '<span class="names">Binumi replaced 100+ Fujitsu slide decks with 90-second videos.</span> Post-meeting engagement is up 5x, and revenue influenced exceeds £1M. A 56-page Fujitsu and AstraZeneca presentation became a single video pitch.',
+    interim: '<span class="names">Binumi replaced 100+ Fujitsu slide decks with 90-second videos.</span> Post-meeting engagement is up 5x, and revenue influenced exceeds £20M.',
   },
   usecases: {
     leadLine: 'One platform, every tech moment.',
@@ -180,6 +183,7 @@ const technology: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">pipeline</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__f568be6123550de943db47af0332fd84_h169.mp4',
 };
 
 const telecommunications: Industry = {
@@ -226,6 +230,7 @@ const telecommunications: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">base</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__180e186cca69df01f98e8e9e11acb2fa_h169.mp4',
 };
 
 // ---------------------------------------------------------------------------
@@ -253,7 +258,7 @@ const industrials: Industry = {
       'Industrials sell complex products and services across multiple sites and markets. Safety training has to be consistent everywhere. Bids and proposals run to hundreds of pages.',
       'Boards, regulators and communities need to understand what the work involves. Static formats slow every one of those loops, and a slow bid loop is a lost contract.',
     ],
-    interim: '<span class="names">Binumi replaced 100+ Fujitsu decks with video, 5x engagement, £1M+ influenced.</span> Heathrow distilled a 7-page proposal into a clear video summary for a key meeting, and the Brabazon Smart Neighbourhood became a story stakeholders could follow.',
+    interim: '<span class="names">Binumi replaced 100+ Fujitsu decks with video, 5x engagement, £20M+ influenced.</span> Post-meeting engagement for multiple aviation hubs has been successful.',
   },
   usecases: {
     leadLine: 'One platform, every industrial moment.',
@@ -276,6 +281,7 @@ const industrials: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">projects</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__1996cdc0540ecb68778dff407a10bf53_h169.mp4',
 };
 
 const construction: Industry = {
@@ -299,7 +305,7 @@ const construction: Industry = {
       'A bid runs to hundreds of pages, and the people deciding it skim. Planning and community consent depend on stakeholders understanding a scheme they will never read in full.',
       'Every week a tender or a consultation stalls is a week of cost and a competitor moving first. Static formats slow the decisions that revenue depends on.',
     ],
-    interim: '<span class="names">Binumi turned the Brabazon Smart Neighbourhood, a complex smart-city proposal, into a story stakeholders could follow, and replaced 100+ Fujitsu decks with 90-second videos, 5x engagement, £1M+ influenced.</span> The same bid-transformation engine works for a tender.',
+    interim: '<span class="names">Binumi turned a complex smart-city proposal into a story stakeholders could follow, and replaced 100+ Fujitsu decks with 90-second videos, 5x engagement, £20M+ influenced.</span> The same bid-transformation engine works for a tender.',
   },
   usecases: {
     leadLine: 'One platform, every construction moment.',
@@ -322,6 +328,7 @@ const construction: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">bids</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__0b7bbae3a9ac1dbddb2cfe4fec59dd12_h169.mp4',
 };
 
 const energyUtilities: Industry = {
@@ -345,7 +352,7 @@ const energyUtilities: Industry = {
       'Infrastructure projects depend on regulators, communities and customers understanding complex, high-stakes work. Safety has to be consistent across a dispersed field workforce.',
       'Static submissions and PDFs slow approvals and leave field teams reading documents nobody finishes. Every delayed approval carries a real cost.',
     ],
-    interim: '<span class="names">Binumi distilled a 7-page Heathrow proposal into a clear video summary for a key meeting, and produces 500+ Generali videos a year across 12 markets in 12 languages, 80% faster than before.</span> The same engine carries a regulated, multi-site operation.',
+    interim: '<span class="names">Binumi produces 500+ Generali videos a year across 12 markets in 12 languages, 80% faster than before.</span> The same engine carries a regulated, multi-site operation.',
   },
   usecases: {
     leadLine: 'One platform, every energy moment.',
@@ -368,6 +375,7 @@ const energyUtilities: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">network</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__e8f4a818a863d1d1254c84c08faadf3f_h169.mp4',
 };
 
 const automotive: Industry = {
@@ -391,7 +399,7 @@ const automotive: Industry = {
       'A launch has to reach every market and every dealer at once, on brand, in language. Product detail and brand story compete for attention with the next model and the next channel.',
       'Static decks and inconsistent local content dilute the brand and slow the sell-through. The brands that turn launches into clear, consistent video move metal faster.',
     ],
-    interim: '<span class="names">Binumi produces 500+ videos a year with Generali across 12 markets in 12 languages, 80% faster than before, and replaced 100+ Fujitsu decks with 90-second videos.</span> The same multi-market launch engine works for a dealer network.',
+    interim: '<span class="names">Binumi produces 900+ videos a year with Knight Frank and 500+ videos for Generali across 12 markets in 12 languages, 80% faster than before.</span> The same multi-market launch engine works for a dealer network.',
   },
   usecases: {
     leadLine: 'One platform, every automotive moment.',
@@ -414,6 +422,7 @@ const automotive: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">markets</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__b8dc34bcbce75207be623c2dca1d9695_h169.mp4',
 };
 
 // ---------------------------------------------------------------------------
@@ -441,7 +450,7 @@ const lifeSciences: Industry = {
       'The science that wins partners and capital is buried in dense decks and data nobody outside the lab fully reads. Every regulated message has to clear review before it ships.',
       'Synthetic, avatar-based content is a disclosure and IP risk a regulated science business cannot take. Static formats slow the investor and partner conversations that funding depends on.',
     ],
-    interim: '<span class="names">Binumi turned a 56-page Fujitsu and AstraZeneca presentation into a single video pitch.</span> No avatars, real video, real trust, the only standard a regulated science buyer accepts.',
+    interim: '<span class="names">Binumi turned a 56-page Fujitsu presentation into engaging video pitches.</span> No avatars, real video, real trust, the only standard a regulated science buyer accepts.',
   },
   usecases: {
     leadLine: 'One platform, every life sciences moment.',
@@ -464,6 +473,7 @@ const lifeSciences: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">pipeline</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__82ecda8ccc256a2f994f8da1d45bd179_h169.mp4',
 };
 
 const healthcare: Industry = {
@@ -510,6 +520,7 @@ const healthcare: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">service</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__66eebce85bd9c7d5de293cdf8ecef7b3_h169.mp4',
 };
 
 // ---------------------------------------------------------------------------
@@ -560,6 +571,7 @@ const realEstate: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">branches</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__8f26dd641347d99c9de0c420a6296dfa_h169.mp4',
 };
 
 const travelTransport: Industry = {
@@ -583,7 +595,7 @@ const travelTransport: Industry = {
       'Customers need clear information across every booking, route and disruption, in every market and language. Operations and safety messages have to reach a dispersed, shift-based workforce.',
       'Static formats cannot keep pace with a network this size or a schedule this fast. Clear communication is what protects the booking and the operation at once.',
     ],
-    interim: '<span class="names">Binumi distilled a complex 7-page Heathrow proposal into a clear video summary for a key meeting, and produces 500+ Generali videos a year across 12 markets in 12 languages, 80% faster than before.</span> The same multi-market engine carries a transport network.',
+    interim: '<span class="names">Binumi turned a complex smart-city proposal into a story stakeholders could follow, and replaced 100+ Fujitsu decks with 90-second videos, 5x engagement, £20M+ influenced.</span> The same multi-market engine carries a transport network.',
   },
   usecases: {
     leadLine: 'One platform, every travel moment.',
@@ -606,6 +618,7 @@ const travelTransport: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">network</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__26398698b2a1d4a8fdf60e0b3e37497b_h169.mp4',
 };
 
 const publicSector: Industry = {
@@ -629,7 +642,7 @@ const publicSector: Industry = {
       'Consultations and services depend on citizens and stakeholders understanding information they will never read in full. Workforce training has to be consistent across every department.',
       'Static formats lower engagement and slow delivery, and agency production absorbs budget that should reach the front line. Clear video does the opposite.',
     ],
-    interim: '<span class="names">Binumi distilled a 7-page proposal into a clear video summary for a key meeting at Heathrow, and turned the Brabazon Smart Neighbourhood into a story stakeholders could follow.</span> The same engine carries a public consultation or service.',
+    interim: '<span class="names">Binumi turned a complex smart-city proposal into a story stakeholders could follow, and replaced 100+ Fujitsu decks with 90-second videos, 5x engagement, £20M+ influenced.</span> The same engine carries a public consultation or service.',
   },
   usecases: {
     leadLine: 'One platform, every public sector moment.',
@@ -652,6 +665,7 @@ const publicSector: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">services</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__97bef2cd4194830d70d2e26bb3dfae20_h169.mp4',
 };
 
 const education: Industry = {
@@ -698,6 +712,7 @@ const education: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">campus</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__798901d9d8799cbc72083adc27dca18c_h169.mp4',
 };
 
 // ---------------------------------------------------------------------------
@@ -725,7 +740,7 @@ const events: Industry = {
       'Events cost months of planning and end in days. The content they generate, keynotes, customer moments, brand experiences, speaker sessions, mostly evaporates before it can do its job.',
       'Pre-event promotion is fragmented across teams. Post-event recaps land too late to matter. And the moments that should drive sales, recruitment and brand for a year never make it out of the room.',
     ],
-    interim: 'Binumi has produced event content for <span class="names">80+ enterprise organizations, including corporate summits, conferences and customer events run by Fujitsu, Generali and others</span>. ISO 27001 certified. GDPR-compliant.',
+    interim: 'Binumi has produced event content for <span class="names">80+ enterprise organizations, including corporate summits, conferences and customer events run by Informa, Fujitsu, Generali and others</span>. ISO 27001 certified. GDPR-compliant.',
   },
   usecases: {
     leadLine: 'One platform, every event moment.',
@@ -750,6 +765,7 @@ const events: Industry = {
   cta: {
     h2: 'See what becomes possible for your <span class="hl">event team</span>.',
   },
+  video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__030ca7e69a97216b8d2e4f44c2fa4cc3_h169.mp4',
 };
 
 // ---------------------------------------------------------------------------

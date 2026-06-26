@@ -1,12 +1,201 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Leadership team. One record per person. The grid shows photo + name + role;
+// clicking a card opens that person's full bio in a modal. Bios follow the
+// house rules (American spelling, no em-dashes).
+const team = [
+  {
+    name: 'Anthony Copping',
+    role: 'Founder & CEO',
+    photo: '/team/anthony.jpg',
+    bio: [
+      `A serial entrepreneur, Anthony founded his first music publishing company at 21 and created Last Voices, a 20-year journey into the deepest jungles of the South Pacific, followed by National Geographic in a television series hailed as "the most dangerous journey ever undertaken in search of indigenous music." A composer and presenter, his work aired in over 100 countries, with albums released by Sony and Virgin.`,
+      `He was an early investor in Totem, a video events technology business later acquired by FTSE 100 giant Informa. Binumi, his video technology platform, gave an exclusive 300,000 young people the opportunity to create short documentaries. Today, Binumi AI empowers organizations to create purposeful, on-brand video at scale, turning everyday communication into stories that inspire, influence, and deliver real impact.`,
+    ],
+  },
+  {
+    name: 'Alexander Hasler',
+    role: 'COO',
+    photo: '/team/alexander.jpg',
+    bio: [
+      `Based in Switzerland, Alexander has joined Binumi in a dual role as Chief Operating Officer during the company's scale-up phase while also leading sales across the DACH region. As COO, he is responsible for building scalable operational structures, driving executional excellence, and supporting sustainable growth.`,
+      `He brings extensive experience from senior roles at a global insurance group, combined with a strong track record in startup environments, enabling him to translate strategy into scalable operations and commercial success. In addition, Alexander serves as President of the donation-funded Green Ethiopia Foundation, supporting sustainable development and social impact initiatives.`,
+    ],
+  },
+  {
+    name: 'Nils Aggett',
+    role: 'Senior Advisor',
+    photo: '/team/nils.jpg',
+    bio: [
+      `Following a successful international career in sales, marketing, and operational management, mainly in the financial and retirement services sectors, Nils is now leveraging his experience and network to support start-ups. He is a lead partner at Betascale in Switzerland, a SaaS company builder, and holds various board mandates.`,
+      `At Binumi, Nils is supporting rapid scale-up in the DACH region, primarily focused on business development and sales. He lives in Switzerland, just outside Zurich.`,
+    ],
+  },
+  {
+    name: 'F. Markus Deutsch',
+    role: 'Senior Advisor',
+    photo: '/team/markus.jpg',
+    bio: [
+      `Senior Advisor to Binumi. Founder of Landmark Global Associates and previously CEO of Cendant Vacation Rental Group (now part of KKR/Landal and Platinum Equity/Awaze).`,
+      `An expert operational advisor for business in transition, he has been involved in over 100 million online consumer transactions and 20+ M&A transactions across Real Estate, Travel, Music, and Financial Services. Companies previously advised include Castello Del Nero Hotels, Wyndham, Sony, Polygram, Scholastic, Affinion Group, Grand City Hotels, Head Skis, Ponant Cruises, Properties in Paradise, and Holistic Cyber.`,
+    ],
+  },
+  {
+    name: 'Stefan Jennings',
+    role: 'Senior Advisor',
+    photo: '/team/stefan.jpg',
+    bio: [
+      `A senior leader with a background in the events and media industry, Stefan has operated at C-suite level within a FTSE 50 multinational, bringing deep expertise in strategy, transformation, and organizational change.`,
+      `He is passionate about unlocking value and driving business improvement, with a strong track record in strategic delivery, commercial enablement, and operational excellence. Known for his pragmatic, results-driven leadership style, he consistently delivers sustainable impact across complex structures and teams undergoing transition or growth.`,
+    ],
+  },
+  {
+    name: 'Matthew Krise',
+    role: 'Strategic Knowledge Advisor',
+    photo: '/team/matthew.jpg',
+    bio: [
+      `A senior advisor with over 30 years of leadership experience in K-12 education technology, Matthew has held senior leadership roles at Ripple Effects, EdisonLearning, Encyclopaedia Britannica, Apex Learning, LeapFrog SchoolHouse, Scientific Learning, and Squirrels LLC.`,
+      `He is an expert advisor in education strategy, revenue growth, and innovation, with deep experience supporting schools and education systems globally. A longstanding leader in the education community, he also serves as Executive Director of the Mid American Association of School Superintendents and as a board member of multiple national education organizations.`,
+    ],
+  },
+  {
+    name: 'Archie Cork',
+    role: 'Head of Operations',
+    photo: '/team/archie.jpg',
+    bio: [
+      `With a background spanning the gaming industry and entrepreneurial ventures in events, Archie brings a dynamic mix of operational rigor and creative thinking to his role as Head of Operations at Binumi.`,
+      `He leads strategic development across the platform's AI-powered features, guided by a deep interest in how artificial intelligence can enhance storytelling and streamline workflows. His focus on scalable, user-centric solutions has improved delivery efficiency and supported Binumi's growth across global markets.`,
+    ],
+  },
+  {
+    name: 'Jenni Dang',
+    role: 'Head of Design',
+    photo: '/team/jenni.jpg',
+    bio: [
+      `Before joining Binumi as Head of Design, Jenni spent 15 years as an architect, contributing to industry-recognized, award-winning projects in Sydney, New York, and London.`,
+      `A First Class Honours graduate from the University of NSW, her interest in how environments shape experience led to a natural transition into digital design. At Binumi, she brings a refined, detail-oriented approach grounded in a "less is more" philosophy, removing complexity so users can focus on telling clear, impactful stories. Because when communication is clear, it scales.`,
+    ],
+  },
+  {
+    name: 'Thanayu Thanakitworawat',
+    role: 'CTO',
+    photo: '/team/thanayu.jpg',
+    bio: [
+      `Based in France, Thanayu is the Chief Technology Officer at Binumi, bringing over a decade of technical leadership to the platform.`,
+      `With a background in engineering and media production and prior experience at Microsoft, he leads Binumi's distributed development team across Thailand and Vietnam. He applies agile principles and a product-first mindset to develop scalable, user-focused solutions that power effective storytelling and support complex enterprise needs.`,
+    ],
+  },
+];
 ---
-<BaseLayout title="Binumi · Meet the Team" description="Meet the Binumi team.">
+<BaseLayout
+  title="Binumi · Meet the team"
+  description="The leadership team behind Binumi, spanning technology, media, operations and design across Europe, Asia and the US."
+>
   <main>
-    <section class="section">
+    <!-- ===================== BANNER ===================== -->
+    <section class="page-banner">
       <div class="container">
-        <h1>Meet the Team</h1>
+        <div class="intro">
+          <h1>Meet the <span class="hl">team</span>.</h1>
+          <p class="subtitle">Operators, builders and advisors behind the platform, spanning technology, media, operations and design across Europe, Asia and the US.</p>
+        </div>
       </div>
     </section>
+
+    <!-- ===================== TEAM GRID ===================== -->
+    <section class="section">
+      <div class="container">
+        <div class="team-grid reveal">
+          {team.map((person, i) => (
+            <button class="member" data-idx={i} type="button" aria-haspopup="dialog" aria-label={`Read ${person.name}'s bio`}>
+              <img class="member-photo" src={person.photo} alt={person.name} width="512" height="640" loading="lazy" />
+              <span class="member-info">
+                <span class="member-name">{person.name}</span>
+                <span class="member-role">{person.role}</span>
+                <span class="member-more"><span class="material-symbols-outlined" aria-hidden="true">read_more</span>Read bio</span>
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- One modal per person (native <dialog>). -->
+    {team.map((person, i) => (
+      <dialog id={`m-${i}`} class="member-modal">
+        <button class="member-close" type="button" aria-label="Close"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+        <div class="member-modal-inner">
+          <img class="member-modal-photo" src={person.photo} alt={person.name} width="512" height="640" />
+          <div>
+            <h2 class="member-modal-name">{person.name}</h2>
+            <p class="member-role">{person.role}</p>
+            {person.bio.map((para) => <p class="member-bio">{para}</p>)}
+          </div>
+        </div>
+      </dialog>
+    ))}
   </main>
 </BaseLayout>
+
+<script is:inline>
+  document.addEventListener('click', function (e) {
+    var close = e.target.closest && e.target.closest('.member-close');
+    if (close) { var d = close.closest('dialog'); if (d) d.close(); return; }
+    var card = e.target.closest && e.target.closest('.member');
+    if (card) { var dlg = document.getElementById('m-' + card.getAttribute('data-idx')); if (dlg && dlg.showModal) dlg.showModal(); return; }
+    if (e.target.tagName === 'DIALOG') e.target.close(); // click on backdrop
+  });
+</script>
+
+<style>
+  .page-banner { padding-top: var(--nav-to-hero); padding-bottom: var(--section-y); }
+
+  /* Photo + name + role cards; click opens the bio modal. Island look (surface
+     fill + cyan hairline) matches the global .card treatment. Every headshot is
+     the same uniform 4:5 portrait, center-cropped. */
+  /* Spacing modeled on the live binumi grid: 3 columns, ~30px column gutter,
+     ~40px row rhythm (their span4 grid + vspace scale). */
+  .team-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem 1.875rem; }
+  /* Cards fill their column and are left-aligned, matching the live grid. */
+  .member { display: flex; flex-direction: column; align-items: stretch; gap: 1rem; text-align: left; cursor: pointer; font: inherit;
+    appearance: none; -webkit-appearance: none; background: none; border: 0; padding: 0;
+    color: var(--body-copy); transition: transform .25s; }
+  .member:hover { transform: translateY(-3px); }
+  .member-photo { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top;
+    border-radius: var(--radius); }
+  /* Name + role + button in a cyan island box (surface fill + cyan border come
+     from the shared island rule in global.css, same as the rest of the site). */
+  .member-info { width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: .45rem;
+    padding: 1.1rem 1.2rem 1.2rem; border-width: 1px; border-style: solid; border-radius: var(--r-card);
+    transition: border-color .25s, box-shadow .25s; }
+  .member:hover .member-info { border-color: var(--cyan-bright); box-shadow: 0 18px 44px -30px rgba(11,20,40,.30); }
+  .member-name { font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; color: var(--ink); line-height: 1.2; overflow-wrap: break-word; }
+  .member-role { font-family: var(--font-head); font-weight: 700; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan); }
+  .member-more { margin-top: .2rem; display: inline-flex; align-items: center; gap: .35rem; font-size: .82rem; color: var(--muted); }
+  .member-more .material-symbols-outlined { font-size: 18px; color: var(--cyan); }
+  @media (max-width: 860px) { .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 540px) { .team-grid { grid-template-columns: minmax(0, 1fr); } }
+
+  /* Bio modal */
+  .member-modal { position: relative; width: min(640px, 92vw); padding: 0; overflow: hidden;
+    border: 1px solid var(--cyan); border-radius: var(--r-card);
+    background: var(--bg); color: var(--body-copy); box-shadow: 0 40px 90px -30px rgba(11,20,40,.5); }
+  .member-modal::backdrop { background: rgba(7,14,29,.55); }
+  /* Inner scrolls when a bio is taller than the viewport; the close button is a
+     sibling of the inner, so it stays pinned to the dialog while content scrolls. */
+  .member-modal-inner { max-height: 88vh; overflow-y: auto; padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); display: grid;
+    grid-template-columns: auto 1fr; gap: clamp(1.25rem, 1rem + 1.5vw, 2rem); align-items: start; }
+  .member-modal-photo { width: clamp(120px, 17vw, 180px); height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top;
+    border-radius: var(--radius); border: 1px solid var(--border-soft); }
+  .member-modal-name { font-family: var(--font-head); font-size: var(--t-h5); letter-spacing: -.01em; margin-bottom: .35rem; }
+  .member-bio { color: var(--body-copy); font-size: .96rem; line-height: 1.6; margin-top: .7rem; }
+  .member-close { position: absolute; top: .6rem; right: .6rem; z-index: 2; display: grid; place-items: center; width: 38px; height: 38px;
+    border-radius: 999px; border: 1px solid var(--border); background: var(--panel); color: var(--muted); cursor: pointer; }
+  .member-close:hover { color: var(--ink); border-color: var(--cyan); }
+  .member-close .material-symbols-outlined { font-size: 20px; }
+  @media (max-width: 560px) {
+    .member-modal-inner { grid-template-columns: 1fr; }
+    .member-modal-photo { width: clamp(140px, 44vw, 180px); }
+  }
+</style>

@@ -65,7 +65,7 @@ except where noted. Each also has a live industry page in this repo at
 | **FinTech / Financial Services** | Thin, board investors in financial services | **PROOF GAP.** Lead with the Real vs Synthetic / regulated-industry angle, not a case study. Flag for content planning. |
 | **Insurance** | Generali | Strong. 500+ videos, 12 markets, 12 languages. |
 | **Events** | None yet | **PROOF GAP.** Replaced Real Estate in the lineup. Uses the bracketed interim proof treatment (same approach as FinTech) until a named events client lands. Capturing one is the second content priority alongside the FinTech gap. |
-| **Tech** | Fujitsu (incl. Fujitsu x AstraZeneca) | Strong. £1M+ revenue, 100+ decks replaced. |
+| **Tech** | Fujitsu (incl. Fujitsu x AstraZeneca) | Strong. £20M+ revenue, 100+ decks replaced. |
 | **Consultancy** | S2 Partnership | Strong. about 80% fewer onboarding support calls. |
 | **Industrials** | Fujitsu, Heathrow, Brabazon | Moderate, proof exists but less packaged. |
 
@@ -81,7 +81,7 @@ Additional sectors served (secondary): Life Sciences, Logistics, Hotels and Leis
 video and post inherits whatever figure it shows, so this gates publication.
 
 ### Tier 1, headline outcomes
-- **Fujitsu.** £1M+ revenue influenced. 100+ slide decks replaced with 90 second videos. 5x post-meeting engagement. 90% turnaround reduction.
+- **Fujitsu.** £20M+ revenue influenced. 100+ slide decks replaced with 90 second videos. 5x post-meeting engagement. 90% turnaround reduction.
 - **Knight Frank.** 800+ videos created internally in year one. 75% cost saving vs previous supplier. Two-week turnaround cut to two hours. 5x LinkedIn engagement lift.
 - **Generali.** 500+ videos across 12 European markets in 12 languages. 80% faster production. Significant campaign cost reduction.
 - **S2 Partnership.** About 80% reduction in onboarding support-call demand. 3x social engagement. 100+ videos internally in year one.

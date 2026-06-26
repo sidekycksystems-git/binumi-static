@@ -86,7 +86,7 @@ const { industry } = Astro.props;
                 <p set:html={industry.proof.interim}></p>
               </div>
             </div>
-            <VideoFrame class="reveal" label={`${industry.name} proof video`} />
+            <VideoFrame class="reveal" label={`${industry.name} proof video`} videoSrc={industry.video} autoplay muted loop />
           </div>
         </div>
       </div>
@@ -116,7 +116,7 @@ const { industry } = Astro.props;
             <div class="creds" set:html={industry.trust.creds}></div>
             <p class="close">{industry.trust.close}</p>
           </div>
-          <VideoFrame label={`${industry.name} trust video`} />
+          <VideoFrame label={`${industry.name} trust video`} videoSrc={industry.video} autoplay muted loop />
         </div>
       </div>
     </section>

@@ -37,7 +37,7 @@ const frameRole = label && !embedSrc && !videoSrc ? 'img' : undefined;
 {small ? (
   <div class={`thumb ${className}`.trim()} role={frameRole} aria-label={label}>
     {tag && <span class="video-tag">{tag}</span>}
-    <span class="play-sm" aria-hidden="true"><span class="material-symbols-outlined" aria-hidden="true">play_arrow</span></span>
+    {videoSrc && <video src={videoSrc} poster={poster} muted playsinline preload="metadata"></video>}
     {duration && <span class="duration" aria-hidden="true"><span class="material-symbols-outlined" aria-hidden="true">play_arrow</span>{duration}</span>}
   </div>
 ) : (
@@ -65,9 +65,7 @@ const frameRole = label && !embedSrc && !videoSrc ? 'img' : undefined;
           loop={loop}
           preload={autoplay ? 'auto' : 'metadata'}>
         </video>
-      ) : (
-        <span class="play" aria-hidden="true"><span class="material-symbols-outlined" aria-hidden="true">play_arrow</span></span>
-      )}
+      ) : null}
       {duration && <span class="duration" aria-hidden="true"><span class="material-symbols-outlined" aria-hidden="true">play_arrow</span>{duration}</span>}
     </div>
   </div>

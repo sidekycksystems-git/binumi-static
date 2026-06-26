@@ -282,9 +282,6 @@
       border: 1px solid rgba(120,165,225,0.16); box-shadow: 0 30px 80px -42px rgba(11,20,40,.30);
       display: grid; place-items: center; overflow: hidden; transition: transform .5s ease; }
     .video-master:hover .video-frame { transform: scale(1.005); }
-    .play { position: relative; z-index: 2; width: 84px; height: 84px; border-radius: 999px; display: grid; place-items: center;
-      color: #04121b; background: var(--cyan); }
-    .play .material-symbols-outlined { font-size: 42px; }
     .video-tag { position: absolute; left: 1rem; top: 1rem; z-index: 2; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
       color: #cfe0ff; padding: .35rem .7rem; border-radius: var(--radius-sm); background: rgba(7,14,29,.72); border: 1px solid rgba(120,165,225,0.14); }
     .video-frame iframe,
@@ -297,9 +294,7 @@
     .thumb { position: relative; aspect-ratio: 16 / 9; width: 100%; overflow: hidden;
       background: linear-gradient(160deg, #12244a, #0b1428); border-bottom: 1px solid rgba(120,165,225,0.16);
       display: grid; place-items: center; }
-    .thumb .play-sm { width: 54px; height: 54px; border-radius: 999px; display: grid; place-items: center;
-      color: #04121b; background: var(--cyan); transition: transform .3s ease; }
-    .thumb .play-sm .material-symbols-outlined { font-size: 30px; }
+    .thumb video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .thumb .video-tag { left: .8rem; top: .8rem; }
 
     /* Chat input bar. Used only by the site-wide chat widget (ChatWidget.astro)
@@ -344,7 +339,7 @@
       border-color: var(--border);
       color: var(--body-copy);
     }
-    :root body :is(.card, .bento-card, .bento-tile, .feature-block, .wiw-card, .faq-item, .featured, .post-card) {
+    :root body :is(.card, .bento-card, .bento-tile, .feature-block, .wiw-card, .faq-item, .featured, .post-card, .member-info) {
       background: var(--surface);
       border-color: var(--cyan);
       color: var(--body-copy);
@@ -398,8 +393,7 @@
     .testimonial .qmark { color: var(--cyan); opacity: .9; margin-bottom: 1rem; }
     .testimonial .qmark svg { width: 44px; height: 28px; }
     .testimonial blockquote { margin: 0; color: var(--body-copy); font-size: var(--t-h6); line-height: 1.55; }
-    .testimonial .attribution { margin-top: auto; padding-top: 1.5rem; display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; }
-    .testimonial .avatar { width: 46px; height: 46px; border-radius: 999px; background: var(--cyan-fill); border: 1px solid var(--border); }
+    .testimonial .attribution { margin-top: auto; padding-top: 1.5rem; }
     .testimonial .who b { color: var(--ink); font-weight: 600; display: block; font-family: var(--font-head); }
     .testimonial .who span { color: var(--muted); font-size: .92rem; }
 

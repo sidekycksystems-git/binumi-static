@@ -69,10 +69,9 @@ const breadcrumbs = {
             <h1>{data.heading}</h1>
             <p class="deck">{data.deck}</p>
             <div class="byline">
-              <span class="avatar" aria-hidden="true"></span>
               <span class="who">
                 <b>{data.author}</b>
-                <span><time datetime={data.date.toISOString().slice(0, 10)}>{fmtDate(data.date)}</time> &middot; {data.watch}</span>
+                <span><time datetime={data.date.toISOString().slice(0, 10)}>{fmtDate(data.date)}</time></span>
               </span>
             </div>
           </div>
@@ -83,8 +82,7 @@ const breadcrumbs = {
           <div class="article-hero">
             <VideoFrame
               class="reveal"
-              tag={data.heroVideoTag}
-              duration={data.heroVideoSrc ? undefined : data.heroVideoDuration}
+              poster={data.heroVideoPoster}
               videoSrc={data.heroVideoSrc}
               label={`${data.heading} video`}
             />
@@ -153,12 +151,12 @@ const breadcrumbs = {
   .back-link { display: inline-flex; align-items: center; gap: .45rem; color: var(--muted); font-size: .9rem; transition: color .2s; }
   .back-link:hover { color: var(--cyan); }
   .back-link .material-symbols-outlined { font-size: 18px; }
-  .article-head { max-width: var(--container-sm); margin-inline: 0; text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 1.15rem; }
+  /* head spans the full page container so the headline pulls across the page, matching the homepage/subpage heroes */
+  .article-head { max-width: none; margin-inline: 0; text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 1.15rem; }
   .article-head .post-cat { margin-top: 1.5rem; }
-  .article-head h1 { max-width: 18ch; text-wrap: balance; }
+  .article-head h1 { max-width: 36ch; text-wrap: balance; }
   .article-head .deck { font-size: 1.2rem; color: var(--muted); max-width: 52ch; line-height: 1.55; }
   .byline { display: flex; align-items: center; gap: .7rem; margin-top: .4rem; }
-  .byline .avatar { width: 42px; height: 42px; border-radius: 999px; background: var(--cyan-fill); border: 1px solid var(--border); }
   .byline .who { text-align: left; }
   .byline .who b { display: block; color: var(--ink); font-weight: 600; font-family: var(--font-head); font-size: .98rem; }
   .byline .who span { color: var(--muted); font-size: .85rem; }

@@ -1,12 +1,169 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import VideoFrame from '../components/VideoFrame.astro';
+
+const stats = [
+  { figure: '80+', label: 'enterprise clients' },
+  { figure: '1M+', label: 'videos generated' },
+  { figure: '1B+', label: 'platform activities' },
+  { figure: '15M+', label: 'rights-cleared clips' },
+  { figure: '32', label: 'global team across London, NYC, Bangkok, Ho Chi Minh City' },
+  { figure: 'ISO 27001', label: 'certified, and GDPR-compliant' },
+];
 ---
-<BaseLayout title="Binumi · About Binumi" description="About Binumi.">
+<BaseLayout
+  title="Binumi · About"
+  description="Binumi turns real expertise into precise, on-brand video at scale. From cultural storytelling to enterprise communication, this is why we built it and where it is going."
+>
   <main>
-    <section class="section">
+    <!-- ===================== HERO (mission) ===================== -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <h1>On a mission to make video communications as easy as <span class="hl">writing an email</span>.</h1>
+        <p class="lead">
+          Binumi began with one belief: the most valuable thing a business knows should not stay
+          trapped in documents nobody reads. We turn real expertise into precise, on-brand video,
+          at a scale a single team could never reach alone.
+        </p>
+        <a class="btn btn-primary" href="/contact/">Start your proof of value
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===================== WHY WE BUILT THIS (copy left, film right) ===================== -->
+    <section class="section" id="why">
+      <div class="container split">
+        <div class="copy-col">
+          <h2>Why we <span class="hl">built this</span></h2>
+          <p class="lead">
+            For over a decade we have removed the barriers that keep essential messages from being
+            heard. Anthony founded Binumi to turn trapped expertise into video that scales, removing
+            the production bottleneck and the agency dependency that keep most teams silent.
+          </p>
+          <p>
+            A National Geographic documentary filmmaker turned founder, he built the company around
+            one idea: real video, real trust, amplified by AI, never replaced by it.
+          </p>
+          <a class="btn btn-outline" href="/meet-the-team/">Meet the team
+            <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+          </a>
+        </div>
+        <VideoFrame
+          label="Here is the Binumi story"
+          videoSrc="https://d27kwhqqz0gcvq.cloudfront.net/site/2025/about-us/here-is-the-story-2.mp4"
+        />
+      </div>
+    </section>
+
+    <!-- ===================== THE NAME (Bin · Umi) ===================== -->
+    <section class="section" id="name">
+      <div class="container stack">
+        <div class="intro">
+          <h2>The <span class="hl">name</span></h2>
+          <p class="subtitle">Two words for one idea: a vault of stories, as deep as an ocean.</p>
+        </div>
+        <div class="grid grid-3 reveal">
+          <div class="card name-cell">
+            <span class="name-word">Bin</span>
+            <p>A vault where your most valuable clips are kept.</p>
+          </div>
+          <div class="card name-cell">
+            <span class="name-word">Umi</span>
+            <p>Japanese for ocean. Vast, deep, dynamic.</p>
+          </div>
+          <div class="card name-cell">
+            <span class="name-word">Binumi</span>
+            <p>Boundless video freedom.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== OUR JOURNEY (film left, copy right) ===================== -->
+    <section class="section" id="journey">
+      <div class="container split split--flip">
+        <VideoFrame
+          label="The Binumi journey"
+          videoSrc="https://d27kwhqqz0gcvq.cloudfront.net/site/2025/about-us/aboutus-our-journey-3.mp4"
+        />
+        <div class="copy-col">
+          <h2>Our <span class="hl">journey</span></h2>
+          <p class="lead">
+            Binumi began over a decade ago as a way for students to tell their own cultural stories
+            on video. We reached millions of people across more than 10 countries and partnered with
+            UNESCO along the way.
+          </p>
+          <p>
+            As that reach grew, we saw businesses facing the same problem: powerful stories held back
+            by tools too complex to use. So we pivoted. We took everything we had learned about making
+            video creation accessible and rebuilt it for the teams that need to communicate most,
+            sales, HR, support, product, and internal comms.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== REBORN IN 2025 + BY THE NUMBERS ===================== -->
+    <section class="section" id="numbers">
+      <div class="container stack">
+        <div class="intro">
+          <h2>In 2025, Binumi was rebuilt as an <span class="hl">AI video engine</span></h2>
+          <p class="subtitle">
+            Today, business and information experts get instant access to everything a polished,
+            on-brand video needs: 15 million rights-cleared clips, intelligent scriptwriting,
+            automated voiceover, captions, and brand-locked templates. The platform is the scale.
+            The service is the expertise.
+          </p>
+        </div>
+        <dl class="stat-grid reveal">
+          {stats.map((s) => (
+            <div class="stat-cell">
+              <dt>{s.figure}</dt>
+              <dd>{s.label}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <!-- ===================== CLOSE ===================== -->
+    <section class="section" id="close">
       <div class="container">
-        <h1>About Binumi</h1>
+        <div class="cta-card">
+          <video class="cta-bg" src="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__e9fd886d8dacac140457e375d606c8a0_h169.mp4"
+            autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+          <div class="inner">
+            <h2>See what becomes <span class="hl">possible</span>.</h2>
+            <p class="subtitle">Start a proof of value and watch your expertise reach further than it ever has.</p>
+            <a class="btn btn-primary" href="/contact/">Start your proof of value
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 </BaseLayout>
+
+<style>
+  /* The name (Bin · Umi): three light islands, the word set large in the heading
+     font with its meaning beneath. Reuses the global .card island styling. */
+  #name .name-cell { display: flex; flex-direction: column; align-items: flex-start; gap: .6rem; }
+  #name .name-word { font-family: var(--font-head); font-weight: 800; font-size: var(--t-h3);
+    line-height: 1; color: var(--ink); letter-spacing: -0.01em; }
+  #name .name-cell:last-child .name-word { color: var(--cyan); }
+  #name .name-cell p { color: var(--body-copy); }
+
+  /* By the numbers: a six-cell stat band, light islands (surface + cyan hairline),
+     the figure in bright cyan over a muted label. */
+  #numbers .stat-grid { margin: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  #numbers .stat-cell { background: var(--surface); border: 1px solid var(--cyan); border-radius: var(--r-card);
+    padding: 1.75rem; }
+  #numbers .stat-cell dt { font-family: var(--font-head); font-weight: 800;
+    font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.6rem); line-height: 1; color: var(--cyan-bright); }
+  #numbers .stat-cell dd { margin: .6rem 0 0; color: var(--muted); font-size: .95rem; line-height: 1.45; }
+
+  @media (max-width: 860px) { #numbers .stat-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { #numbers .stat-grid { grid-template-columns: 1fr; } }
+</style>
