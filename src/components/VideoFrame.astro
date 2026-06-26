@@ -60,7 +60,7 @@ const frameRole = label && !embedSrc && !videoSrc ? 'img' : undefined;
           poster={poster}
           controls={controls}
           playsinline
-          autoplay={autoplay}
+          data-autoplay={autoplay ? '' : undefined}
           muted={muted}
           loop={loop}
           preload={autoplay ? 'auto' : 'metadata'}>
@@ -71,15 +71,3 @@ const frameRole = label && !embedSrc && !videoSrc ? 'img' : undefined;
   </div>
 )}
 
-{!small && videoSrc && autoplay && (
-  <script is:inline>
-    (function () {
-      var vids = document.querySelectorAll('video[autoplay]');
-      for (var i = 0; i < vids.length; i++) {
-        vids[i].muted = true;
-        var p = vids[i].play();
-        if (p && typeof p.catch === 'function') p.catch(function () {});
-      }
-    })();
-  </script>
-)}

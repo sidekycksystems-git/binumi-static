@@ -120,33 +120,33 @@ const homeSteps = [
         <!-- Spotlight tabs: a horizontal row of value areas (top) drives one focal panel below.
              Toggle logic in the inline script below; one panel open at a time. -->
         <div class="value-wrap reveal">
-          <div class="value-rail" role="tablist" aria-label="Value areas">
-            <button class="value-tab active" type="button" role="tab" data-i="0" aria-selected="true">Revenue Growth</button>
-            <button class="value-tab" type="button" role="tab" data-i="1" aria-selected="false">Workforce Capability</button>
-            <button class="value-tab" type="button" role="tab" data-i="2" aria-selected="false">Customer Engagement</button>
-            <button class="value-tab" type="button" role="tab" data-i="3" aria-selected="false">Operational Efficiency</button>
+          <div class="value-rail" role="group" aria-label="Value areas">
+            <button class="value-tab active" type="button" data-i="0" aria-pressed="true">Revenue Growth</button>
+            <button class="value-tab" type="button" data-i="1" aria-pressed="false">Workforce Capability</button>
+            <button class="value-tab" type="button" data-i="2" aria-pressed="false">Customer Engagement</button>
+            <button class="value-tab" type="button" data-i="3" aria-pressed="false">Operational Efficiency</button>
           </div>
           <div class="value-stage">
-            <article class="value-panel active" data-i="0">
+            <div class="value-panel active" data-i="0">
               <h3>Revenue Growth</h3>
               <p>Support every pitch, proposal, and sales opportunity with precision video communications that help buyers understand, engage, and act.</p>
               <span class="value-graphic" aria-hidden="true"><span class="material-symbols-outlined">trending_up</span></span>
-            </article>
-            <article class="value-panel" data-i="1">
+            </div>
+            <div class="value-panel" data-i="1">
               <h3>Workforce Capability</h3>
               <p>Transform complex knowledge into scalable learning experiences that improve onboarding, training, compliance, internal communications, and professional development.</p>
               <span class="value-graphic" aria-hidden="true"><span class="material-symbols-outlined">psychology</span></span>
-            </article>
-            <article class="value-panel" data-i="2">
+            </div>
+            <div class="value-panel" data-i="2">
               <h3>Customer Engagement</h3>
               <p>Help customers understand products, services, processes, and decisions through clear, consistent communications.</p>
               <span class="value-graphic" aria-hidden="true"><span class="material-symbols-outlined">smart_display</span></span>
-            </article>
-            <article class="value-panel" data-i="3">
+            </div>
+            <div class="value-panel" data-i="3">
               <h3>Operational Efficiency</h3>
               <p>Reduce dependency on agencies, repetitive meetings, and additional headcount by scaling expert communication across the business.</p>
               <span class="value-graphic" aria-hidden="true"><span class="material-symbols-outlined">settings</span></span>
-            </article>
+            </div>
           </div>
         </div>
       </div>
@@ -244,7 +244,7 @@ const homeSteps = [
         <!-- Testimonials, two-up -->
         <div class="testimonials reveal">
           <div class="testimonial">
-            <div class="qmark"><svg viewBox="0 0 45 28" fill="currentColor"><path d="M15.4 0v11H24.9L16.6 28H0L13 0h2.4ZM36.7 0v11H45L36.7 28H21.3L34.3 0h2.4Z"/></svg></div>
+            <div class="qmark"><svg viewBox="0 0 45 28" fill="currentColor" aria-hidden="true"><path d="M15.4 0v11H24.9L16.6 28H0L13 0h2.4ZM36.7 0v11H45L36.7 28H21.3L34.3 0h2.4Z"/></svg></div>
             <blockquote>
               Binumi has changed how we sell. It helps our experts support every opportunity with
               precise, high-impact video communications that make complex ideas easier to understand
@@ -257,7 +257,7 @@ const homeSteps = [
           </div>
 
           <div class="testimonial">
-            <div class="qmark"><svg viewBox="0 0 45 28" fill="currentColor"><path d="M15.4 0v11H24.9L16.6 28H0L13 0h2.4ZM36.7 0v11H45L36.7 28H21.3L34.3 0h2.4Z"/></svg></div>
+            <div class="qmark"><svg viewBox="0 0 45 28" fill="currentColor" aria-hidden="true"><path d="M15.4 0v11H24.9L16.6 28H0L13 0h2.4ZM36.7 0v11H45L36.7 28H21.3L34.3 0h2.4Z"/></svg></div>
             <blockquote>
               Binumi enables us to create accurate, targeted video at a scale our business demands,
               unlocking new opportunities for engagement and revenue growth. They don&rsquo;t just
@@ -277,7 +277,7 @@ const homeSteps = [
       <div class="container">
         <div class="cta-card">
           <video class="cta-bg" src="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__e9fd886d8dacac140457e375d606c8a0_h169.mp4"
-            autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+            data-autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
           <div class="inner">
             <h2>See where Binumi <span class="hl">creates impact</span>.</h2>
             <p class="subtitle">Explore how precision video communications can support sales, workforce education, customer engagement, internal communications, and knowledge transfer across your organization.</p>
@@ -395,7 +395,7 @@ const homeSteps = [
       Array.prototype.forEach.call(tabs, function (t) {
         var on = t.getAttribute('data-i') === i;
         t.classList.toggle('active', on);
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.setAttribute('aria-pressed', on ? 'true' : 'false');
       });
       Array.prototype.forEach.call(panels, function (p) {
         p.classList.toggle('active', p.getAttribute('data-i') === i);

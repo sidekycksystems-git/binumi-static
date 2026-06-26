@@ -110,5 +110,20 @@ const organizationSchema = {
       els.forEach(function (el) { io.observe(el); });
     })();
   </script>
+
+  <!-- Autoplay videos start via JS, and only when motion is allowed. Marked with
+       data-autoplay (no native autoplay attribute), so reduced-motion visitors get
+       a still poster/first frame instead of looping motion. -->
+  <script is:inline>
+    (function () {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var vids = document.querySelectorAll('video[data-autoplay]');
+      for (var i = 0; i < vids.length; i++) {
+        vids[i].muted = true;
+        var p = vids[i].play();
+        if (p && typeof p.catch === 'function') p.catch(function () {});
+      }
+    })();
+  </script>
 </body>
 </html>

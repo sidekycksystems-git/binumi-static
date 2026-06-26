@@ -125,7 +125,7 @@ const breadcrumbs = {
       <div class="container">
         <div class="cta-card">
           <video class="cta-bg" src="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__e9fd886d8dacac140457e375d606c8a0_h169.mp4"
-            autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+            data-autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
           <div class="inner">
             <h2>Find the video <span class="hl">hiding in your business</span>.</h2>
             <p class="lead">Bring one thing you already have, a deck, a report, a recording. We will show you what it becomes.</p>
@@ -149,7 +149,7 @@ const breadcrumbs = {
      =========================================================== */
   .article { padding-top: clamp(2rem, 1rem + 4vw, 3.5rem); }
   .back-link { display: inline-flex; align-items: center; gap: .45rem; color: var(--muted); font-size: .9rem; transition: color .2s; }
-  .back-link:hover { color: var(--cyan); }
+  .back-link:hover { color: var(--cyan-text); }
   .back-link .material-symbols-outlined { font-size: 18px; }
   /* head spans the full page container so the headline pulls across the page, matching the homepage/subpage heroes */
   .article-head { max-width: none; margin-inline: 0; text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 1.15rem; }
@@ -175,7 +175,7 @@ const breadcrumbs = {
   .prose ul { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: .65rem; color: var(--body-copy); font-size: 1.08rem; }
   .prose li { line-height: 1.6; }
   .prose li::marker { color: var(--cyan); }
-  .prose a.inline { color: var(--cyan); text-decoration: underline; text-underline-offset: 3px; }
+  .prose a.inline { color: var(--cyan-text); text-decoration: underline; text-underline-offset: 3px; }
 
   .pullquote { border: 1px solid var(--border); border-radius: var(--radius); padding: clamp(1.5rem, 1rem + 1.5vw, 2.1rem); margin-block: clamp(2.25rem, 1.5rem + 1.5vw, 3.25rem);
     background: var(--cyan-fill); font-family: var(--font-head); font-weight: 700; font-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.95rem); line-height: 1.25; color: var(--ink); }

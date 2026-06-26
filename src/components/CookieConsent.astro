@@ -7,7 +7,7 @@
 
 <div class="bnm-cookie" data-bnm-cookie hidden>
   <div class="bnm-cookie-overlay"></div>
-  <div class="bnm-cookie-modal" role="dialog" aria-modal="true" aria-labelledby="bnm-cookie-title">
+  <div class="bnm-cookie-modal" role="dialog" aria-labelledby="bnm-cookie-title">
     <button class="bnm-cookie-x" type="button" aria-label="Close">&times;</button>
     <h2 class="bnm-cookie-title" id="bnm-cookie-title">Binumi uses cookies</h2>
     <p class="bnm-cookie-copy">
@@ -27,9 +27,9 @@
     border: 1px solid var(--cyan); border-radius: var(--radius);
     max-width: 480px; width: 100%; padding: 2.25rem 2rem; text-align: center;
     box-shadow: 0 24px 60px rgba(11, 20, 40, 0.28); }
-  .bnm-cookie-x { position: absolute; top: .9rem; right: 1.1rem; border: 0;
+  .bnm-cookie-x { position: absolute; top: .5rem; right: .5rem; border: 0;
     background: none; color: var(--muted); font-size: 1.6rem; line-height: 1;
-    cursor: pointer; padding: 0; }
+    cursor: pointer; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; }
   .bnm-cookie-title { margin: 0 0 1rem; font-size: var(--t-h6); color: var(--ink); }
   .bnm-cookie-copy { margin: 0 0 1.75rem; color: var(--body-copy); line-height: 1.6; }
 </style>
@@ -46,6 +46,9 @@
     }
     root.querySelector(".bnm-cookie-ok").addEventListener("click", accept);
     root.querySelector(".bnm-cookie-x").addEventListener("click", accept);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !root.hidden) accept();
+    });
     root.hidden = false;
     root.querySelector(".bnm-cookie-ok").focus();
   })();
