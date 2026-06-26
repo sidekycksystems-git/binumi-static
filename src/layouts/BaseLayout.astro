@@ -78,7 +78,8 @@ const organizationSchema = {
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <!-- ponytail: Material Symbols is subset to only the icons we use via icon_names (3.8MB full font -> 22KB). Adding a new icon? Add its name to this list or it won't render. -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Roboto:wght@400;500;700&icon_names=arrow_back,arrow_forward,auto_awesome,bar_chart,close,description,expand_more,groups,how_to_reg,link,lock,menu,movie,play_arrow,psychology,read_more,search,settings,shield,slideshow,smart_display,trending_up,verified_user&display=swap" rel="stylesheet" />
 </head>
 <body class={isHome ? 'home' : undefined}>
   <Header current={current} ctaHref={ctaHref} />
