@@ -18,26 +18,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
         <div class="contact-form-wrap">
-          <!-- HubSpot form drop-in: replace the <form> below with the HubSpot embed (target <div> + loader script) when ready. Keep this wrapper for styling. -->
-          <form>
-            <div class="field">
-              <label for="contact-name">Full name</label>
-              <input type="text" id="contact-name" name="name" autocomplete="name" />
-            </div>
-            <div class="field">
-              <label for="contact-email">Work email</label>
-              <input type="email" id="contact-email" name="email" autocomplete="email" />
-            </div>
-            <div class="field">
-              <label for="contact-company">Company</label>
-              <input type="text" id="contact-company" name="company" autocomplete="organization" />
-            </div>
-            <div class="field">
-              <label for="contact-message">How can we help?</label>
-              <textarea id="contact-message" name="message" rows="5"></textarea>
-            </div>
-            <button class="btn btn-primary" type="submit">Book your discovery call</button>
-          </form>
+          <div id="hubspot-form"></div>
+          <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/embed/v2.js" is:inline></script>
+          <script is:inline>
+            hbspt.forms.create({
+              portalId: "26490650",
+              formId: "d44fd1f3-4bd5-49b6-b133-c163bd9bee71",
+              region: "eu1",
+              target: "#hubspot-form"
+            });
+          </script>
         </div>
 
       </div>
@@ -73,52 +63,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border: 1px solid var(--cyan);
     border-radius: var(--r-card);
     padding: 2.5rem;
-  }
-
-  .contact-form-wrap form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .contact-form-wrap .field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.375rem;
-  }
-
-  .contact-form-wrap label {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--ink);
-  }
-
-  .contact-form-wrap input,
-  .contact-form-wrap textarea {
-    width: 100%;
-    padding: 0.625rem 0.875rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    background: var(--bg);
-    color: var(--ink);
-    font-size: 1rem;
-    font-family: inherit;
-    transition: border-color 0.15s;
-    box-sizing: border-box;
-  }
-
-  .contact-form-wrap input:focus,
-  .contact-form-wrap textarea:focus {
-    outline: none;
-    border-color: var(--cyan);
-  }
-
-  .contact-form-wrap textarea {
-    resize: vertical;
-  }
-
-  .contact-form-wrap .btn {
-    align-self: flex-start;
-    margin-top: 0.5rem;
   }
 </style>
