@@ -1,12 +1,50 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { industries } from '../../data/industries.ts';
+
+const heading = 'The model travels to <span class="hl">your world</span>.';
 ---
-<BaseLayout title="Binumi · Industries" description="Industries Binumi works with." current="industries">
+<BaseLayout title="Binumi · Industries" description="Every industry Binumi works with, and the named-client proof." current="industries">
   <main>
+    <section class="page-banner">
+      <div class="container hero-inner">
+        <h1 set:html={heading}></h1>
+        <p class="lead">Binumi turns what your teams already know into on-brand video at scale. Find your sector to see the named-client proof.</p>
+        <a class="btn btn-primary" href="/contact/">Start your proof of value
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+
     <section class="section">
       <div class="container">
-        <h1>Industries</h1>
+        <div class="grid grid-3 reveal">
+          {industries.map((i) => (
+            <a class="card ind-card" href={`/industries/${i.slug}/`}>
+              <span class="ind-kicker">{i.navLabel}</span>
+              <p class="ind-hook" set:html={i.hero.h1}></p>
+              <span class="ind-go">See how it works
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              </span>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   </main>
 </BaseLayout>
+
+<style is:global>
+  .page-banner { padding-top: var(--nav-to-hero); padding-bottom: var(--section-y); }
+  /* keep the highlighted phrase whole, no hanging widow */
+  .page-banner .hl { white-space: nowrap; }
+
+  .ind-card { display: flex; flex-direction: column; gap: .9rem; text-decoration: none; }
+  .ind-kicker { font-family: var(--font-head); font-weight: 700; font-size: .78rem; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--cyan); }
+  .ind-hook { font-family: var(--font-head); font-weight: 700; font-size: 1.35rem; line-height: 1.2; color: var(--ink); }
+  .ind-go { margin-top: auto; display: inline-flex; align-items: center; gap: .45rem;
+    font-family: var(--font-head); font-weight: 600; font-size: .92rem; color: var(--cyan); }
+  .ind-go .material-symbols-outlined { font-size: 18px; transition: transform .18s; }
+  .ind-card:hover .ind-go .material-symbols-outlined { transform: translateX(4px); }
+</style>

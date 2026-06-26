@@ -411,7 +411,7 @@
     /* ===========================================================
        FOOTER  (Automark footer)
        =========================================================== */
-    .site-footer { position: relative; padding-top: var(--section-y); overflow: hidden; }
+    .site-footer { position: relative; padding-top: var(--section-y); overflow: hidden; border-top: 1px solid var(--border-soft); }
     .footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2.5rem; padding-bottom: 3rem; }
     .footer-brand { max-width: 24rem; }
     .footer-brand .brand img { height: 2.1rem; }
