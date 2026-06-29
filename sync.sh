@@ -17,6 +17,5 @@ rsync -av --delete \
   --exclude="google946e14e0f8ff101b.html" \
   --exclude="index.php" \
   --exclude="php_compatible_pack.php" \
-  --exclude="robots.txt" \
   --exclude="sitemap.xml" \
   $ASTRO_DIST $PUBLIC
