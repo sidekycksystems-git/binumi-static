@@ -379,7 +379,7 @@
     .proof ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .7rem; }
     .proof li { color: var(--body-copy); padding-left: 1.4rem; position: relative; }
     .proof li::before { content: ""; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; border-radius: 999px; background: var(--cyan); }
-    .stat { color: var(--cyan-bright); font-weight: 600; }
+    .stat { color: var(--cyan); font-weight: 600; }
 
     .credential { text-align: center; padding: 1.4rem 1.5rem;
       display: flex; align-items: center; justify-content: center; gap: .75rem; flex-wrap: wrap; }
@@ -446,7 +446,7 @@
     .legal-page .legal-body ul { margin: 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: .55rem; }
     .legal-page .legal-body li::marker { color: var(--cyan); }
     .legal-page .legal-body a { color: var(--cyan); transition: color .2s; }
-    .legal-page .legal-body a:hover { color: var(--cyan-bright); }
+    .legal-page .legal-body a:hover { color: var(--cyan); }
     .legal-page .legal-body .sub { padding-left: 1.6rem; }
     .legal-page .legal-body .sub2 { padding-left: 3.2rem; }
     .legal-page .legal-body dl { margin: 0; }
