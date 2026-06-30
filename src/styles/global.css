@@ -537,9 +537,8 @@
     .crumb-current { color: var(--ink); }
 
     /* SHARED VERTICAL COMPONENTS */
-    .card .kicker.muted { color: var(--muted); }   /* couplet color logic: platform = muted, service = cyan */
-    .chip { padding: .55rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-soft);
-      background: var(--panel); color: var(--muted); font-family: var(--font-head); font-weight: 600; font-size: .9rem; white-space: nowrap; }
+    .chip { padding: .55rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--cyan);
+      background: var(--cyan-fill); color: var(--cyan); font-family: var(--font-head); font-weight: 600; font-size: .9rem; white-space: nowrap; }
 
     /* BLOCK 1: HERO (vertical variant, centered feature video) */
     .hero-inner .btn { margin-top: .2rem; }   /* the one action */
@@ -551,6 +550,8 @@
       font-size: var(--t-h3); line-height: 1.1; color: var(--ink); text-wrap: balance; }
     .couplet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; width: 100%; }
     .couplet-grid .card p { color: var(--body-copy); }
+    .couplet-grid .card { transition: none; }
+    .couplet-grid .card:hover { transform: none; border-color: var(--cyan); box-shadow: none; }
     .couplet .close-line { text-align: center; max-width: 60ch; font-size: clamp(1.1rem, 1rem + .6vw, 1.35rem);
       line-height: 1.45; color: var(--body-copy); }
     .couplet .close-line strong { color: var(--ink); }
