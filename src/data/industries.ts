@@ -34,6 +34,7 @@ export interface Industry {
   usecases: { leadLine: string; chips: string[] };
   trust:    { kicker: string; h2: string; creds: string; close: string }; // creds has <strong> -> set:html
   cta:      { h2: string };                                        // has <span class="hl"> -> set:html
+  heroVideo?: string;      // src for the hero brand film (one per rendered industry)
   video?:   string;        // optional src for the proof + trust placeholders; empty placeholder if unset
 }
 
@@ -85,6 +86,7 @@ const financialServices: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">markets</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__49279dcaa29c7ef98b13bb2c6060fd8d_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__2e5d44ca4c2b602a1edc2a856f746d23_h169.mp4',
 };
 
@@ -132,6 +134,7 @@ const professionalServices: Industry = {
   cta: {
     h2: 'See what becomes possible for your <span class="hl">practice</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__e1eb9c471a4a8f81da726720885a3992_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__49c3e48862c3023c2591ddb136f55408_h169.mp4',
 };
 
@@ -183,6 +186,7 @@ const technology: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">pipeline</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__d7b73d0c3230c3002ce8eb52898888f5_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__f568be6123550de943db47af0332fd84_h169.mp4',
 };
 
@@ -230,6 +234,7 @@ const telecommunications: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">base</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__b8f901c77e13336ca3ffab9e0789016d_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__180e186cca69df01f98e8e9e11acb2fa_h169.mp4',
 };
 
@@ -281,6 +286,7 @@ const industrials: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">projects</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__656e4f8b39895f161690ed539d38151c_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__1996cdc0540ecb68778dff407a10bf53_h169.mp4',
 };
 
@@ -328,6 +334,7 @@ const construction: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">bids</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__9f5362c0df90d51b267c90d90eda4fc5_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__0b7bbae3a9ac1dbddb2cfe4fec59dd12_h169.mp4',
 };
 
@@ -375,6 +382,7 @@ const energyUtilities: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">network</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__f5cb3935898f0fa5154ac0891605efe9_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__e8f4a818a863d1d1254c84c08faadf3f_h169.mp4',
 };
 
@@ -422,6 +430,7 @@ const automotive: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">markets</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__cc73243b839722183881d5816abaca4b_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__b8dc34bcbce75207be623c2dca1d9695_h169.mp4',
 };
 
@@ -473,6 +482,7 @@ const lifeSciences: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">pipeline</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__7a18a8b4b7222be2d93477393ae699f1_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__82ecda8ccc256a2f994f8da1d45bd179_h169.mp4',
 };
 
@@ -520,6 +530,7 @@ const healthcare: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">service</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__1b5665e27c0b3ef079c5e714237a9f50_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__66eebce85bd9c7d5de293cdf8ecef7b3_h169.mp4',
 };
 
@@ -571,6 +582,7 @@ const realEstate: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">branches</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__a5418dafb031e0ca7b24975de5c9b48e_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__8f26dd641347d99c9de0c420a6296dfa_h169.mp4',
 };
 
@@ -618,6 +630,7 @@ const travelTransport: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">network</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__a259c4b33fbda6eede772bb716d9a008_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__26398698b2a1d4a8fdf60e0b3e37497b_h169.mp4',
 };
 
@@ -665,6 +678,7 @@ const publicSector: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">services</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__52da652d2c12351227bbd47f701bc8a7_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__97bef2cd4194830d70d2e26bb3dfae20_h169.mp4',
 };
 
@@ -712,6 +726,7 @@ const education: Industry = {
   cta: {
     h2: 'See what becomes possible across your <span class="hl">campus</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__84f6ffea57555271fce3de2c2b60dfe2_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__798901d9d8799cbc72083adc27dca18c_h169.mp4',
 };
 
@@ -765,6 +780,7 @@ const events: Industry = {
   cta: {
     h2: 'See what becomes possible for your <span class="hl">event team</span>.',
   },
+  heroVideo: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__415a615efaeca22d8a4eb2056c413b4b_h169.mp4',
   video: 'https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__030ca7e69a97216b8d2e4f44c2fa4cc3_h169.mp4',
 };
 
