@@ -125,6 +125,7 @@ const homeSteps = [
             <button class="value-tab" type="button" data-i="1" aria-pressed="false">Workforce Capability</button>
             <button class="value-tab" type="button" data-i="2" aria-pressed="false">Customer Engagement</button>
             <button class="value-tab" type="button" data-i="3" aria-pressed="false">Operational Efficiency</button>
+            <button class="value-tab" type="button" data-i="4" aria-pressed="false">AI Visibility</button>
           </div>
           <div class="value-stage">
             <div class="value-panel active" data-i="0">
@@ -147,6 +148,26 @@ const homeSteps = [
               <p>Reduce dependency on agencies, repetitive meetings, and additional headcount by scaling expert communication across the business.</p>
               <span class="value-graphic" aria-hidden="true"><span class="material-symbols-outlined">settings</span></span>
             </div>
+            <div class="value-panel" data-i="4">
+              <h3>AI Visibility</h3>
+              <p>Answer engines now decide who gets recommended before a buyer ever reaches your site. Binumi builds the video, transcript, and metadata layer that lets ChatGPT, Perplexity, and Google AI read your expertise and put it in front of the right buyer.</p>
+              <span class="value-graphic" aria-hidden="true"><span class="material-symbols-outlined">travel_explore</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== AI VISIBILITY CTA ===================== -->
+    <section class="section" id="geo-cta">
+      <div class="container">
+        <div class="cta-card">
+          <div class="inner">
+            <h2>See what AI <span class="hl">already knows</span> about you.</h2>
+            <p class="subtitle">Run your site through the same visibility check we use with clients. Get your score, see what is missing, and find out what to fix first.</p>
+            <a class="btn btn-primary" href="/geo/">Check your score
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+            </a>
           </div>
         </div>
       </div>
@@ -344,10 +365,10 @@ const homeSteps = [
 
   /* "Where Binumi creates value" spotlight tabs: a horizontal row of labels (top) drives one focal panel below. */
   #value .value-wrap { display: flex; flex-direction: column; gap: 1.5rem; max-width: 64rem; margin: 1rem auto 0; width: 100%; }
-  #value .value-rail { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: .25rem; border-bottom: 1px solid var(--border); }
+  #value .value-rail { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; border-bottom: 1px solid var(--border); }
   #value .value-tab { all: unset; box-sizing: border-box; display: flex; align-items: center; cursor: pointer;
     font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; color: var(--muted);
-    padding: .9rem 1.1rem; margin-bottom: -1px; border-bottom: 2px solid transparent;
+    padding: .9rem 1rem; margin-bottom: -1px; border-bottom: 2px solid transparent;
     transition: background .2s, border-color .2s, color .2s; }
   #value .value-tab:hover { background: rgba(11,20,40,.04); color: var(--ink); }
   #value .value-tab:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
