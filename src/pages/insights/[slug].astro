@@ -29,6 +29,7 @@ const blogPosting = {
   headline: data.heading,
   description: data.description ?? data.deck,
   datePublished: data.date.toISOString(),
+  dateModified: data.date.toISOString(),
   author: { '@type': 'Organization', name: data.author },
   image: articleImage,
   mainEntityOfPage: canonical,
@@ -38,6 +39,20 @@ const blogPosting = {
     logo: { '@type': 'ImageObject', url: new URL('/binumi-logo.png', Astro.site).href },
   },
 };
+
+const toAbsolute = (path: string) => (path.startsWith('http') ? path : new URL(path, Astro.site).href);
+
+const videoObject = data.heroVideoSrc
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'VideoObject',
+      name: data.heading,
+      description: data.description ?? data.deck,
+      thumbnailUrl: data.heroVideoPoster ? toAbsolute(data.heroVideoPoster) : articleImage,
+      contentUrl: data.heroVideoSrc,
+      uploadDate: data.date.toISOString(),
+    }
+  : null;
 
 const breadcrumbs = {
   '@context': 'https://schema.org',
@@ -140,6 +155,7 @@ const breadcrumbs = {
 
   <script type="application/ld+json" set:html={JSON.stringify(blogPosting)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbs)} />
+  {videoObject && <script type="application/ld+json" set:html={JSON.stringify(videoObject)} />}
 
 </BaseLayout>
 
