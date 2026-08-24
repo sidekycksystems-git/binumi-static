@@ -1,0 +1,289 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VideoFrame from '../../components/VideoFrame.astro';
+
+// The grader is a separate app on a separate deploy. `?embed=1` asks it for the
+// chrome-less variant: form, result and legal notice, without the site header,
+// footer, cookie notice and closing CTA that this page already provides.
+const GRADER_ORIGIN = 'https://geo.binumi.com';
+
+// What actually happens after a visitor submits, stated on the page.
+// Deliberately NOT a promise of an emailed report: the grader app sends no mail at
+// all. It has no mail dependency and no transactional provider. It renders the
+// score in place and files the lead into HubSpot, and the breakdown is a human
+// follow-up from there. Do not add a delivery time or an automated-send claim to
+// this line until one of those genuinely exists.
+// Frontmatter, not an HTML comment, so the rationale does not ship to production.
+const FORM_NOTE = 'Your score appears here on screen. We will be in touch about the full breakdown.';
+---
+<BaseLayout
+  title="Binumi · AI visibility grader"
+  description="Buyers ask ChatGPT, Claude and Perplexity before they ask you. See what the answer engines can read on your site, and what it takes to fix it."
+>
+  <main>
+    <!-- ===================== PAGE BANNER ===================== -->
+    <section class="page-banner">
+      <div class="container hero-inner">
+        <h1>Buyers are asking ChatGPT before they ask you</h1>
+        <p class="lead">
+          Board conversations now start with what AI recommends, not just what shows up in
+          search. If the engines can't read your expertise, they can't recommend it, and the
+          deal never reaches your pipeline. Most visibility checkers stop at the score. We
+          built the team that fixes what the score finds.
+        </p>
+        <div class="banner-actions">
+          <a class="btn btn-primary" href="#grader">Check your score
+            <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+          </a>
+        </div>
+        <!-- PLACEHOLDER: reusing the solutions hero film. There is no GEO-specific
+             asset yet, and public/ holds no video at all, only posters. Swap the src
+             and poster when one exists. -->
+        <VideoFrame
+          videoSrc="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__79e216f079172a5949cf8e11095f67a5_h169.mp4"
+          poster="/solutions-hero-poster.jpg"
+          label="Binumi proof overview video"
+          autoplay muted loop
+        />
+      </div>
+    </section>
+
+    <!-- ===================== MECHANISM BENTO ===================== -->
+    <section class="section">
+      <div class="container stack">
+        <div class="intro">
+          <h2>Video helps AI visibility, or it <span class="hl">actively hurts it</span></h2>
+          <p class="subtitle">
+            AI systems don't watch your videos. They read the layer underneath: transcripts,
+            metadata, structured data. Get that layer wrong and the video is invisible to the
+            engine, however good it looks on the page.
+          </p>
+        </div>
+        <div class="bento reveal">
+          <div class="bento-card b-wide">
+            <div class="icon"><span class="material-symbols-outlined" aria-hidden="true">groups</span></div>
+            <h3>We build the fix, not just the score</h3>
+            <p>
+              Anyone can hand you a number. Fixing it means producing video that's structured
+              to be read, transcribing it properly, and correcting the metadata AI systems
+              actually parse. That's our production and editorial team, working from your
+              existing footage, decks and knowledge, without adding headcount on your side.
+            </p>
+          </div>
+          <div class="bento-card b-cell">
+            <div class="icon"><span class="material-symbols-outlined" aria-hidden="true">movie</span></div>
+            <h3>Video, built to be read</h3>
+            <p>Structured for the transcript and metadata layer from the first cut, not patched afterwards.</p>
+          </div>
+          <div class="bento-card b-cell">
+            <div class="icon"><span class="material-symbols-outlined" aria-hidden="true">description</span></div>
+            <h3>Transcription done properly</h3>
+            <p>The layer AI actually reads, produced to the same standard as the video itself.</p>
+          </div>
+          <div class="bento-card b-cell">
+            <div class="icon"><span class="material-symbols-outlined" aria-hidden="true">settings</span></div>
+            <h3>Metadata, corrected</h3>
+            <p>What's wrong gets put right, not just flagged.</p>
+          </div>
+          <div class="bento-card b-cell">
+            <div class="icon"><span class="material-symbols-outlined" aria-hidden="true">link</span></div>
+            <h3>Run across every property</h3>
+            <p>One capability, applied to every page and every market you hold, not a one-off audit.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== THE HONEST CAVEATS ===================== -->
+    <section class="section">
+      <div class="container">
+        <div class="couplet">
+          <p class="lead-line">Worth being straight about what this traffic actually is.</p>
+          <div class="couplet-grid reveal">
+            <div class="card">
+              <span class="kicker">Smaller, but pre-qualified</span>
+              <p>
+                AI referral is a smaller share of total traffic than the current hype suggests.
+                It also arrives already convinced, because the engine has effectively
+                pre-qualified the buyer before they land.
+              </p>
+            </div>
+            <div class="card">
+              <span class="kicker">The nearer risk is silence</span>
+              <p>
+                Missed AI traffic isn't the biggest near-term cost. Answers being given with no
+                click at all is. Fixing the transcript and metadata layer protects against both.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== THE GRADER ===================== -->
+    <section class="section" id="grader">
+      <div class="container stack">
+        <div class="geo-embed">
+          <iframe
+            id="geo-grader"
+            src={`${GRADER_ORIGIN}/?embed=1`}
+            title="Binumi AI visibility grader"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            sandbox="allow-scripts allow-forms allow-same-origin allow-top-navigation-by-user-activation"
+            scrolling="no"
+          ></iframe>
+          <p class="form-note">{FORM_NOTE}</p>
+          <noscript>
+            <p class="geo-embed-fallback">
+              The grader needs JavaScript. <a href={GRADER_ORIGIN}>Open it directly</a>.
+            </p>
+          </noscript>
+          <p class="geo-embed-fallback">
+            Trouble loading? <a href={GRADER_ORIGIN}>Open the grader directly</a>, or
+            <a href="/contact/">talk to us instead</a>.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== WHAT YOU GET BACK ===================== -->
+    <section class="section">
+      <div class="container stack">
+        <div class="intro">
+          <h2>A score, and <span class="hl">what to do about it</span></h2>
+        </div>
+        <div class="bento reveal">
+          <div class="bento-card b-cell">
+            <h3>Where you stand today</h3>
+            <p>Current placement across ChatGPT, Perplexity and Google AI.</p>
+          </div>
+          <div class="bento-card b-cell">
+            <h3>What's missing</h3>
+            <p>The specific gaps in your transcript and metadata layer keeping you unreadable.</p>
+          </div>
+          <div class="bento-card b-cell">
+            <h3>What to fix first</h3>
+            <p>Ranked by what moves the score fastest, not by what's easiest to say.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CLOSING CTA ===================== -->
+    <section class="section" id="cta">
+      <div class="container">
+        <div class="cta-card">
+          <video class="cta-bg" src="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__e9fd886d8dacac140457e375d606c8a0_h169.mp4"
+            data-autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+          <div class="inner">
+            <h2>What would it change if AI <span class="hl">recommended you first</span>?</h2>
+            <a class="btn btn-primary" href="/contact/">Start your proof of value
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  /* No panel, no border, no fill. The grader is meant to read as part of the page,
+     not as a window cut into it, so the only thing separating it from the page is
+     the page background it inherits. */
+  /* The grader section carries no heading any more, so its own top padding stacked on top of the
+     previous section's bottom padding and left a hole. The section above already provides the
+     separation; this one only needs to close the gap underneath. */
+  #grader { padding-top: 0; }
+
+  .geo-embed {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+  }
+  /* Centred to sit under the form rather than against the page's left edge. The form inside the
+     frame is centred in its own document, so left-aligned text below it reads as belonging to the
+     page rather than to the tool. */
+  .geo-embed .form-note,
+  .geo-embed .geo-embed-fallback { text-align: center; }
+  /* The frame reports its own height and this follows it, so the grader grows and shrinks with
+     its content and never scrolls inside the page. A cross-origin parent cannot measure its
+     child, so that report is the only way to know: see the listener at the foot of this file.
+
+     `scrolling="no"` is set on the element as well. It is only safe BECAUSE the height is driven
+     by the report: with a fixed height it would clip the result and leave no way to reach it.
+     The starting height is a first paint only, replaced within a frame of the iframe loading. */
+  .geo-embed iframe {
+    width: 100%;
+    /* height is the reported value once the frame speaks. Until then min-height carries it, and
+       it is deliberately generous: with scrolling off, a frame that is too SHORT clips its own
+       form with no way to reach the rest, which is worse than any amount of blank space. The
+       script clears the floor the moment a real height arrives. */
+    height: 420px;
+    min-height: 1120px;
+    border: 0;
+    display: block;
+    background: transparent;
+    overflow: hidden;
+    transition: height .2s ease;
+  }
+  @media (min-width: 481px) { .geo-embed iframe { min-height: 860px; } }
+  @media (min-width: 721px) { .geo-embed iframe { min-height: 690px; } }
+  @media (prefers-reduced-motion: reduce) {
+    .geo-embed iframe { transition: none; }
+  }
+  .geo-embed-fallback { color: var(--muted); font-size: .9rem; margin: 0; }
+  .geo-embed-fallback a { color: var(--cyan); text-decoration: underline; }
+  /* The next-step line. Deliberately a step up from .geo-embed-fallback below it:
+     that one is troubleshooting and should read as fine print, this one answers
+     "what happens after I submit" and has to be seen. */
+  .form-note { color: var(--body-copy); font-size: .95rem; margin: 0; }
+
+  /* The results row is three cells on the six-column bento, so it fills one row
+     exactly. Without icons: these are outcomes, not features. */
+  #cta .cta-card h2 { max-width: 22ch; }
+</style>
+
+<script>
+  // The grader grows when a result lands, so it tells us its height and we resize
+  // the frame to match. Everything here is a guard: the message has to come from
+  // the grader's exact origin AND from this specific frame, carry our namespaced
+  // type, and pass a finite number inside a sane range. Anything else is ignored.
+  // Derived from the frame itself, not written down a second time. The origin we accept messages
+  // from and the origin we loaded MUST be the same string, and the way that guarantee fails is a
+  // second copy of the constant that someone updates only in one place.
+  const frameEl = document.getElementById('geo-grader') as HTMLIFrameElement | null;
+  const GRADER_ORIGIN = frameEl && new URL(frameEl.src, location.href).origin;
+  const MIN_H = 200;
+  const MAX_H = 4000;
+
+  if (frameEl) {
+    const frame = frameEl;
+    window.addEventListener('message', (event: MessageEvent) => {
+      if (event.origin !== GRADER_ORIGIN) return;
+      if (event.source !== frame.contentWindow) return;
+      const data = event.data;
+      if (!data || data.type !== 'binumi:geo:height') return;
+      const height = Number(data.height);
+      if (!Number.isFinite(height)) return;
+      // The frame has spoken, so the pre-handshake floor is no longer needed and would now only
+      // hold the frame open on empty space. Drop it and let the reported height govern.
+      frame.style.minHeight = '0';
+      frame.style.height = Math.min(Math.max(height, MIN_H), MAX_H) + 'px';
+    });
+
+    // Say hello once the frame is up. The frame reports its height unprompted too, but this
+    // script is a deferred module: a frame served from a fast origin can load and report before
+    // the listener above exists, and that report is then simply lost. The ping closes that race.
+    frame.addEventListener('load', () => {
+      if (!GRADER_ORIGIN) return;
+      frame.contentWindow?.postMessage({ type: 'binumi:geo:hello' }, GRADER_ORIGIN);
+    });
+    // And once more for the case where the frame finished loading before we got here at all.
+    if (GRADER_ORIGIN) {
+      frame.contentWindow?.postMessage({ type: 'binumi:geo:hello' }, GRADER_ORIGIN);
+    }
+  }
+</script>
