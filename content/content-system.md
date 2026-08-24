@@ -24,8 +24,9 @@ A 32 person team does not run five content streams. It runs one idea, five ways.
 
 ## Editorial categories
 - **Thesis pieces.** Cornerstone arguments developing Static Content Crisis to Systemized Expertise. Quarterly.
-- **Vertical pieces.** The thesis told for each of the six verticals. Heavy lift, highest payoff for industry search and GEO.
+- **Vertical pieces.** The thesis told for each of the six verticals. Heavy lift, highest payoff for industry search and GEO. Why: a vertical piece run through Binumi's own transcript-and-metadata process is a live demonstration of the thesis, and each named or anonymized proof point in it becomes another block of AI-readable expertise for that sector.
 - **Field notes.** Named-client deep dives (Fujitsu, Knight Frank, Generali, S2). The credibility layer.
+- **GEO-specific field notes (new category).** Distinct from standard field notes (client outcome, told once). These pieces lead explicitly with the GEO mechanism: this client had 400+ pieces of expert knowledge trapped in static formats, and systemizing it into video with proper transcription and metadata is what made it AI-readable and citable, not just faster to produce. Good candidates from the new proof set: the higher-education publisher (courseware to video, machine-readable curriculum authority) and the pharma comms team (regulated clinical content made citable without compliance risk). Anonymized until cleared, same as their entries in `product.md`.
 - **Real vs Synthetic.** POV on why generative-avatar video fails in regulated industries. Needs no client logo, safe on founder channels.
 - **HR and Internal Comms.** For the People Architect, the under-served buyer. Most airtime.
 
@@ -43,7 +44,7 @@ Lead by proof strength, and lead with what doubles as LinkedIn fuel.
 2. **Tech** (Fujitsu): the cleanest Win the Pitch story (£1M+, 56 page deck to video).
 3. **Insurance** (Generali) and **Consultancy** (S2): strong; S2 anchors the HR and onboarding content.
 4. **Industrials**: proof exists but less packaged.
-5. **FinTech and Events, the two proof gaps, handled deliberately.** FinTech: lead with the Real vs Synthetic / regulated angle (compliance, IP, trust), which needs no client logo. Events: replaced Real Estate in the lineup and uses the bracketed interim treatment until a named events client lands. Commissioning proof for both is a parallel workstream.
+5. **FinTech remains a proof gap; Events does not.** FinTech: lead with the Real vs Synthetic / regulated angle (compliance, IP, trust), which needs no client logo. Events: Informa's full stats (2x+ CTR, 29% engagement) are now available and named, so the bracketed interim treatment can be retired on the events vertical page. Commissioning a second named events client remains useful for redundancy but is no longer urgent.
 
 ## LinkedIn rhythm
 Weekly, across the brand page and two named posters, founder-weighted.
@@ -71,6 +72,6 @@ LinkedIn engagement and inbound conversations, GEO citations, organic vertical
 rankings, and proof-of-value enquiries.
 
 ## Standing reminders
-- Reconfirm every named-client figure against latest approved numbers before publishing.
+- Reconfirm every named-client figure against latest approved numbers before publishing. This now explicitly includes Informa, whose full stats (2x+ CTR, 29% engagement) enter the proof library for the first time.
 - Assign an owner to the gated diagnostic asset; the nurture sequence depends on it.
 - Capture 2 or 3 more attributed testimonials (Fujitsu, Generali, a CEO/CFO voice).

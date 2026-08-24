@@ -64,10 +64,10 @@ except where noted. Each also has a live industry page in this repo at
 |---|---|---|
 | **FinTech / Financial Services** | Thin, board investors in financial services | **PROOF GAP.** Lead with the Real vs Synthetic / regulated-industry angle, not a case study. Flag for content planning. |
 | **Insurance** | Generali | Strong. 500+ videos, 12 markets, 12 languages. |
-| **Events** | None yet | **PROOF GAP.** Replaced Real Estate in the lineup. Uses the bracketed interim proof treatment (same approach as FinTech) until a named events client lands. Capturing one is the second content priority alongside the FinTech gap. |
+| **Events** | Informa (named, full stats now available) | No longer a hard proof gap: Informa's CTR and engagement stats can anchor this vertical. Still worth a second named events client for redundancy. |
 | **Tech** | Fujitsu (incl. Fujitsu x AstraZeneca) | Strong. £20M+ revenue, 100+ decks replaced. |
 | **Consultancy** | S2 Partnership | Strong. about 80% fewer onboarding support calls. |
-| **Industrials** | Fujitsu, Heathrow | Moderate, proof exists but less packaged. |
+| **Industrials** | Fujitsu, Heathrow, plus an anonymized construction company (Tier 2) | Moderate, proof exists but less packaged. The construction safety and insurance angle (training standardized, used to support reduced premiums) is new and not packaged anywhere else. |
 
 **Knight Frank** (ex-Real Estate: 800+ videos year one, 75% cost saving, 5x LinkedIn lift, the only attributed testimonial) remains a headline proof point. Real Estate was retired as a dedicated vertical and replaced by Events, so Knight Frank now lives on the homepage proof block, the About page, and as a cross-referenced example inside other industry pages, not on a page of its own.
 
@@ -86,6 +86,68 @@ video and post inherits whatever figure it shows, so this gates publication.
 - **Generali.** 500+ videos across 12 European markets in 12 languages. 80% faster production. Significant campaign cost reduction.
 - **S2 Partnership.** About 80% reduction in onboarding support-call demand. 3x social engagement. 100+ videos internally in year one.
 - **Ripple Effects.** 40% faster time-to-demo. 65% increase in sales engagement. 5x faster turnaround vs agency.
+- **Informa.** 2x+ higher click-through rate. 29% higher engagement. Extended sponsor value beyond the event, supporting promotion before, during and after. Drove both sponsorship revenue and lead generation.
+
+### Reading proof through the GEO lens
+Every case below is a production story (faster, cheaper, more video) AND a GEO
+story (more of the client's expertise made machine-readable). When packaging any
+of these for content, do not stop at the production stat, name what it means for
+AI visibility: more transcribed, metadata-tagged video means more surface area
+for AI engines to read, cite and recommend the client's expertise from. This is
+what separates Binumi's proof from a generic "we made video faster" claim.
+
+### Tier 2, anonymized outcomes (client not cleared to name)
+Real stats, vague sector descriptor, no company name or logo. Do not infer or
+add a name later without confirmed clearance; do not inflate these figures.
+
+**Cross-industry use is fine, as long as it stays anonymized.** An anonymized
+proof point is not locked to its source sector. "A healthcare provider cut
+production costs 80%" can support a Healthcare page, but the underlying
+capability (fast turnaround, one person managing video across departments)
+is generic enough to reference on Industrials, Consultancy, or a thesis piece
+too, so long as the sector descriptor stays accurate or is dropped entirely
+("one client saw production move from weeks to hours"). What is locked is the
+name and the logo, not the placement. Never imply a stat belongs to a named
+client it does not belong to, and never let a vague reference on one page
+imply a different, more specific client relationship than what is true.
+
+This matters most for the construction/insurance angle and the pharma HCP
+angle: both are strong enough as *capability* proof (fast turnaround, dense
+expert content made simple) to use well outside their native vertical page,
+as long as the copy stays at "a construction company" / "a pharmaceutical
+communications team" rather than getting more specific in a way that would
+narrow it back down to one identifiable name.
+
+- **A higher-education and professional learning publisher.** 400+ educational
+  videos created in four months. Four new video-first courseware products
+  launched. 75% lower production costs. 4x faster delivery. *GEO read:* 400+
+  videos is not just volume, it is 400+ transcribed, citable pieces of
+  subject-matter authority now readable by AI engines answering "who teaches X."
+- **A healthcare provider.** 80% reduction in production costs. Production
+  moved from weeks to hours. One person managing video across HR, marketing
+  and patient communications.
+- **An edtech language-learning platform.** 120,000+ learner-created videos.
+  90% of learners reported improved speaking confidence. 70% year-on-year
+  retention. *GEO read:* 120,000+ learner videos is a machine-readable
+  engagement dataset, not just a usage stat. A different proof shape entirely
+  (learner-generated, not brand-produced), worth flagging as such if it is ever
+  used in a GEO-specific piece.
+- **A construction company.** Standardized health and safety training across
+  staff. Used to demonstrate safety practices to insurers, supporting reduced
+  premiums. (Note: a distinct proof angle, safety and insurance, not currently
+  covered by any other client in the library. Prioritize for the Industrials
+  vertical and for a possible standalone field-notes piece.)
+- **A pharmaceutical communications team.** Supported a global pharmaceutical
+  launch. 10 technical clinical education videos produced for HCPs. *GEO read:*
+  10 videos is a small number but a strong GEO example: dense, regulated, expert
+  content that is normally locked in PDFs, made AI-readable without
+  compromising compliance review.
+
+> **Flag:** Imagine Learning has strong stats (1M+ learners, 3,000+ branded
+> projects) but is currently only named in partner lists, not used as a
+> packaged case study anywhere. Confirm clearance before adding as Tier 1
+> named, or fold into Tier 2 anonymized ("an edtech platform") if clearance
+> is unconfirmed. Do not use the name and the stats together until cleared.
 
 ### Named testimonial (the only attributed quote currently available)
 > "We were stuck using a one-size-fits-all platform that didn't reflect who we are.
