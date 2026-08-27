@@ -51,12 +51,10 @@ const FORM_NOTE = 'Your score appears here on screen as soon as the scan finishe
     <!-- ===================== 2. SCORE ===================== -->
     <section class="section" id="score">
       <div class="container">
-        <div class="split why-split">
+        <div class="split">
           <div class="copy-col">
             <h2>See what AI actually knows <span class="hl">about you</span></h2>
-          </div>
-          <div class="why-prose">
-            <p>
+            <p class="lead">
               Binumi's AI Visibility Assessment analyzes your page to show how effectively AI can
               understand, trust and use the knowledge it contains. Your score reveals where you
               stand today, where important signals may be missing, and where the greatest
@@ -66,6 +64,8 @@ const FORM_NOTE = 'Your score appears here on screen as soon as the scan finishe
               <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
             </a>
           </div>
+          <!-- PLACEHOLDER: no asset yet. Add videoSrc and poster when one exists. -->
+          <VideoFrame label="See what AI actually knows about you" />
         </div>
       </div>
     </section>
@@ -73,12 +73,12 @@ const FORM_NOTE = 'Your score appears here on screen as soon as the scan finishe
     <!-- ===================== 3. CREDIBILITY ===================== -->
     <section class="section" id="why">
       <div class="container">
-        <div class="split why-split">
+        <div class="split split--flip">
+          <!-- PLACEHOLDER: no asset yet. Add videoSrc and poster when one exists. -->
+          <VideoFrame label="A score built on real AI visibility signals" />
           <div class="copy-col">
             <h2>A score built on <span class="hl">real AI visibility signals</span></h2>
-          </div>
-          <div class="why-prose">
-            <p>
+            <p class="lead">
               This is not a superficial website grader. Binumi's assessment is built on deep
               analysis of the signals that influence how AI can understand, trust and use your
               knowledge. Developed by global leaders in digital communications, video and applied
@@ -145,14 +145,32 @@ const FORM_NOTE = 'Your score appears here on screen as soon as the scan finishe
     <!-- ===================== 8. COMMERCIAL RISK ===================== -->
     <section class="section" id="stakes">
       <div class="container">
-        <div class="intro">
-          <h2>What it costs when AI <span class="hl">answers without you</span></h2>
-          <p class="subtitle">
-            When AI cannot find enough credible knowledge about your business, it turns elsewhere.
-            Your competitors can become the recommendation, their expertise can shape the answer,
-            and your products may never enter consideration, before a buyer ever reaches your
-            business.
-          </p>
+        <div class="stakes-split">
+          <div class="copy-col">
+            <h2>What it costs when AI <span class="hl">answers without you</span></h2>
+            <p class="lead">
+              When AI cannot find enough credible knowledge about your business, it turns
+              elsewhere, before a buyer ever reaches your business.
+            </p>
+          </div>
+          <div class="stakes-grid reveal">
+            <div>
+              <h3>Your competitors become the recommendation</h3>
+              <p>AI recommends whoever it can read and trust. If that is not you, the name a buyer hears first belongs to someone else.</p>
+            </div>
+            <div>
+              <h3>Their expertise shapes the answer</h3>
+              <p>The explanation a buyer receives is built from another company's knowledge, framed around their strengths and their way of solving the problem.</p>
+            </div>
+            <div>
+              <h3>Your products never enter consideration</h3>
+              <p>A buyer satisfied by the answer has no reason to keep looking. The shortlist forms without you on it.</p>
+            </div>
+            <div>
+              <h3>You never learn the deal existed</h3>
+              <p>No visit, no inquiry, no signal. The decision is shaped and the conversation is over before you knew it had started.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -222,7 +240,7 @@ const FORM_NOTE = 'Your score appears here on screen as soon as the scan finishe
           <video class="cta-bg" src="https://d27kwhqqz0gcvq.cloudfront.net/uploads/1__e9fd886d8dacac140457e375d606c8a0_h169.mp4"
             data-autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
           <div class="inner">
-            <h2>What changes when your business <span class="hl">becomes part of the answer</span>?</h2>
+            <h2>What changes when your business <span class="hl">becomes part of the&nbsp;answer</span>?</h2>
             <a class="btn btn-primary" href="/contact/">Start the conversation
               <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
             </a>
@@ -280,19 +298,33 @@ const FORM_NOTE = 'Your score appears here on screen as soon as the scan finishe
      "what happens after I submit" and has to be seen. */
   .form-note { color: var(--ink); font-family: var(--font-head); font-weight: 700; font-size: 1.05rem; margin: 0; }
 
+  /* Copy and video share the row evenly here, not the site's 5/6 split, so the two
+     alternating frames line up at the same width. The frame fills its column. */
+  #score .split, #why .split { grid-template-columns: 1fr 1fr; }
+  #score .video-master, #why .video-master { width: 100%; max-width: none; }
+  #score .copy-col h2, #why .copy-col h2 { max-width: none; text-wrap: balance; }
+  #score .copy-col .lead, #why .copy-col .lead { max-width: none; }
+  @media (max-width: 980px) {
+    #score .split, #why .split { grid-template-columns: 1fr; }
+  }
+
+  /* Heading and lead on the left, four bare points on the right. No cards: these are
+     consequences, not features, and the section above is already a bento. */
+  .stakes-split { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--gap); align-items: start; }
+  .stakes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+  .stakes-grid h3 { font-size: var(--t-h6); margin-bottom: .6rem; }
+  .stakes-grid p { color: var(--muted); font-size: .98rem; }
+  @media (max-width: 980px) {
+    .stakes-split { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .stakes-grid { grid-template-columns: 1fr; }
+  }
+
   /* The results row is three cells on the six-column bento, so it fills one row
      exactly. Without icons: these are outcomes, not features. */
-  #cta .cta-card h2 { max-width: 22ch; }
+  #cta .cta-card h2 { max-width: 22ch; text-wrap: balance; }
 
-  /* The site has no left-aligned prose column: .intro centers and .lead is caption weight,
-     so the split lead needs its own body column. Top-aligned against the heading. */
-  .why-split { align-items: start; grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); }
-  .why-prose p { color: var(--body-copy); font-size: 1.05rem; line-height: 1.7; max-width: 52ch; }
-  .why-prose .btn { margin-top: 1.25rem; }
-  @media (max-width: 980px) {
-    .why-split { grid-template-columns: 1fr; }
-    .why-prose p { max-width: none; }
-  }
 </style>
 
 <script>
