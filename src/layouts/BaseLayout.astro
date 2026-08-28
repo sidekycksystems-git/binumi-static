@@ -12,7 +12,7 @@ interface Props {
   ctaHref?: string;
   ogImage?: string;
 }
-const { title, description, current, ctaHref, ogImage = '/binumi-logo.png' } = Astro.props;
+const { title, description, current, ctaHref, ogImage = '/og-image.png' } = Astro.props;
 const isHome = Astro.url.pathname === '/';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImageUrl = new URL(ogImage, Astro.site).href;
