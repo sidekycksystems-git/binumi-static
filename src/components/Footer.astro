@@ -1,5 +1,10 @@
 ---
 // Site footer. Identical on every page.
+interface Props {
+  buildDate: string;
+}
+const { buildDate } = Astro.props;
+const updated = new Date(buildDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 ---
 <footer class="site-footer">
   <div class="container">
@@ -26,7 +31,7 @@
   </div>
   <hr class="rule" />
   <div class="container footer-bottom">
-    <p>&copy; 2026 Binumi. All rights reserved.</p>
+    <p>&copy; 2026 Binumi. All rights reserved. <time datetime={buildDate}>Updated {updated}</time></p>
     <nav class="footer-legal" aria-label="Legal">
       <a class="footer-link" href="/terms-of-use/">Terms of use</a>
       <a class="footer-link" href="/privacy-policy/">Privacy policy</a>

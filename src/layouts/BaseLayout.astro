@@ -17,6 +17,7 @@ const isHome = Astro.url.pathname === '/';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImageUrl = new URL(ogImage, Astro.site).href;
 const siteUrl = Astro.site!.href.replace(/\/$/, '');
+const buildDate = new Date().toISOString();
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -34,6 +35,15 @@ const organizationSchema = {
     'https://www.linkedin.com/company/binumi',
     'https://www.facebook.com/binumi',
   ],
+};
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  url: canonical,
+  name: title,
+  description,
+  datePublished: '2026-06-18',
+  dateModified: buildDate,
 };
 ---
 <!doctype html>
@@ -80,6 +90,7 @@ const organizationSchema = {
   <script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/26490650.js"></script>
 
   <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
   {isHome && (
     <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
   )}
@@ -92,7 +103,7 @@ const organizationSchema = {
 <body class={isHome ? 'home' : undefined}>
   <Header current={current} ctaHref={ctaHref} />
   <slot />
-  <Footer />
+  <Footer buildDate={buildDate} />
   <ChatWidget />
   <CookieConsent />
 
