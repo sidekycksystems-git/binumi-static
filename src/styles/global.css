@@ -535,9 +535,8 @@
       .nav-toggle:checked + .nav-toggle-label .icon-menu { display: none; }
       .nav-toggle:checked + .nav-toggle-label .icon-close { display: block; }
       .nav-cta { display: none; }
-      .nav-links-cta { display: flex; flex-direction: column; gap: .5rem;
+      .nav-links-cta { display: flex; flex-wrap: wrap; gap: .5rem;
         margin-top: .5rem; padding-top: .7rem; border-top: 1px solid var(--border-soft); }
-      .nav-links-cta .btn { width: 100%; justify-content: center; }
 
       /* Inside the mobile menu the dropdowns are native <details> accordions,
          so the whole nav works with JavaScript disabled. */
