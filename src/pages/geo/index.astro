@@ -260,11 +260,6 @@ const FORM_NOTE = 'Reading your page the way AI reads it. This can take up to a 
     flex-direction: column;
     gap: .75rem;
   }
-  /* Centred to sit under the form rather than against the page's left edge. The form inside the
-     frame is centred in its own document, so left-aligned text below it reads as belonging to the
-     page rather than to the tool. */
-  .geo-embed .form-note,
-  .geo-embed .geo-embed-fallback { text-align: center; }
   /* The frame reports its own height and this follows it, so the grader grows and shrinks with
      its content and never scrolls inside the page. A cross-origin parent cannot measure its
      child, so that report is the only way to know: see the listener at the foot of this file.
@@ -308,8 +303,10 @@ const FORM_NOTE = 'Reading your page the way AI reads it. This can take up to a 
     #score .split, #why .split { grid-template-columns: 1fr; }
   }
 
-  /* Left-aligned intro, so this section reads against the left edge like the splits above it. */
-  #knowledge .intro { margin-inline: 0; align-items: flex-start; text-align: left; }
+  /* Left-aligned intros, so these sections read against the left edge like the splits above them.
+     The grader frame fills its container and the form inside it sits flush left, so the copy
+     above and below it lines up on the same edge. */
+  #knowledge .intro, #grader .intro { margin-inline: 0; align-items: flex-start; text-align: left; }
 
   /* Heading and lead on the left, four bare points on the right. No cards: these are
      consequences, not features, and the section above is already a bento. */
